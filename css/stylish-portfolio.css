@@ -32,6 +32,15 @@ body {
 .text-vertical-center h3 {
     color: white;
 }
+
+a.landing{
+    color: white;
+}
+
+h2.portfolio{
+    color: white;
+}
+
 /* Custom Button Styles */
 
 .btn-dark {
@@ -221,22 +230,6 @@ hr.small {
 
 .call-to-action .btn {
     margin: 10px;
-}
-
-/* Map */
-
-.map {
-    height: 500px;
-}
-
-@media(max-width:768px) {
-    .map {
-        height: 75%;
-    }
-}
-
-.map iframe {
-    pointer-events: none;
 }
 
 /* Footer */
