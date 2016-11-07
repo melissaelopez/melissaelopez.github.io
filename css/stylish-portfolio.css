@@ -89,6 +89,9 @@ hr.small {
   position: absolute;
 }
 
+.navbar-transparent{
+   background: rgba(255,255,255,0.9);
+}
 /* Header */
 
 .header {
@@ -164,7 +167,7 @@ hr.small {
 /* Footer */
 
 footer {
-    padding: 100px 0;
+    padding: 30px ;
 }
 
 #to-top {
@@ -172,4 +175,8 @@ footer {
   position: fixed;
   bottom: 5px;
   right: 5px;
+}
+
+.footer a{
+    color: white;
 }
