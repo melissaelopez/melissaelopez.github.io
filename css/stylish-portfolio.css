@@ -13,7 +13,7 @@ body {
 }
 
 body {
-    font-family: "Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Maven Pro", "Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .text-vertical-center {
@@ -57,16 +57,23 @@ h2.portfolio{
 }
 
 .btn-light {
-    border-radius: 0;
-    color: #333;
-    background-color: rgba(255,255,255,0.8);
+    color: #ffffff;
+    font-weight: bold;
+    border-color: rgba(255,255,255,1);
+    border-radius: 25px;
+    width: 300px;
+    height: 100px;
+    padding: 35px;
+    margin: 25px;
 }
 
 .btn-light:hover,
 .btn-light:focus,
 .btn-light:active {
-    color: #333;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,1);
+    width:300px;
+    height:100px; 
+    /*background-image: url(../img/pill-melello.jpg);*/
 }
 
 /* Custom Horizontal Rule */
@@ -90,11 +97,12 @@ hr.small {
 }
 
 .navbar-transparent{
-   background: rgba(255,255,255,0.9);
+   background: rgba(255,255,255,1);
 }
+
 /* Header */
 
-.header {
+/*.header {
     display: table;
     position: relative;
     width: 100%;
@@ -104,12 +112,30 @@ hr.small {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+}*/
+/* Header */
+
+.header {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 20%;
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 60%;
+    background: url(../img/bg.jpg) no-repeat center center scroll;
+    background-color: black;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
 }
 
 /* About */
 
 .about {
-    padding: 50px 0;
+    padding: 100px 0;
 }
 
 /* Services */
@@ -139,7 +165,7 @@ hr.small {
 /* Portfolio */
 
 .portfolio {
-    padding: 50px 0;
+    padding: 100px;
 }
 
 .portfolio-item {
@@ -180,3 +206,85 @@ footer {
 .footer a{
     color: white;
 }
+
+div.element1{
+    display: inline;
+}
+
+/*#melello:hover{
+    background-image: url('../img/var-melello.jpg');
+
+}*/
+
+div.skill-pill-cs {
+    height: 40px;
+    color: white;
+    background-color: #527094;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    margin-bottom: 6px;
+    border-radius: 10px; 
+}
+div.skill-pill-design {
+    height: 40px;
+    color: white;
+    background-color: #b07c8f;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    margin-bottom: 6px;
+    border-radius: 10px; 
+}
+div.skill-pill-leadership {
+    height: 40px;
+    color: white;
+    background-color: #f49681;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    margin-bottom: 6px;
+    border-radius: 10px; 
+}
+
+div.programming-port{
+    color: white;
+}
+
+a.programming-port {
+    color: darkblue;
+}
+
+div.ux-port{
+    color: white;
+}
+
+a.ux-port {
+    color: purple;
+}
+
+div.design-port {
+    color: white;
+}
+a.design-port {
+    color: gray;
+}
+
+a.footer {
+    color: gray;
+}
+
+h1.footer {
+    color: gray;
+}
+
+div.element5 {
+    color: white;
+    text-align: left;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
