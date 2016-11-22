@@ -138,13 +138,13 @@ hr.small {
     padding: 100px 0;
 }
 
-/* Services */
+/* Experience */
 
-.services {
+.experience {
     padding: 50px 0;
 }
 
-.service-item {
+.experience-item {
     margin-bottom: 30px;
 }
 
@@ -216,6 +216,42 @@ div.element1{
 
 }*/
 
+div.skill-pill-cs-base {
+    height: 40px;
+    color: #527094;
+    border: 1px solid #527094;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    margin-bottom: 15px;
+    border-radius: 10px; 
+}
+
+div.skill-pill-design-base {
+    height: 40px;
+    color: #b07c8f;
+    border: 1px solid #b07c8f;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    margin-bottom: 15px;
+    border-radius: 10px; 
+}
+
+div.skill-pill-leadership-base {
+    height: 40px;
+    color: #f49681;
+    border: 1px solid #f49681;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    margin-bottom: 15px;
+    border-radius: 10px; 
+}
+
 div.skill-pill-cs {
     height: 40px;
     color: white;
@@ -227,6 +263,19 @@ div.skill-pill-cs {
     margin-bottom: 6px;
     border-radius: 10px; 
 }
+
+div.skill-pill-cs-soft {
+    height: 40px;
+    color: white;
+    background-color: #6b9ab5;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 2px;
+    margin-bottom: 6px;
+    border-radius: 10px; 
+}
+
 div.skill-pill-design {
     height: 40px;
     color: white;
@@ -250,12 +299,34 @@ div.skill-pill-leadership {
     border-radius: 10px; 
 }
 
+div.outline {
+    border: 1px solid white;
+}
+
+div.inverse-cs {
+    /*border: 1px solid white;*/
+    background-color: white;
+    color: #527094;
+}
+
+div.inverse-design {
+    /*border: 1px solid white;*/
+    background-color: white;
+    color: #b07c8f;
+}
+
+div.inverse-leadership {
+    /*border: 1px solid white;*/
+    background-color: white;
+    color: #f49681;
+}
+
 div.programming-port{
     color: white;
 }
 
 a.programming-port {
-    color: darkblue;
+    color: #BFEFFF;
 }
 
 div.ux-port{
@@ -263,14 +334,14 @@ div.ux-port{
 }
 
 a.ux-port {
-    color: purple;
+    color: #EED2EE;
 }
 
 div.design-port {
     color: white;
 }
 a.design-port {
-    color: gray;
+    color: #ffe2d7;
 }
 
 a.footer {
@@ -287,4 +358,67 @@ div.element5 {
     margin-left: 10%;
     margin-right: 10%;
 }
+
+a.to-resume:hover {
+    /*text-decoration: none;*/
+}
+
+div.skills:hover > div{
+    background-color: black;
+}
+
+/*Highlight CS Skills*/
+div.skill-pill-cs-base:hover {
+    color: white;
+    background-color: #527094;
+    cursor: pointer;
+}   
+
+div.skill-pill-cs-base:hover ~ div.skill-pill-design{
+    background-color: lightgray;
+}  
+
+div.skill-pill-cs-base:hover ~ div.skill-pill-leadership{
+    background-color: lightgray;
+}  
+
+div.skill-pill-design-base:hover {
+    color: white;
+    background-color: #b07c8f;
+    cursor: pointer;
+}   
+
+div.skill-pill-design-base:hover ~ div.skill-pill-cs{
+    background-color: lightgray;
+}  
+
+div.skill-pill-design-base:hover ~ div.skill-pill-cs-soft{
+    background-color: lightgray;
+}  
+
+div.skill-pill-design-base:hover ~ div.skill-pill-leadership{
+    background-color: lightgray;
+} 
+
+div.skill-pill-leadership-base:hover {
+    color: white;
+    background-color: #f49681;
+    cursor: pointer;
+}   
+
+div.skill-pill-leadership-base:hover ~ div.skill-pill-cs{
+    background-color: lightgray;
+}  
+
+div.skill-pill-leadership-base:hover ~ div.skill-pill-cs-soft{
+    background-color: lightgray;
+} 
+
+div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
+    background-color: lightgray;
+} 
+
+div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
+    background-color: lightgray;
+} 
 
