@@ -44,16 +44,18 @@ h2.portfolio{
 /* Custom Button Styles */
 
 .btn-dark {
-    border-radius: 0;
-    color: #fff;
-    background-color: rgba(0,0,0,0.4);
+    text-align: center;
+    display: inline;
+    border-radius: 10px;
+    background-color: white;
+    color: #f49681;
 }
 
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
-    color: #fff;
-    background-color: rgba(0,0,0,0.7);
+    background-color: #f49681;
+    color: white;
 }
 
 .btn-light {
@@ -135,6 +137,14 @@ hr.small {
 /* About */
 
 .about {
+    padding: 50px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+/* Resume Plug */
+
+.resume {
     padding: 50px;
 }
 
@@ -363,10 +373,6 @@ a.to-resume:hover {
     /*text-decoration: none;*/
 }
 
-div.skills:hover > div{
-    background-color: black;
-}
-
 /*Highlight CS Skills*/
 div.skill-pill-cs-base:hover {
     color: white;
@@ -421,4 +427,3 @@ div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
 div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
     background-color: lightgray;
 } 
-
