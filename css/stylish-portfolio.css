@@ -427,3 +427,7 @@ div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
 div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
     background-color: lightgray;
 } 
+
+a.footer:hover {
+    color: #f49681;
+}
