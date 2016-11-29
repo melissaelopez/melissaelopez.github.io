@@ -6,20 +6,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Hi, I'm Melissa, an aspiring software engineer with a passion for student leadership.">
     <meta name="author" content="Melissa Lopez">
 
     <title>Melissa Lopez</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
 
     <!-- Animate.css -->
@@ -130,13 +134,10 @@
                     </div>
                 </div>
                 <!-- /.col-lg-10 -->
-
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container -->
-<!--         <h3>Want to learn more?</h3>
-        <a href="/pdf/lopez_melissa_resume.pdf" class="btn btn-dark btn-lg">CHECK OUT MY RESUME</a> -->
     </section>
 
     <!-- Experience -->
@@ -256,7 +257,6 @@
                     </div>
                 </div>
                 <!-- /.col-lg-10 -->
-
             </div>
             <!-- /.row -->
         </div>
@@ -290,7 +290,6 @@
                     </div>
                 </div>
                 <!-- /.col-lg-10 -->
-
             </div>
             <!-- /.row -->
         </div>
@@ -341,7 +340,6 @@
                     </div>
                 </div>
                 <!-- /.col-lg-10 -->
-
             </div>
             <!-- /.row -->
         </div>
@@ -355,6 +353,7 @@
         | <a class="footer" href="https://www.linkedin.com/in/melissa-lopez" class="footer">LinkedIn</a> 
         | <a class="footer" href="https://github.com/melissaelopez" class="footer">GitHub</a> 
         | <a class="footer" href="https://www.instagram.com/melello/" class="footer">Instagram</a> 
+          </a>
         </p>
       </div>
     </footer>
@@ -412,14 +411,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
-
-    // $('#melello').on('mousein', function(){
-    //     $('#top').css('background-image', 'url(../img/bg.jpg)');
-    // });
-    // $('#melello').on('mouseout', function(){, function(){
-    //     $('#top').css('background-image', 'none');
-    // });
-
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();
@@ -445,54 +436,7 @@
             }
         });
     });
-    //#to-top button appears after scrolling
-    var fixed = false;
-    $(document).scroll(function() {
-        if ($(this).scrollTop() > 250) {
-            if (!fixed) {
-                fixed = true;
-                // $('#to-top').css({position:'fixed', display:'block'});
-                $('#to-top').show("slow", function() {
-                    $('#to-top').css({
-                        position: 'fixed',
-                        display: 'block'
-                    });
-                });
-            }
-        } else {
-            if (fixed) {
-                fixed = false;
-                $('#to-top').hide("slow", function() {
-                    $('#to-top').css({
-                        display: 'none'
-                    });
-                });
-            }
-        }
-    });
-    // Disable Google Maps scrolling
-    // See http://stackoverflow.com/a/25904582/1607849
-    // Disable scroll zooming and bind back the click event
-    var onMapMouseleaveHandler = function(event) {
-        var that = $(this);
-        that.on('click', onMapClickHandler);
-        that.off('mouseleave', onMapMouseleaveHandler);
-        that.find('iframe').css("pointer-events", "none");
-    }
-    var onMapClickHandler = function(event) {
-            var that = $(this);
-            // Disable the click handler until the user leaves the map area
-            that.off('click', onMapClickHandler);
-            // Enable scrolling zoom
-            that.find('iframe').css("pointer-events", "auto");
-            // Handle the mouse leave event
-            that.on('mouseleave', onMapMouseleaveHandler);
-        }
-        // Enable map zooming with mouse scroll when the user clicks the map
-    $('.map').on('click', onMapClickHandler);
     </script>
-
-
 </body>
 
 </html>
