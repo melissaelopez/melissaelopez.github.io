@@ -8,6 +8,7 @@ body {
 
 body {
     font-family: "Maven Pro", "Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 0;
 }
 
 .text-vertical-center {
@@ -106,7 +107,7 @@ hr.small {
     display: table;
     position: relative;
     width: 100%;
-    height: 60%;
+    height: 70%;
     background: url(../img/bg.jpg) no-repeat center center scroll;
     background-color: white;
     -webkit-background-size: cover;
@@ -211,7 +212,7 @@ div.skill-pill-cs-base {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
-    margin-right: 2px;
+    margin-right: 6px;
     margin-bottom: 15px;
     border-radius: 10px; 
 }
@@ -223,7 +224,7 @@ div.skill-pill-design-base {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
-    margin-right: 2px;
+    margin-right: 6px;
     margin-bottom: 15px;
     border-radius: 10px; 
 }
@@ -235,7 +236,7 @@ div.skill-pill-leadership-base {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
-    margin-right: 2px;
+    margin-right: 0px;
     margin-bottom: 15px;
     border-radius: 10px; 
 }
@@ -314,22 +315,107 @@ div.programming-port{
 }
 
 a.programming-port {
+    font-size: 23px;
+    letter-spacing: 4px;
     color: #BFEFFF;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+a.programming-port:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #BFEFFF;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+a.programming-port:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+a.ux-port {
+    font-size: 23px;
+    letter-spacing: 4px;
+    color: #EED2EE;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+a.ux-port:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #EED2EE;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+a.ux-port:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+a.design-port {
+    font-size: 23px;
+    letter-spacing: 4px;
+    color: #ffe2d7;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+a.design-port:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffe2d7;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+a.design-port:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 div.ux-port{
     color: white;
 }
 
-a.ux-port {
-    color: #EED2EE;
-}
-
 div.design-port {
     color: white;
-}
-a.design-port {
-    color: #ffe2d7;
 }
 
 a.footer {
@@ -366,6 +452,7 @@ div.skill-pill-cs-base:hover ~ div.skill-pill-leadership{
     background-color: lightgray;
 }  
 
+/*Highlight Design Skills*/
 div.skill-pill-design-base:hover {
     color: white;
     background-color: #b07c8f;
@@ -384,6 +471,7 @@ div.skill-pill-design-base:hover ~ div.skill-pill-leadership{
     background-color: lightgray;
 } 
 
+/*Highlight Leadership Skills*/
 div.skill-pill-leadership-base:hover {
     color: white;
     background-color: #f49681;
@@ -412,4 +500,49 @@ a.footer:hover {
 
 div.footer {
     background-color: black;
+}
+
+.footer-img {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 30%;
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 30%;
+    background: url(../img/footer.jpg) no-repeat center center scroll;
+    background-color: #f49681;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+a.footer {
+    color: gray;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a.footer:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #f49681;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+a.footer:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
