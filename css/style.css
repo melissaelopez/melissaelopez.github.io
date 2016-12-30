@@ -23,12 +23,26 @@ body {
     padding: 5%;
 }
 
+ul.nav a:hover {
+    color: #f49681 !important;
+}
+
 button.navbar-toggle{
     margin-top: 10px;
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 3px;
     padding-bottom: 2px;
+    border: 1px solid #f49681 !important;
+    transition: all 0.2s ease-in;
+}
+
+button.navbar-toggle:hover{
+    background-color: #f49681 !important;
+}
+
+button.navbar-toggle:hover > .orange{
+    color: white;
 }
 
 .text-vertical-center {
