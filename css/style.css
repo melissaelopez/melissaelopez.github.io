@@ -404,7 +404,7 @@ a.ux-port:before {
   content: "";
   position: absolute;
   width: 100%;
-  height: 4px;
+  height: 5px;
   bottom: 1;
   left: 0;
   background-color: #EED2EE;
