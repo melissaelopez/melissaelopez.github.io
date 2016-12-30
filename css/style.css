@@ -11,6 +11,26 @@ body {
     margin: 0;
 }
 
+.orange {
+    color: #f49681;
+    margin: 0px;
+}
+
+.description{
+    letter-spacing: 4px;
+    position: absolute;
+    top: 10%;
+    padding: 5%;
+}
+
+button.navbar-toggle{
+    margin-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+}
+
 .text-vertical-center {
     display: table-cell;
     text-align: center;
@@ -161,7 +181,8 @@ hr.small {
 }
 
 .portfolio-item {
-    margin: 0 auto;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .img-portfolio {
@@ -185,7 +206,8 @@ hr.small {
 /* Footer */
 
 footer {
-    padding: 30px ;
+    padding: 30px;
+    text-align: center;
 }
 
 #to-top {
@@ -197,6 +219,12 @@ footer {
 
 .footer a{
     color: white;
+}
+
+img.footer {
+  height: 150px;
+  width: auto;
+  border-radius: 50%;
 }
 
 div.element1{
@@ -215,6 +243,7 @@ div.skill-pill-cs-base {
     margin-right: 6px;
     margin-bottom: 15px;
     border-radius: 10px; 
+    transition: all 0.2s ease-in;
 }
 
 div.skill-pill-design-base {
@@ -227,6 +256,7 @@ div.skill-pill-design-base {
     margin-right: 6px;
     margin-bottom: 15px;
     border-radius: 10px; 
+    transition: all 0.2s ease-in;
 }
 
 div.skill-pill-leadership-base {
@@ -236,9 +266,10 @@ div.skill-pill-leadership-base {
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
-    margin-right: 0px;
+    margin-right: 6px;
     margin-bottom: 15px;
-    border-radius: 10px; 
+    border-radius: 10px;
+    transition: all 0.2s ease-in;
 }
 
 div.skill-pill-cs {
@@ -251,6 +282,19 @@ div.skill-pill-cs {
     margin-right: 2px;
     margin-bottom: 6px;
     border-radius: 10px; 
+}
+
+a.plug{
+    font-size: 30px;
+    color: gray;
+}
+
+span.plug{
+    padding: 30px;
+}
+
+a.plug:hover{
+    text-decoration: none;
 }
 
 div.skill-pill-cs-soft {
@@ -322,15 +366,15 @@ a.programming-port {
     text-decoration: none;
     display: inline-block;
     margin-bottom: 10px;
-    margin-top: 30px;
+
 }
 
 a.programming-port:before {
   content: "";
   position: absolute;
   width: 100%;
-  height: 2px;
-  bottom: 0;
+  height: 5px;
+  bottom: 1; /* Here to change position of the line, 0 for under */
   left: 0;
   background-color: #BFEFFF;
   visibility: hidden;
@@ -347,22 +391,21 @@ a.programming-port:hover:before {
 }
 
 a.ux-port {
-    font-size: 23px;
-    letter-spacing: 4px;
-    color: #EED2EE;
-    position: relative;
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 10px;
-    margin-top: 30px;
+  font-size: 23px;
+  letter-spacing: 4px;
+  color: #EED2EE;
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
 a.ux-port:before {
   content: "";
   position: absolute;
   width: 100%;
-  height: 2px;
-  bottom: 0;
+  height: 4px;
+  bottom: 1;
   left: 0;
   background-color: #EED2EE;
   visibility: hidden;
@@ -390,24 +433,24 @@ a.design-port {
 }
 
 a.design-port:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: #ffe2d7;
-  visibility: hidden;
-  -webkit-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffe2d7;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
 }
 
 a.design-port:hover:before {
-  visibility: visible;
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1);
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 div.ux-port{
@@ -444,12 +487,10 @@ div.skill-pill-cs-base:hover {
     cursor: pointer;
 }   
 
-div.skill-pill-cs-base:hover ~ div.skill-pill-design{
+div.skill-pill-cs-base:hover ~ div.skill-pill-design,
+div.skill-pill-cs-base:hover ~ div.skill-pill-leadership {
     background-color: lightgray;
-}  
-
-div.skill-pill-cs-base:hover ~ div.skill-pill-leadership{
-    background-color: lightgray;
+    transition: all 0.2s ease-in;
 }  
 
 /*Highlight Design Skills*/
@@ -459,17 +500,12 @@ div.skill-pill-design-base:hover {
     cursor: pointer;
 }   
 
-div.skill-pill-design-base:hover ~ div.skill-pill-cs{
+div.skill-pill-design-base:hover ~ div.skill-pill-cs,
+div.skill-pill-design-base:hover ~ div.skill-pill-cs-soft,
+div.skill-pill-design-base:hover ~ div.skill-pill-leadership {
     background-color: lightgray;
+    transition: all 0.2s ease-in;
 }  
-
-div.skill-pill-design-base:hover ~ div.skill-pill-cs-soft{
-    background-color: lightgray;
-}  
-
-div.skill-pill-design-base:hover ~ div.skill-pill-leadership{
-    background-color: lightgray;
-} 
 
 /*Highlight Leadership Skills*/
 div.skill-pill-leadership-base:hover {
@@ -478,21 +514,13 @@ div.skill-pill-leadership-base:hover {
     cursor: pointer;
 }   
 
-div.skill-pill-leadership-base:hover ~ div.skill-pill-cs{
+div.skill-pill-leadership-base:hover ~ div.skill-pill-cs,
+div.skill-pill-leadership-base:hover ~ div.skill-pill-design,
+div.skill-pill-leadership-base:hover ~ div.skill-pill-cs-soft,
+div.skill-pill-leadership-base:hover ~ div.skill-pill-design {
     background-color: lightgray;
+    transition: all 0.2s ease-in;
 }  
-
-div.skill-pill-leadership-base:hover ~ div.skill-pill-cs-soft{
-    background-color: lightgray;
-} 
-
-div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
-    background-color: lightgray;
-} 
-
-div.skill-pill-leadership-base:hover ~ div.skill-pill-design{
-    background-color: lightgray;
-} 
 
 a.footer:hover {
     color: #f49681;
@@ -546,3 +574,44 @@ a.footer:hover:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: all 0.2s ease-in;
+}
+
+a > img:hover {
+  /*opacity: .85;*/
+/*  padding: 10px;
+  border: 2px solid #BFEFFF;*/
+  /*transition: all 0.2s ease-in;*/
+}
+
+/*a.port{
+  text-align: center;
+}*/
+
+img {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h2#bio{
+  color:white;
+  margin-left: 10%;
+  margin-right: 10%;
+  visibility: hidden;
+  -vendor-animation-duration: 3s;
+  -vendor-animation-delay: 20s;
+  -vendor-animation-iteration-count: infinite;
+}
+
+
+
+
+
+
