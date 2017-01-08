@@ -11,38 +11,42 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: all 0.2s ease-in;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.spaced {
+  letter-spacing: 4px;
+}
 .orange {
     color: #f49681;
     margin: 0px;
 }
 
-.description{
+.leadership {
+  color: #f49681;
+}
+.programming {
+  color: #527094;
+}
+.design {
+  color: #b07c8f;
+}
+.description {
     letter-spacing: 4px;
     position: absolute;
     top: 10%;
     padding: 5%;
-}
-
-ul.nav a:hover {
-    color: #f49681 !important;
-}
-
-button.navbar-toggle{
-    margin-top: 10px;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 3px;
-    padding-bottom: 2px;
-    border: 1px solid #f49681 !important;
-    transition: all 0.2s ease-in;
-}
-
-button.navbar-toggle:hover{
-    background-color: #f49681 !important;
-}
-
-button.navbar-toggle:hover > .orange{
-    color: white;
 }
 
 .text-vertical-center {
@@ -70,7 +74,7 @@ h2.portfolio{
     color: white;
 }
 
-/* Custom Button Styles */
+/* Buttons */
 
 .btn-dark {
     text-align: center;
@@ -79,7 +83,6 @@ h2.portfolio{
     background-color: white;
     color: #f49681;
 }
-
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
@@ -87,25 +90,6 @@ h2.portfolio{
     color: white;
 }
 
-.btn-light {
-    color: #ffffff;
-    font-weight: bold;
-    border-color: rgba(255,255,255,1);
-    border-radius: 25px;
-    width: 300px;
-    height: 100px;
-    padding: 35px;
-    margin: 25px;
-}
-
-.btn-light:hover,
-.btn-light:focus,
-.btn-light:active {
-    background-color: rgba(255,255,255,1);
-    width:300px;
-    height:100px; 
-    /*background-image: url(../img/pill-melello.jpg);*/
-}
 
 /* Custom Horizontal Rule */
 
@@ -122,14 +106,54 @@ hr.small {
     width: 100%;
 }
 .navbar-brand {
-  transform: translateX(-50%);
-  left: 50%;
-  position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
 }
 
 .navbar-transparent{
    background: rgba(255,255,255,1);
 }
+
+ul.nav a:hover,
+a.navbar-brand:hover {
+    color: #f49681 !important;
+}
+
+button.navbar-toggle{
+    margin-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    border: 1px solid #f49681 !important;
+    transition: all 0.2s ease-in;
+}
+
+button.navbar-toggle:hover{
+    background-color: #f49681 !important;
+}
+
+button.navbar-toggle:hover > .orange{
+    color: white;
+}
+
+.active {
+    background-color: #f49681 !important;
+}
+
+.active > .orange {
+    color: white;
+}
+
+button.navbar-toggle.active:hover{
+    background-color: white !important;
+}
+
+button.navbar-toggle.active:hover > .orange{
+    color: #f49681;
+}
+
 
 /* Header */
 
@@ -156,37 +180,27 @@ hr.small {
     padding: 25px;
     padding-top: 100px;
     padding-bottom: 100px;
+    background-color:#eeeeee;
 }
 
 /* Resume Plug */
 
 .resume {
     padding: 50px;
+    background-color:#eeeeee;
 }
 
 /* Experience */
 
 .experience {
     padding: 50px;
+    background-color: white;
 }
 
 .experience-item {
     margin-bottom: 30px;
 }
 
-/* Callout */
-
-.callout {
-    display: table;
-    width: 100%;
-    height: 400px;
-    color: #fff;
-    background: url(../img/callout.jpg) no-repeat center center scroll;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-}
 
 /* Portfolio */
 
@@ -207,21 +221,30 @@ hr.small {
     opacity: 0.8;
 }
 
-/* Call to Action */
-
-.call-to-action {
-    padding: 50px 0;
+.portfolio.programming {
+  background-color: #527094;
 }
 
-.call-to-action .btn {
-    margin: 10px;
+.portfolio.ux {
+  background-color:#b07c8f;
 }
 
+.portfolio.design {
+  background-color:#f49681;
+}
 /* Footer */
 
 footer {
     padding: 30px;
     text-align: center;
+}
+
+a.footer {
+    color: gray;
+}
+
+h1.footer {
+    color: gray;
 }
 
 #to-top {
@@ -243,6 +266,58 @@ img.footer {
 
 div.element1{
     display: inline;
+}
+a.footer:hover {
+    color: #f49681;
+}
+
+div.footer {
+    background-color: black;
+}
+
+.footer-img {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 30%;
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 30%;
+    background: url(../img/footer.jpg) no-repeat center center scroll;
+    background-color: #f49681;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+a.footer {
+    color: gray;
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a.footer:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #f49681;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+a.footer:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
 }
 
 /* Skill Pills s*/
@@ -296,19 +371,6 @@ div.skill-pill-cs {
     margin-right: 2px;
     margin-bottom: 6px;
     border-radius: 10px; 
-}
-
-a.plug{
-    font-size: 30px;
-    color: gray;
-}
-
-span.plug{
-    padding: 30px;
-}
-
-a.plug:hover{
-    text-decoration: none;
 }
 
 div.skill-pill-cs-soft {
@@ -368,7 +430,11 @@ div.inverse-leadership {
     color: #f49681;
 }
 
-div.programming-port{
+/* Portfolio */
+
+div.programming-port,
+div.ux-port,
+div.design-port {
     color: white;
 }
 
@@ -467,22 +533,6 @@ a.design-port:hover:before {
     transform: scaleX(1);
 }
 
-div.ux-port{
-    color: white;
-}
-
-div.design-port {
-    color: white;
-}
-
-a.footer {
-    color: gray;
-}
-
-h1.footer {
-    color: gray;
-}
-
 div.element5 {
     color: white;
     text-align: left;
@@ -521,7 +571,8 @@ div.skill-pill-design-base:hover ~ div.skill-pill-leadership {
     transition: all 0.2s ease-in;
 }  
 
-/*Highlight Leadership Skills*/
+/* Highlight Leadership Skills */
+
 div.skill-pill-leadership-base:hover {
     color: white;
     background-color: #f49681;
@@ -536,83 +587,18 @@ div.skill-pill-leadership-base:hover ~ div.skill-pill-design {
     transition: all 0.2s ease-in;
 }  
 
-a.footer:hover {
-    color: #f49681;
-}
-
-div.footer {
-    background-color: black;
-}
-
-.footer-img {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    padding: 30%;
-    display: table;
-    position: relative;
-    width: 100%;
-    height: 30%;
-    background: url(../img/footer.jpg) no-repeat center center scroll;
-    background-color: #f49681;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-}
-
-a.footer {
-    color: gray;
-    position: relative;
-    text-decoration: none;
-    display: inline-block;
-}
-
-a.footer:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: #f49681;
-  visibility: hidden;
-  -webkit-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
-}
-
-a.footer:hover:before {
-  visibility: visible;
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1);
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  position: relative;
-  transition: all 0.2s ease-in;
-}
-
-a > img:hover {
-  /*opacity: .85;*/
-/*  padding: 10px;
-  border: 2px solid #BFEFFF;*/
-  /*transition: all 0.2s ease-in;*/
-}
+/*a > img:hover, a:hover > img {
+    opacity: .85;
+    padding: 10px;
+    border: 2px solid #BFEFFF;
+    transition: all 0.2s ease-in;
+}*/
 
 /*a.port{
   text-align: center;
 }*/
 
-img {
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+
 
 h2#bio{
   color:white;
@@ -624,8 +610,56 @@ h2#bio{
   -vendor-animation-iteration-count: infinite;
 }
 
+/*.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+*/
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+    position: absolute;
+    bottom: 0;
+}
 
+.carousel {
+    /*height: 400px;*/
+    width: 100%;
+    margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+/* .carousel-caption {
+    z-index: 10;
+}*/
+/* Declare heights because of positioning of img element */
+/* .carousel .item {
+    width: auto;
+    padding-bottom: 75px;
+}*/
+/*.carousel-inner > .item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
+}*/
 
-
-
-
+/*.carousel-control.left,
+.carousel-control.right {
+  position: absolute;
+  top: 90% !important;
+}*/
+/*  left: 50%;
+  z-index: 5;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  font-family: serif;*/
+}
+/*
+div.bottom > ol.carousel-indicators {
+    position: absolute;
+    top: 90% !important;
+}*/
