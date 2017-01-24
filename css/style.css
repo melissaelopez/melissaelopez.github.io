@@ -25,6 +25,29 @@ img {
     margin-bottom: 20px;
 }
 
+h1.graphics{
+  color: white;
+  font-size: 50px;
+  letter-spacing: 4px;
+}
+
+header.graphics{
+  height: 20% !important;
+  background-color: #f49681;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 10%;
+  padding-bottom: 5%;
+  display: table;
+  position: relative;
+  width: 100%;
+}
+
+a.graphics{
+  line-height: 200%;
+}
+
 .spaced {
   letter-spacing: 4px;
 }
@@ -157,7 +180,7 @@ button.navbar-toggle.active:hover > .orange{
 
 /* Header */
 
-.header {
+.header-main {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
