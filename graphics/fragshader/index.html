@@ -19,7 +19,6 @@
 </script>
 
 <script id='fs_script' type='x-shader/x-fragment'>
-
 varying vec3 vPos;                               // Pixel position
 uniform float uTime;                             // Time
 vec2 A[3];
@@ -35,18 +34,19 @@ void main() {
 
    float x = vPos.x;
    float y = vPos.y;
-   vec2 p = vPos.xy;
+   vec2 p = vPos.zx;
 
-   vec3 c = mix(vec3(.9, 0, .5 * sin(uTime * 5.)), vec3(0.,.8,1.), .5 + .5 * y);
+   vec3 c = mix(vec3(.9, 0, .5 * sin(uTime * 2.)), vec3(0.,.8,1.), .5 + .5 * y);
 
    for (int i = 0 ; i < 1 ; i++) {
-      float z = D(8. * p * tan(uTime*.4) + A[i]);
+      float z = D(8. * p * tan(uTime*1.4) + A[i]);
       if (z > 0.)
          c = vec3(y, x, z);
    }
 
    gl_FragColor = vec4(sqrt(c), 1.);             // Final pixel color
 }
+
 </script>
    
 <script>
