@@ -1,0 +1,61 @@
+<script src=lib.js></script>
+
+<body bgcolor=black text=white>
+<center>
+<canvas id='canvas1' width=600 height=600></canvas>
+</center>
+</body>
+
+<script id='vs_script' type='x-shader/x-vertex'>
+
+// YOU PROBABLY WON'T NEED TO CHANGE THE VERTEX SHADER FOR NOW.
+
+   attribute vec3 aPos;
+   varying   vec3 vPos;
+   void main() {
+      gl_Position = vec4(aPos, 1.0);  // Set position of vertex in image.
+      vPos = aPos;                    // Copy pos to a varying variable to
+   }                                  //   interpolate it across pixels.
+</script>
+
+<script id='fs_script' type='x-shader/x-fragment'>
+
+varying vec3 vPos;                               // Pixel position
+uniform float uTime;                             // Time
+vec2 A[3];
+
+float D(vec2 p) {          // Unit sphere: return z value.
+   float rr = dot(p, p);
+   return rr >= 1. ? 0. : sqrt(1. - rr);
+}
+
+void main() {
+
+   A[0] = vec2(.6, .2);
+
+   float x = vPos.x;
+   float y = vPos.y;
+   vec2 p = vPos.xy;
+
+   vec3 c = mix(vec3(.9, 0, .5 * sin(uTime * 5.)), vec3(0.,.8,1.), .5 + .5 * y);
+
+   for (int i = 0 ; i < 1 ; i++) {
+      float z = D(8. * p * tan(uTime*.4) + A[i]);
+      if (z > 0.)
+         c = vec3(y, x, z);
+   }
+
+   gl_FragColor = vec4(sqrt(c), 1.);             // Final pixel color
+}
+</script>
+   
+<script>
+
+var vs = vs_script.innerHTML, fs = fs_script.innerHTML;
+
+addTextEditor(fs, function() { canvas1.setShaders(vs, this.value); });
+
+gl_start(canvas1, vs, fs);
+
+</script>
+
