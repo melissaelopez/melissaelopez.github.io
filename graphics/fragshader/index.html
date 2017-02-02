@@ -23,14 +23,14 @@ varying vec3 vPos;                               // Pixel position
 uniform float uTime;                             // Time
 vec2 A[3];
 
-float D(vec2 p) {          // Unit sphere: return z value.
-   float rr = dot(p, p);
+float L(vec2 p) {          // Unit sphere: return z value.
+   float rr = dot(p*.2, p);
    return rr >= 1. ? 0. : sqrt(1. - rr);
 }
 
 void main() {
 
-   A[0] = vec2(.6, .2);
+   vec2 f = vec2(0, 0);
 
    float x = vPos.x;
    float y = vPos.y;
@@ -38,11 +38,10 @@ void main() {
 
    vec3 c = mix(vec3(.9, 0, .5 * sin(uTime * 2.)), vec3(0.,.8,1.), .5 + .5 * y);
 
-   for (int i = 0 ; i < 1 ; i++) {
-      float z = D(8. * p * tan(uTime*1.4) + A[i]);
-      if (z > 0.)
-         c = vec3(y, x, z);
-   }
+    float z = L(8. * p * tan(uTime*1.4) + f);
+    if (z > 0.)
+      c = vec3(y, x, z);
+
 
    gl_FragColor = vec4(sqrt(c), 1.);             // Final pixel color
 }
