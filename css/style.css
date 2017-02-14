@@ -7,7 +7,7 @@ body {
 }
 
 body {
-    font-family: "Maven Pro", "Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Maven Pro","Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
     margin: 0;
 }
 
@@ -33,12 +33,11 @@ h1.graphics{
 
 header.graphics{
   height: 20% !important;
-  /*background-color: #f49681;*/
-  background: red; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left top, #fc9e5f, #ff8ea7); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #fc9e5f, #ff8ea7); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #fc9e5f, #ff8ea7); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #fc9e5f, #ff8ea7); /* Standard syntax */
+  background: red; 
+  background: -webkit-linear-gradient(left top, #fc9e5f, #ff8ea7); 
+  background: -o-linear-gradient(bottom right, #fc9e5f, #ff8ea7);  
+  background: -moz-linear-gradient(bottom right, #fc9e5f, #ff8ea7);
+  background: linear-gradient(to bottom right, #fc9e5f, #ff8ea7);
   display: table-cell;
   text-align: center;
   vertical-align: middle;
@@ -48,6 +47,7 @@ header.graphics{
   position: relative;
   width: 100%;
 }
+
 
 a.graphics{
   line-height: 200%;
