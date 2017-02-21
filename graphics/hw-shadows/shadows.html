@@ -60,7 +60,8 @@ vec3 phong(vec3 N, vec3 E, vec3 A, vec3 D, vec4 S) {
       vec3 Sd = normalize(uLDirs[i]);
 
       vec2 ts = raytraceSphere(Sp, Sd, S);
-      if (ts.x < 1000.){ // if the ray hits a sphere, don't add anything
+      if (ts.x == 1000.){ // if the ray hits a sphere, don't add anything
+         // not sure that the appropriate conditional is here given t (t.x, t.y)
          
       } else{ // the ray doesnt hit a sphere, add diffuse and specular components
          // Phong Shading
