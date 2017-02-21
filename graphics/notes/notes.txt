@@ -1,0 +1,51 @@
+***** ••••••••••••••••••••••••••••• *****
+***** •• Computer Graphics Notes •• *****
+***** ••••••••••••••••••••••••••••• *****
+
+Tuesday, February 7
+
+*************************************************
+ Ray Tracing, Shadows, Reflection and Refraction
+*************************************************
+
+* How do we account for the shinny-ness
+
+A + Sum ( D * (N • L) + S * pow(E • R, p) ) 
+(ambient light color) + (color diffused) * (normal • light source) + (specular component color)
+* A = ambient light
+* D = unit length vector from the object to the eye
+* N = normal
+* S = specular component
+* The shinnier it is, the larger the power p (which is also a color!)
+* R = 2 * N + dot(N,L) - L
+* This model isn't actually realistic, so we need to sum all the light sources
+* The is the description of a material surface
+
+* Reflections and Shadows are really really easy when you think about how the light source is hitting an object
+
+
+
+
+Tuesday, February 14
+
+*************************************************************
+ Ray Tracing, Shadows, Reflection and Refraction (continued)
+*************************************************************
+
+* interested in the lab? email him: herscher@nyu.edu
+
+* check out the new ray tracing story (should be posted!)
+* perlin has added thing to the library
+	* you can now store information for all the spheres in uSpheres
+	* that's where the spheres are, and they're also being animated by the javascript
+* step J adds in the phong shader --> basically makes them look like plastic objects (this is all the math that we went through from Feb. 7) --> go in and break it down
+	* make the highlight basically white for plastic, make the highlight closer to the color of the sphere to make it look more like metal
+* all the lights are also in the javascript, so in the WebGL code we just loop through however many lights we have
+* "u" at the beginning = is uniform, "s" at the end = is an array
+* there are couple lights at play (the key light and fill light)
+* woah how did he make the glowing pink and orange ones??
+* for the third part of the gradient, you want to use (1 - t * t) (if you just use t, then you will get a 50-50 gradient)
+* you now need a way for the spheres to reflect the background
+* (recall A is ambient light)
+* the gradient here is being used in three ways (the background, its reflection on the spheres, and the reflection off one sphere and onto another)
+

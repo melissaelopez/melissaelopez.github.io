@@ -1,0 +1,86 @@
+<script src=lib.js></script>
+
+<body bgcolor=black text=white>
+<center>
+<canvas id='canvas1' width=600 height=600></canvas>
+</center>
+</body>
+
+<script id='vs_script' type='x-shader/x-vertex'>
+
+   attribute vec3 aPos;
+   varying   vec3 vPos;
+   void main() {
+      gl_Position = vec4(aPos, 1.0);  // Set position of vertex in image.
+      vPos = aPos;                    // Copy pos to a varying variable to
+   }                                  //   interpolate it across pixels.
+</script>
+
+<script id='fs_script' type='x-shader/x-fragment'>
+
+varying vec3 vPos;                               // Position in image
+uniform float uTime;                             // Time
+vec3 LDir = normalize(vec3(1.,1.,sin(uTime)));
+
+
+vec2 raytraceSphere(vec3 V, vec3 W, vec4 S) {
+   V -= S.xyz;
+   float B = 2. * dot(V, W);
+   float C = dot(V, V) - S.w * S.w;
+   float discrim = B * B - 4. * C;
+   if (discrim < 0.){
+        return vec2(-1., -1);
+   } else {
+        return vec2(-B - discrim, -B + discrim) / 2.;
+   }
+}
+
+void main() {
+    vec3 c = vec3(0.4, 0.996, 1.);                // Light blue background
+
+    vec3 V = vec3(0.,0.,sin(uTime));                      // Origin
+    vec3 W = normalize(vec3(vPos.xy, -3.));       // Direction
+    vec4 S = vec4(0.,0.,-4., .5);                 // Sphere
+    vec3 E = -W;
+
+    vec2 t = raytraceSphere(V, W, S);
+
+    float distance = 1000.;
+
+    if (t.x < distance){
+
+        // vec3 P = V + t.x * W;
+        // vec3 N = normalize(P - S.xyz);
+        // float brightness = max(0., dot(N, LDir));
+        // brightness = mix(.1, brightness,.5);
+        // c = vec3(1., 0.1, .5) * brightness;
+
+        // Phong shading
+        distance = t.x;
+        vec3 P = V + t.x * W;                      // Point on sphere
+        vec3 N = normalize(P - S.xyz);             // Surface normal
+        float d = max(0., dot(N, LDir));           // Diffuse value
+        vec3 R = 2. * dot(N, LDir) * N - LDir;     // Reflection dir
+        float s = pow(max(0., dot(E, R)), 10.);    // Specular value
+        c = vec3(.1, .01, .01);                    // Ambient color
+        c += d * vec3(1., 0.1, .5);               // Diffuse color
+        c += s * vec3(.5,.5,.5);
+}
+
+    gl_FragColor = vec4(sqrt(c), 1.);             // Final pixel color
+}
+
+</script>
+   
+<script>
+
+var vs = vs_script.innerHTML, fs = fs_script.innerHTML;
+
+addTextEditor(fs, function() { canvas1.setShaders(vs, this.value); });
+
+gl_start(canvas1, vs, fs);
+
+</script>
+
+
+
