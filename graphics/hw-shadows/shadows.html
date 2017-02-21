@@ -43,35 +43,60 @@ vec3 backgroundColor(vec3 dir) {
    // return mix(vec3(0.988, 0.290, 0.662), vec3(1., 0.592, 0.301), 1. - t * t);
 }
 
-vec3 phong(vec3 N, vec3 E, vec3 A, vec3 D, vec4 S) {
+vec3 phong(vec3 N, vec3 E, vec3 A, vec3 D, vec4 S, vec3 P) {
    vec3 c = A * backgroundColor(N);                                 // Ambient color
    for (int i = 0 ; i < uLDirs_length ; i++) { // Loop through lights
+
+      // //*******************************************************
+      // // SHADOW WORK!!
+      // //*******************************************************
       
-      //*******************************************************
-      // SHADOW WORK!!
-      //*******************************************************
+      vec3  LDir = normalize(uLDirs[i]);
+      vec2 t;
+      vec3 Sp; //point
+      vec3 Sd; //direction
+      for (int j = 0; j < uSpheres_length; j++){
+         Sp =  P+.001*LDir;
+         Sd = LDir;
+         t = raytraceSphere(Sp, Sd, uSpheres[j]);
+         if (t.x < 1000.) // we have a hit
+            break;
+      }
 
-      // For each light source, shoot a ray from the surface in the direction of that last light source.
-
-      // Compute surface point from the surface normal
-      vec3 Sp = N * S.w + S.xyz + .01; // add some small epsilon
-
-      // Shadow direction matches the direction of the light source
-      vec3 Sd = normalize(uLDirs[i]);
-
-      vec2 ts = raytraceSphere(Sp, Sd, S);
-      if (ts.x == 1000.){ // if the ray hits a sphere, don't add anything
-         // not sure that the appropriate conditional is here given t (t.x, t.y)
-         
-      } else{ // the ray doesnt hit a sphere, add diffuse and specular components
-         // Phong Shading
-         vec3  LDir = normalize(uLDirs[i]);
+      if (t.x == 1000.){ // if we don't his anything
          float d = max(0., dot(N, LDir));           // Diffuse value
          vec3  R = reflection(LDir, N);
          float s = pow(max(0., dot(E, R)), S.a);    // Specular value
          c += uLColors[i] * (d * D + s * S.rgb * .1*S.a);
       }
+
+
+      // scratch work
+
+      // // For each light source, shoot a ray from the surface in the direction of that last light source.
+
+      // // Compute surface point from the surface normal
+      // vec3 Sp = N * S.w + S.xyz + .01; // add some small epsilon
+
+      // // Shadow direction matches the direction of the light source
+      // vec3 Sd = normalize(uLDirs[i]);
+
+      // vec2 ts = raytraceSphere(Sp, Sd, S);
+      // if (ts.x > 0.  && ts.y < 1000.){ // if the ray hits a sphere, don't add anything
+      //    // not sure that the appropriate conditional is here given t (t.x, t.y)
+         
+      // } else{ // the ray doesnt hit a sphere, add diffuse and specular components
+      //    // Phong Shading
+      //    vec3  LDir = normalize(uLDirs[i]);
+      //    float d = max(0., dot(N, LDir));           // Diffuse value
+      //    vec3  R = reflection(LDir, N);
+      //    float s = pow(max(0., dot(E, R)), S.a);    // Specular value
+      //    c += uLColors[i] * (d * D + s * S.rgb * .1*S.a);
+      // }
    }
+
+   // 
+
    return c;
 }
 
@@ -102,7 +127,7 @@ void main() {
       c = backgroundColor(vPos);
    else
       for (int bounce = 0 ; bounce < 5 ; bounce++) {
-          c += phong(N, E, .1*C.rgb, .5*C.rgb, C);
+          c += phong(N, E, .1*C.rgb, .5*C.rgb, C, P);
           V = P + .001 * W;
           W = reflection(-W, N);
           if (! raytrace()) {
