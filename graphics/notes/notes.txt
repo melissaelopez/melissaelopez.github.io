@@ -49,3 +49,70 @@ Tuesday, February 14
 * (recall A is ambient light)
 * the gradient here is being used in three ways (the background, its reflection on the spheres, and the reflection off one sphere and onto another)
 
+
+
+
+Tuesday, February 23
+
+****************************
+ Data Structures in Shaders
+****************************
+
+* Remember that when we were raytracing, we were just looking for the roots of the funtion
+	* The place where the function = 0 is where the shape we're looking for lies
+		* A sphere had negative stuff on the inside, positive on the outside, and equals 0 on the surface
+* ax + by + cz + d = 0
+	* the normal of the plane is proportional to the vector [a b c] (points in the positive direction where the function would be positive/increasing)
+ 
+Some convention stuff:
+* We don't want to confuse our constants and variables
+* A column (vertical) vector is a point in space, the variables x, y, x
+* A row (horizontal) vector are the coefficients of an equation 
+* ax + by + cz + d = 0 --> homogeneous eq'n (because it's set up to equal zero) --> this is just a dot product between:
+
+	[ a  b  c  d ] • [ x ]  
+	                 [ y ]    =    ax + by + cz + d 
+	                 [ z ]
+	                 [ W ]	and make W = 1 (this is the homogeneous coordinate)                 
+* let's do raytracing for a plane
+* P • V + t(P • W) = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+
+
+
+
