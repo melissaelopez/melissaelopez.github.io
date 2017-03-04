@@ -81,6 +81,21 @@ Some convention stuff:
 
 
 
+Thursday, March 2
+
+************
+ 2D Drawing
+************
+
+var blue  = 128 + Math.floor(128 * Math.sin(time));
+g.fillstyle = ‘rgb(255,128,)’ + blue + ‘)’;
+g.beingPath();
+g.moveTo(0,0);
+g.lineTo(this.width, 0);
+...
+...
+...
+g.fill();
 
 
 
@@ -103,7 +118,7 @@ Some convention stuff:
 
 
 
-2
+
 
 
 

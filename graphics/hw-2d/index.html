@@ -1,0 +1,203 @@
+<table>
+
+<tr>
+<td><canvas id=canvas1 width=400 height=300></td>
+<td width=50></td>
+<td>
+Hi, I am a sleepy bird.
+</td>
+</tr>
+
+<tr>
+<td><canvas id=canvas2 width=400 height=500></td>
+<td width=50></td>
+<td>
+Hi, I am a bird who has had its morning espresso.
+</td>
+</tr>
+
+</table>
+
+<script src=drawlib1.js></script>
+<script>
+   canvas1.update = function(g) {
+      var blue = 128 + Math.floor(128 * Math.sin(time));
+
+      g.fillStyle = 'rgb(255,128,' + blue + ')';
+      g.fill();
+      g.lineWidth = 20;
+      g.lineCap = 'round';
+      g.lineJoin = 'round';
+
+      g.beginPath();
+      g.moveTo(0, 0);
+      g.lineTo(this.width, 0);
+      g.lineTo(this.width, this.height);
+      g.lineTo(0, this.height);
+      g.lineTo(0, 0);
+      g.stroke();
+      g.fill();
+
+      g.beginPath();
+
+      var x = this.cursor.x;
+      var y = this.cursor.y;
+      var z = this.cursor.z;
+      if (z == 0) {
+         x = this.width / 2;
+         y = this.height / 2;
+      }
+
+      var angle = Math.sin(time);
+      var flapY = 100 * Math.sin(angle);
+      var flapX = 100 * Math.cos(angle);
+      g.moveTo(x-flapX, y-flapY);
+      g.lineTo(x, y);
+      g.lineTo(x+flapX, y-flapY);
+      g.stroke();
+   }
+
+   canvas2.update = function(g) {
+      g.lineWidth = 10;
+      g.strokeStyle = 'rgb(0, 0, 0)';
+      g.fillStyle = 'rgb(242,234,214)';
+      g.fill();
+
+      var yellow = 'rgb(252,204,10)';
+      var blue = 'rgb(0,57,166)';
+      var green = 'rgb(0,147,60)';
+      var orange = 'rgb(255,99,25)';
+      var red = 'rgb(238,53,46)';
+
+      // background
+      g.beginPath();
+      g.moveTo(0, 0);
+      g.lineTo(this.width, 0);
+      g.lineTo(this.width, this.height);
+      g.lineTo(0, this.height);
+      g.lineTo(0, 0);
+      g.stroke();
+      g.fill();
+
+      g.lineWidth = 30;
+      g.lineCap = 'round';
+      g.lineJoin = 'round';
+
+      // Streets
+      g.strokeStyle = 'white';
+      g.lineWidth = 3;
+
+      // 4th
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 15);
+      g.lineTo(this.width, (this.height / 2) + 15);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 15);
+      g.lineTo(0, (this.height / 2) - 10);
+      g.stroke();
+
+      // Bleeker
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 55);
+      g.lineTo(this.width, (this.height / 2) + 55);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 55);
+      g.lineTo(0, (this.height / 2) + 35);
+      g.stroke();
+
+      // Houston
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 75);
+      g.lineTo(this.width, (this.height / 2) + 75);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 75);
+      g.lineTo(0, (this.height / 2) + 110);
+      g.stroke();
+      
+      // 5th Ave
+      g.beginPath();
+      g.moveTo(this.width/2, 0);
+      g.lineTo(this.width/2, this.height/2);
+      g.stroke();
+
+      // 4th-1st Ave's
+      g.beginPath();
+      g.moveTo(this.width/2 + 50, 0);
+      g.lineTo(this.width/2 + 50, this.height);
+      g.stroke();
+
+      // WSP
+      g.fillStyle = 'rgb(108,190,69)';
+      g.beginPath();
+      g.moveTo((this.width / 2) - 20, (this.height / 2) - 10);
+      g.lineTo((this.width / 2) + 20, (this.height / 2) - 10);
+      g.lineTo((this.width / 2) + 20, (this.height / 2) + 10);
+      g.lineTo((this.width / 2) - 20, (this.height / 2) + 10);
+      g.fill();
+
+      // Subway Lines
+      g.lineWidth = 20;
+
+      g.strokeStyle = yellow;
+      g.beginPath();
+		g.moveTo(this.width - 150, this.height);
+		g.lineTo(this.width - 150,this.height - Math.abs((this.height - 100)*Math.sin(time)));
+		g.stroke();
+
+		g.strokeStyle = blue;
+      g.beginPath();
+		g.moveTo(0, this.width / 4);
+		g.lineTo(Math.abs((this.width/4 + 50)*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
+		g.stroke();
+
+		g.beginPath();
+		g.moveTo((this.width/4 + 50), this.height);
+		g.lineTo(Math.abs(((this.width/4 + 50))*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
+		g.stroke();
+
+		g.strokeStyle = green;
+		g.beginPath();
+		g.moveTo(this.width - 75, this.height);
+		g.lineTo(this.width - 100,this.height - Math.abs((this.height - 50)*Math.sin(time)));
+		g.stroke();
+
+		g.beginPath();
+		g.moveTo(this.width - 75, 0);
+		g.lineTo(this.width - 100,this.height - Math.abs((this.height - 50)*Math.sin(time)));
+		g.stroke();
+      
+      g.strokeStyle = orange;
+      g.beginPath();
+		g.moveTo((this.width/4 + 50), 0);
+		g.lineTo(this.width/4 + 50,Math.abs((this.height - 250)*Math.sin(time)));
+		g.stroke();
+
+		g.beginPath();
+		g.moveTo((this.width/4 + 220), this.height);
+		g.lineTo(this.width/4 + 50,Math.abs((this.height - 250)*Math.sin(time)));
+		g.stroke();
+
+		g.strokeStyle = yellow;
+      g.beginPath();
+		g.moveTo(50, 0);
+		g.lineTo(this.width - 150,this.height - Math.abs((this.height - 100)*Math.sin(time)));
+		g.stroke();
+
+		// LEFT OFF ON 123
+		// g.strokeStyle = red;
+  //     g.beginPath();
+		// g.moveTo(50, 0);
+		// g.lineTo(this.width - 150,this.height - Math.abs((this.height - 100)*Math.sin(time)));
+		// g.stroke();
+   }
+
+   draw2DCanvases([ canvas1, canvas2 ]);
+</script>
+
+
