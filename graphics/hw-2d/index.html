@@ -1,61 +1,19 @@
 <table>
 
 <tr>
-<td><canvas id=canvas1 width=400 height=300></td>
-<td width=50></td>
-<td>
-Hi, I am a sleepy bird.
-</td>
-</tr>
-
-<tr>
 <td><canvas id=canvas2 width=400 height=500></td>
 <td width=50></td>
 <td>
-Hi, I am a bird who has had its morning espresso.
+A funky lil NYC subway map.
 </td>
 </tr>
+
 
 </table>
 
 <script src=drawlib1.js></script>
 <script>
-   canvas1.update = function(g) {
-      var blue = 128 + Math.floor(128 * Math.sin(time));
 
-      g.fillStyle = 'rgb(255,128,' + blue + ')';
-      g.fill();
-      g.lineWidth = 20;
-      g.lineCap = 'round';
-      g.lineJoin = 'round';
-
-      g.beginPath();
-      g.moveTo(0, 0);
-      g.lineTo(this.width, 0);
-      g.lineTo(this.width, this.height);
-      g.lineTo(0, this.height);
-      g.lineTo(0, 0);
-      g.stroke();
-      g.fill();
-
-      g.beginPath();
-
-      var x = this.cursor.x;
-      var y = this.cursor.y;
-      var z = this.cursor.z;
-      if (z == 0) {
-         x = this.width / 2;
-         y = this.height / 2;
-      }
-
-      var angle = Math.sin(time);
-      var flapY = 100 * Math.sin(angle);
-      var flapX = 100 * Math.cos(angle);
-      g.moveTo(x-flapX, y-flapY);
-      g.lineTo(x, y);
-      g.lineTo(x+flapX, y-flapY);
-      g.stroke();
-   }
 
    canvas2.update = function(g) {
       g.lineWidth = 10;
@@ -68,6 +26,9 @@ Hi, I am a bird who has had its morning espresso.
       var green = 'rgb(0,147,60)';
       var orange = 'rgb(255,99,25)';
       var red = 'rgb(238,53,46)';
+      var gray = 'rgb(167,169,172)';
+      var purple = 'rgb(185,51,173)';
+      var brown = 'rgb(153,102,51)';
 
       // background
       g.beginPath();
@@ -142,62 +103,84 @@ Hi, I am a bird who has had its morning espresso.
       g.fill();
 
       // Subway Lines
-      g.lineWidth = 20;
+      g.lineWidth = 15;
 
       g.strokeStyle = yellow;
       g.beginPath();
-		g.moveTo(this.width - 150, this.height);
-		g.lineTo(this.width - 150,this.height - Math.abs((this.height - 100)*Math.sin(time)));
-		g.stroke();
+      g.moveTo(this.width - 150, this.height);
+      g.lineTo(this.width - 150,this.height - Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
 
-		g.strokeStyle = blue;
+      g.strokeStyle = red;
       g.beginPath();
-		g.moveTo(0, this.width / 4);
-		g.lineTo(Math.abs((this.width/4 + 50)*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
-		g.stroke();
+      g.moveTo(25, 0);
+      g.lineTo(Math.abs((50)*Math.sin(time)),this.height);
+      g.stroke();
 
-		g.beginPath();
-		g.moveTo((this.width/4 + 50), this.height);
-		g.lineTo(Math.abs(((this.width/4 + 50))*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
-		g.stroke();
+      g.strokeStyle = blue;
+      g.beginPath();
+      g.moveTo(0, this.width / 4);
+      g.lineTo(Math.abs((this.width/4 + 50)*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
+      g.stroke();
 
-		g.strokeStyle = green;
-		g.beginPath();
-		g.moveTo(this.width - 75, this.height);
-		g.lineTo(this.width - 100,this.height - Math.abs((this.height - 50)*Math.sin(time)));
-		g.stroke();
+      g.beginPath();
+      g.moveTo((this.width/4 + 50), this.height);
+      g.lineTo(Math.abs(((this.width/4 + 50))*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
+      g.stroke();
 
-		g.beginPath();
-		g.moveTo(this.width - 75, 0);
-		g.lineTo(this.width - 100,this.height - Math.abs((this.height - 50)*Math.sin(time)));
-		g.stroke();
-      
+      g.strokeStyle = green;
+      g.beginPath();
+      g.moveTo(this.width - 75, this.height);
+      g.lineTo(this.width - 100,this.height - Math.abs((this.height - 100)*Math.sin(time)));
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(this.width - 75, 0);
+      g.lineTo(this.width - 100,this.height - Math.abs((this.height - 100)*Math.sin(time)));
+      g.stroke();
+
       g.strokeStyle = orange;
       g.beginPath();
-		g.moveTo((this.width/4 + 50), 0);
-		g.lineTo(this.width/4 + 50,Math.abs((this.height - 250)*Math.sin(time)));
-		g.stroke();
+      g.moveTo((this.width/4 + 50), 0);
+      g.lineTo(this.width/4 + 50,Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
 
-		g.beginPath();
-		g.moveTo((this.width/4 + 220), this.height);
-		g.lineTo(this.width/4 + 50,Math.abs((this.height - 250)*Math.sin(time)));
-		g.stroke();
-
-		g.strokeStyle = yellow;
       g.beginPath();
-		g.moveTo(50, 0);
-		g.lineTo(this.width - 150,this.height - Math.abs((this.height - 100)*Math.sin(time)));
-		g.stroke();
+      g.moveTo(this.width, this.height - 200);
+      g.lineTo(this.width/4 + 50,Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
 
-		// LEFT OFF ON 123
-		// g.strokeStyle = red;
-  //     g.beginPath();
-		// g.moveTo(50, 0);
-		// g.lineTo(this.width - 150,this.height - Math.abs((this.height - 100)*Math.sin(time)));
-		// g.stroke();
+      g.strokeStyle = yellow;
+      g.beginPath();
+      g.moveTo(50, 0);
+      g.lineTo(this.width - 150,this.height - Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
+
+      g.strokeStyle = gray;
+      g.beginPath();
+      g.moveTo(0, this.height/3 + 30);
+      g.lineTo(Math.abs((this.width)*Math.sin(time)), this.height/3 + 30);
+      g.stroke();
+
+      g.strokeStyle = purple;
+      g.beginPath();
+      g.moveTo(this.width, 50);
+      g.lineTo(this.width - Math.abs((this.width)*Math.sin(time)), 50);
+      g.stroke();
+
+      g.strokeStyle = brown;
+      g.beginPath();
+      g.moveTo(this.width, this.height - 150);
+      g.lineTo(this.width - Math.abs((50)*Math.sin(time)), this.height - 150);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(this.width - 40, this.height);
+      g.lineTo(this.width - Math.abs((50)*Math.sin(time)), this.height - 150);
+      g.stroke();
    }
 
-   draw2DCanvases([ canvas1, canvas2 ]);
+   draw2DCanvases([canvas2 ]);
 </script>
 
 
