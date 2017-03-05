@@ -102,6 +102,30 @@ A funky lil NYC subway map.
       g.lineTo((this.width / 2) - 20, (this.height / 2) + 10);
       g.fill();
 
+      // USQ
+      g.beginPath();
+      g.moveTo((this.width / 2) + 40, (this.height / 2) - 80);
+      g.lineTo((this.width / 2) + 85, (this.height / 2) - 80);
+      g.lineTo((this.width / 2) + 85, (this.height / 2) - 50);
+      g.lineTo((this.width / 2) + 60, (this.height / 2) - 50);
+      g.fill();
+
+      // Bryant Park
+      g.beginPath();
+      g.moveTo(155, 55);
+      g.lineTo(180, 55);
+      g.lineTo(180, 70);
+      g.lineTo(155, 70);
+      g.fill();
+
+      // City Hall
+      g.beginPath();
+      g.moveTo((this.width / 2) + 50, (this.height / 2) + 150);
+      g.lineTo((this.width / 2) + 105, (this.height / 2) + 150);
+      g.lineTo((this.width / 2) + 90, (this.height / 2) + 210);
+      g.lineTo((this.width / 2) + 50, (this.height / 2) + 210);
+      g.fill();
+
       // Subway Lines
       g.lineWidth = 15;
 
@@ -130,13 +154,18 @@ A funky lil NYC subway map.
 
       g.strokeStyle = green;
       g.beginPath();
-      g.moveTo(this.width - 75, this.height);
-      g.lineTo(this.width - 100,this.height - Math.abs((this.height - 100)*Math.sin(time)));
+      g.moveTo(this.width - 95, this.height - 100);
+      g.lineTo(this.width - 110,this.height - 100 - Math.abs((this.height - 100)*Math.sin(time)));
       g.stroke();
 
       g.beginPath();
-      g.moveTo(this.width - 75, 0);
-      g.lineTo(this.width - 100,this.height - Math.abs((this.height - 100)*Math.sin(time)));
+      g.moveTo(this.width - 95, 0);
+      g.lineTo(this.width - 110,this.height - 100 - Math.abs((this.height - 100)*Math.sin(time)));
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(this.width - 95, this.height - 100);
+      g.lineTo(Math.abs((this.width - 120)*Math.sin(time)),this.height);
       g.stroke();
 
       g.strokeStyle = orange;
