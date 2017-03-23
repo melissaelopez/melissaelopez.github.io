@@ -98,18 +98,6 @@ M.scale     = function(m, v) {
 	M.matrixMultiply(m, M.scaleMatrix(v), m);
 } // Modify m, scaling by v[0],v[1],v[2].
 
-// Transform
-
-M.transform = function(m, v) {
-	temp = 	[	m[0]*v[0] + m[1]*v[1] + m[2]*v[2] + m[3]*v[3],
-				m[4]*v[0] + m[5]*v[1] + m[6]*v[2] + m[7]*v[3],
-				m[8]*v[0] + m[9]*v[1] + m[10]*v[2] + m[11]*v[3],
-				m[12]*v[0] + m[13]*v[1] + m[14]*v[2] + m[15]*v[3]
-			];
-	m = temp;
-	return m;
-} // Return vec v transformed by matrix m.
-
 //////////////////////////////////////////////////////////////////////////////
 // I have given you a head start by implementing some of the methods for you.
 //
