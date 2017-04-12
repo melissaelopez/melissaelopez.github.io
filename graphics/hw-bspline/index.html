@@ -6,14 +6,16 @@
 <td width=50></td>
 <td valign=top style="font-family: sans-serif">
 <big><b>
-extended bspline editor, by melissa
+extended bspline editor,<br> by melissa
 </b></big>
 <p>
-Extended features:
+new features:
 <ul>
-<li>Click anywhere without a point to <strong>add a new point</strong> which will appear in green.
-<li>Hover over any color on the left palette to preview your artwork with a different colored fill.
-<li>Select a color to change your artwork fill color.
+<li>click anywhere without a point to <strong>add a new point</strong> which will appear in green.
+<li>hover over any color on the left palette <strong>to preview</strong> your artwork with a different colored fill.
+<li>select a color <strong>to change</strong> your artwork fill color.
+<li>click on the upper right corner to toggle <strong>the connecting lines</strong> on and off.
+<li>click on the lower right corner to toggle <strong>the curve points</strong> on and off.
 </ul>
 </td>
 </tr>
@@ -48,15 +50,19 @@ Extended features:
              [  .8, -.5,  0],
            ];
    var selectedColor = 'rgb(241,56,92)';
+   var linesOn = true;
+   var pointsOn = true;
+   var lineToggle = '#326fd3';
+   var buttonToggle = '#326fd3';
 
    canvas1.update = function(g) {
-      g.lineCap = 'round';
+      // g.lineCap = 'round';
       g.lineJoin = 'round';
       g.lineWidth = 1;
 
       // OUTLINE THE CANVAS
 
-      g.fillStyle = 'rgb(237, 237, 237)';
+      g.fillStyle = 'rgb(245, 245, 245)';
       g.strokeStyle = 'black';
       g.beginPath();
       g.moveTo(0,0);
@@ -65,7 +71,6 @@ Extended features:
       g.lineTo(0,this.height);
       g.lineTo(0,0);
       g.fill();
-      g.stroke();
 
       // DRAW THE COLOR PALETTE ON THE RIGHT
 
@@ -102,8 +107,6 @@ Extended features:
          g.lineTo(50,100);
          g.stroke();
       }   
-      
-      
 
       // blue
       g.fillStyle = '#326fd3';
@@ -200,14 +203,30 @@ Extended features:
          g.stroke();
       }
 
+      // Draw linesOn Toggle Button in Upper/Right corner
+      g.fillStyle = lineToggle;
+      g.beginPath();
+      g.moveTo(this.width,0);
+      g.lineTo(this.width,50);
+      g.lineTo(this.width-50,0);
+      g.fill();
+
+      // Draw pointsOn Toggle Button in Upper/Right corner
+      g.fillStyle = buttonToggle;
+      g.beginPath();
+      g.moveTo(this.width,this.height);
+      g.lineTo(this.width,this.height-50);
+      g.lineTo(this.width-50,this.height);
+      g.fill();
 
       g.lineWidth = 1;
       // DRAW THE SCENE
 
+      console.log(P);
+
       M.identity(m);
       M.save(m);
          var curves = [], curve, n, t;
-
 	 // Compute the cursor.
 	 // Note: This will not yet work in the general case, because
 	 //       after converting from pixels, we need to undo perspective
@@ -242,7 +261,6 @@ Extended features:
             P[this.n][0] = cx;
             P[this.n][1] = cy;
          } else if (this.cursor.z && cx > -.8) { // undefined, no point selected
-
             // var closestDist = Number.MAX_VALUE;
             // var closest = -1;
   
@@ -264,7 +282,26 @@ Extended features:
             // P.splice(i, 0, [cx, cy, 0]);
             // console.log(P);
 
-         	P.push([cx, cy, 0]);
+            console.log(cx, cy);
+            if (cx < .85 && (cy <= .5 || cy >= .5)){
+               P.push([cx, cy, 0]);
+            } else if (cx > .85 && cy > .5) {
+               if (linesOn === true){
+                  linesOn = false;
+                  lineToggle = 'gray';
+               } else {
+                  linesOn = true;
+                  lineToggle = '#326fd3';
+               }  
+            } else if (cx > .85 && cy < -.5) {
+               if (pointsOn === true){
+                  pointsOn = false;
+                  buttonToggle = 'gray';
+               } else {
+                  pointsOn = true;
+                  buttonToggle = '#326fd3';
+               } 
+            }
          }
 
 
@@ -325,14 +362,17 @@ Extended features:
 
      // Draw lines between successive key points.
 
-	 curves = [];
+      if (linesOn){
+         curves = [];
          for (n = 0 ; n < P.length ; n++)
-	     	curves.push([ P[n], P[(n+1) % P.length] ]);
+        	curves.push([ P[n], P[(n+1) % P.length] ]);
          	g.strokeStyle = 'blue';
          	this.drawCurves(m, curves );
+      }
 
 	 // Draw the key points as small disks (blue for original, green for new!)
 
+    if (pointsOn){
          curves = [];
          for (n = 5 ; n < P.length ; n++) {
             curve = [];
@@ -341,7 +381,7 @@ Extended features:
                            P[n][1] + .015 * Math.sin(t), 0]);
             curves.push(curve);
          }
-         g.fillStyle = 'rgb(0,255,103)';
+         g.fillStyle = 'lightgreen';
          this.drawCurves(m, curves, true);
 
          curves = [];
@@ -354,6 +394,7 @@ Extended features:
          }
          g.fillStyle = 'blue';
          this.drawCurves(m, curves, true);
+   }
 
 	 // Draw the cursor as red crosshairs.
 
@@ -363,7 +404,7 @@ Extended features:
          g.strokeStyle = 'red';
          this.drawCurves(m, curves);
 
-      //M.restore(m);
+      M.restore(m);
    }
 
    drawCanvases([canvas1]);
