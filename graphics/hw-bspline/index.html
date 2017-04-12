@@ -46,6 +46,7 @@ Extended features:
              [  .6, .4,  0],
              [  .8, -.5,  0],
            ];
+   var selectedColor = 'rgb(241,56,92)';
 
    canvas1.update = function(g) {
       g.lineCap = 'round';
@@ -67,6 +68,9 @@ Extended features:
 
       // DRAW THE COLOR PALETTE ON THE RIGHT
 
+      g.strokeStyle = 'red';
+      g.lineWidth = 5;
+
       // red
       g.fillStyle = 'rgb(241,56,92)';
       g.beginPath();
@@ -76,7 +80,12 @@ Extended features:
       g.lineTo(0,50);
       g.lineTo(0,0);
       g.fill();
-
+      if (selectedColor === 'rgb(241,56,92)'){
+         g.beginPath();
+         g.moveTo(50,0);
+         g.lineTo(50,50);
+         g.stroke();
+      }   
       // purple
       g.fillStyle = '#a65ed1';
       g.beginPath();
@@ -86,6 +95,14 @@ Extended features:
       g.lineTo(0,100);
       g.lineTo(0,50);
       g.fill();
+      if (selectedColor === '#a65ed1'){
+         g.beginPath();
+         g.moveTo(50,50);
+         g.lineTo(50,100);
+         g.stroke();
+      }   
+      
+      
 
       // blue
       g.fillStyle = '#326fd3';
@@ -96,6 +113,12 @@ Extended features:
       g.lineTo(0,150);
       g.lineTo(0,100);
       g.fill();
+      if (selectedColor === '#326fd3'){
+         g.beginPath();
+         g.moveTo(50,100);
+         g.lineTo(50,150);
+         g.stroke();
+      }   
 
       // light blue
       g.fillStyle = '#00d3ef';
@@ -106,6 +129,12 @@ Extended features:
       g.lineTo(0,200);
       g.lineTo(0,150);
       g.fill();
+      if (selectedColor === '#00d3ef'){
+         g.beginPath();
+         g.moveTo(50,150);
+         g.lineTo(50,200);
+         g.stroke();
+      }   
 
       // mint
       g.fillStyle = 'rgb(34,255,204)';
@@ -116,6 +145,12 @@ Extended features:
       g.lineTo(0,250);
       g.lineTo(0,200);
       g.fill();
+      if (selectedColor === 'rgb(34,255,204)'){
+         g.beginPath();
+         g.moveTo(50,200);
+         g.lineTo(50,250);
+         g.stroke();
+      }
 
       // green
       g.fillStyle = 'rgb(0,255,103)';
@@ -126,6 +161,12 @@ Extended features:
       g.lineTo(0,300);
       g.lineTo(0,250);
       g.fill();
+      if (selectedColor === 'rgb(0,255,103)'){
+         g.beginPath();
+         g.moveTo(50,250);
+         g.lineTo(50,300);
+         g.stroke();
+      }
 
       // yellow
       g.fillStyle = '#fff000';
@@ -136,7 +177,12 @@ Extended features:
       g.lineTo(0,350);
       g.lineTo(0,300);
       g.fill();
-
+      if (selectedColor === '#fff000'){
+         g.beginPath();
+         g.moveTo(50,300);
+         g.lineTo(50,350);
+         g.stroke();
+      }
       // gray
       g.fillStyle = '#666666';
       g.beginPath();
@@ -146,7 +192,15 @@ Extended features:
       g.lineTo(0,400);
       g.lineTo(0,350);
       g.fill();
+      if (selectedColor === '#666666'){
+         g.beginPath();
+         g.moveTo(50,350);
+         g.lineTo(50,400);
+         g.stroke();
+      }
 
+
+      g.lineWidth = 1;
       // DRAW THE SCENE
 
       M.identity(m);
@@ -186,11 +240,31 @@ Extended features:
          if (this.n !== undefined) {
             P[this.n][0] = cx;
             P[this.n][1] = cy;
-         } else if (this.cursor.z) {
+         } else if (this.cursor.z && cx > -.8) { // undefined, no point selected
+
+            // var closestDist = Number.MAX_VALUE;
+            // var closest = -1;
+  
+            // for (var i = 0; i < P.length; i++){
+            //    console.log(i);
+            //    var a = P[i][0] - cx;
+            //    var b = P[i][0] - cy;
+            //    var dist = Math.sqrt(a*a + b*b);
+            //    if (dist < closestDist){
+            //       closestDist = dist;
+            //       closest = i;
+            //    }
+            // }
+
+            // console.log("this is the index of the closest:", closest);
+            // console.log("this is the index of the 2nd closest:", closest2);
+
+            // console.log(P);
+            // P.splice(i, 0, [cx, cy, 0]);
+            // console.log(P);
+
          	P.push([cx, cy, 0]);
          }
-
-     // Detect the midpoint area
 
 
 	 // Draw the set of bsplines as a single filled curve.
@@ -208,30 +282,43 @@ Extended features:
                curve.push( [ cubic(X, t), cubic(Y, t), cubic(Z, t) ] );
          }
 
-         // ***********************************
-         // the default fill style
+         // hover for color
 
          if (this.cursor.x < 50 && this.cursor.y < 50){
          	g.fillStyle = 'rgb(241,56,92)';
+            if (this.cursor.z)
+               selectedColor = 'rgb(241,56,92)';
          } else if (this.cursor.x < 50 && this.cursor.y > 50 && this.cursor.y < 100) {
          	g.fillStyle = '#a65ed1';
+            if (this.cursor.z)
+               selectedColor = '#a65ed1';
          } else if (this.cursor.x < 50 && this.cursor.y > 100 && this.cursor.y < 150) {
          	g.fillStyle = '#326fd3';
+            if (this.cursor.z)
+               selectedColor = '#326fd3';
          } else if (this.cursor.x < 50 && this.cursor.y > 150 && this.cursor.y < 200) {
          	 g.fillStyle = '#00d3ef';
+             if (this.cursor.z)
+               selectedColor = '#00d3ef';
          } else if (this.cursor.x < 50 && this.cursor.y > 200 && this.cursor.y < 250) {
          	 g.fillStyle = 'rgb(34,255,204)';
+             if (this.cursor.z)
+               selectedColor = 'rgb(34,255,204)';
          } else if (this.cursor.x < 50 && this.cursor.y > 250 && this.cursor.y < 300) {
          	 g.fillStyle = 'rgb(0,255,103)';
+             if (this.cursor.z)
+               selectedColor = 'rgb(0,255,103)';
          } else if (this.cursor.x < 50 && this.cursor.y > 300 && this.cursor.y < 350){
          	g.fillStyle = '#fff000';
+            if (this.cursor.z)
+               selectedColor = '#fff000';
          } else if (this.cursor.x < 50 && this.cursor.y > 350 && this.cursor.y < 400){
          	g.fillStyle = '#666666';
+            if (this.cursor.z)
+               selectedColor = '#666666';
          } else {
-         	g.fillStyle = 'rgb(241,56,92)';
+         	g.fillStyle = selectedColor;
          }
-
-
 
          this.drawCurves(m, [ curve ], true); // Set isFill flag to true.
 
@@ -243,7 +330,7 @@ Extended features:
          	g.strokeStyle = 'blue';
          	this.drawCurves(m, curves );
 
-	 // Draw the key points as small disks.
+	 // Draw the key points as small disks (blue for original, green for new!)
 
          curves = [];
          for (n = 5 ; n < P.length ; n++) {
@@ -255,6 +342,7 @@ Extended features:
          }
          g.fillStyle = 'rgb(0,255,103)';
          this.drawCurves(m, curves, true);
+
          curves = [];
          for (n = 0 ; n < 5 ; n++) {
             curve = [];
@@ -274,7 +362,7 @@ Extended features:
          g.strokeStyle = 'red';
          this.drawCurves(m, curves);
 
-      M.restore(m);
+      //M.restore(m);
    }
 
    drawCanvases([canvas1]);
