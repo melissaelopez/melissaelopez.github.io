@@ -1,14 +1,53 @@
+h1 {
+	font-size: 250px;
+	margin-bottom: 0px;
+	margin-left: 50px;
+}
+
+h3, h4{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 50px;
+}
+
 body{
 /*	background: #ff6b60; 
     background: -o-linear-gradient(bottom right, rgb(255, 107, 96), rgb(255, 138, 96)); 
     background: -moz-linear-gradient(bottom right, rgb(255, 107, 96), rgb(255, 138, 96)); 
     background: linear-gradient(to bottom right, rgb(255, 107, 96), rgb(255, 138, 96)); */
     background-color: rgb(245, 245, 245);
+
+}
+strong{
+	color: rgb(34,255,204);
 }
 
 canvas {
   position: absolute;
-  top: 20%;
-  left: 25%;
+  top: 23%;
+  left: 50%;
   background-color: ;
 }
+
+#red{
+	color: rgb(241,56,92);
+}
+#orange{
+	color: orange;
+}
+#green{
+	color: rgb(0,255,103);
+}
+#mint{
+	color: rgb(34,255,204);
+}
+#blue{
+	color: #326fd3;
+}
+#lightblue{
+	color: #00d3ef;
+}
+#purple{
+	color: #a65ed1;
+}
+
