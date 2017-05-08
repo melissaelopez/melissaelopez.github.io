@@ -71,7 +71,7 @@ canvas1.update = function(g) {
     g.lineWidth = 1;
 
     // OUTLINE THE CANVAS
-    g.fillStyle = 'rgb(245, 245, 245)';
+    g.fillStyle = 'white';
     g.strokeStyle = 'black';
     g.beginPath();
     g.moveTo(0,0);
@@ -85,6 +85,12 @@ canvas1.update = function(g) {
     g.strokeStyle = 'gray';
     g.lineWidth = 5;
 
+    var gradient = g.createLinearGradient(0, 400, 50, 450);
+    gradient.addColorStop(0, 'orange');
+    gradient.addColorStop(1, 'rgb(241,56,92)');
+    g.fillStyle = gradient;
+    // g.fillRect(10, 10, 200, 100);
+
     colorPosition = 0;
     colors = [  'rgb(241,56,92)', // red
                 'orange', // orange
@@ -94,7 +100,7 @@ canvas1.update = function(g) {
                 '#00d3ef', // light blue
                 '#326fd3', // dark blue
                 '#a65ed1', //purple
-                '#666666' // gray
+                gradient // gray
             ];
 
     var start = 0;
@@ -116,6 +122,9 @@ canvas1.update = function(g) {
         start += 50;
     }
     
+    //  UPDATE GRADIENT TO FILL MORE SCREEN
+    gradient = g.createLinearGradient(175, 100, this.width, this.height);
+
     // DRAW THE SCENE
     g.lineWidth = 1;
     M.identity(m);
@@ -280,13 +289,13 @@ canvas1.update = function(g) {
 
     function myFunction(event) {
         console.log(event.keyCode)
-        if (event.keyCode == 99)
+        if (event.keyCode == 67 || event.keyCode == 99)
             showCurves = true;
-        else if (event.keyCode == 120)
+        else if (event.keyCode == 88 || event.keyCode == 120)
             showCurves = false;
-        else if (event.keyCode == 108)
+        else if (event.keyCode == 76 || event.keyCode == 108)
             linesOn = true;
-        else if (event.keyCode == 107)
+        else if (event.keyCode == 75 || event.keyCode == 107)
             linesOn = false;
     }
 
