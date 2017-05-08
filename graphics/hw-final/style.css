@@ -1,0 +1,13 @@
+/*body{
+	background: #ff6b60; 
+    background: -o-linear-gradient(bottom right, rgb(255, 107, 96), rgb(255, 138, 96)); 
+    background: -moz-linear-gradient(bottom right, rgb(255, 107, 96), rgb(255, 138, 96)); 
+    background: linear-gradient(to bottom right, rgb(255, 107, 96), rgb(255, 138, 96)); 
+}*/
+
+canvas {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  background-color: red;
+}

@@ -1,0 +1,439 @@
+<!-- TOGGLE -->
+<!-- LINES ON WITH period
+LINES OFF WITH forward slash -->
+
+
+<head>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- <table>
+
+<tr>
+<td> -->
+<canvas id=canvas1 width=600 height=450>
+<!-- </td> -->
+<!-- <td width=50></td>
+<td valign=top style="font-family: sans-serif">
+<big><b>
+extended bspline editor,<br> by melissa
+</b></big>
+<p>
+new features:
+<ul>
+<li>click anywhere without a point to <strong>add a new point</strong> which will appear in green.</li>
+<li>hover over any color on the left palette <strong>to preview</strong> your artwork with a different colored fill.</li>
+<li>select a color <strong>to change</strong> your artwork fill color.</li>
+<li>click on the upper right corner to turn the connecting lines<strong> off</strong>.</li>
+<li>click on the lower right corner to turn the connecting lines <strong>on</strong>.</li>
+</ul>
+</td>
+</tr> -->
+
+<!-- </table> -->
+
+<script src=drawlib2.js></script>
+<script src=M.js></script>
+<script src=S.js></script>
+<script>
+var m = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
+// Matrix that transforms from [P0,P1,P2,P3] values to cubic coefficients [a,b,c,d].
+var Bspline = [ -1/6,  3/6, -3/6,  1/6,  // a,b,c,d cubic coefficients from P0
+                3/6, -6/6,    0,  4/6,  // a,b,c,d cubic coefficients from P1
+               -3/6,  3/6,  3/6,  1/6,  // a,b,c,d cubic coefficients from P2
+                1/6,    0,    0,    0   // a,b,c,d cubic coefficients from P3
+   ];
+// Given cubic coefficients [a,b,c,d], evaluate cubic polynomial at t.
+function cubic(A, t) { return A[0] * t*t*t + A[1] * t*t + A[2] * t + A[3]; }
+// Initial values for the key points.  The user can change them interactively.
+
+var startP = 1;
+var P = [
+         [ -.5, -.5,  0],
+         // [ -.2,  .4,  0],
+         // [  .2, -.2,  0],
+         // [  .6, .4,  0],
+         // [  .8, -.5,  0],
+       ];
+var selectedColor = 'rgb(241,56,92)';
+var linesOn = true;
+var pointsOn = true;
+var lineToggle = '#326fd3';
+var buttonToggle = '#326fd3';
+var showCurves = false;
+
+canvas1.update = function(g) {
+
+    // SETUP THE CANVAS / PALETTE / BUTTONS OF THE INTERFACE
+
+    g.lineJoin = 'round';
+    g.lineWidth = 1;
+
+    // OUTLINE THE CANVAS
+    g.fillStyle = 'rgb(245, 245, 245)';
+    g.strokeStyle = 'black';
+    g.beginPath();
+    g.moveTo(0,0);
+    g.lineTo(this.width,0);
+    g.lineTo(this.width,this.height);
+    g.lineTo(0,this.height);
+    g.lineTo(0,0);
+    g.fill();
+
+    // DRAW THE COLOR PALETTE ON THE LEFT
+    g.strokeStyle = 'orange';
+    g.lineWidth = 5;
+    
+    // red
+    g.fillStyle = 'rgb(241,56,92)';
+    g.beginPath();
+    g.moveTo(0,0);
+    g.lineTo(50,0);
+    g.lineTo(50,50);
+    g.lineTo(0,50);
+    g.lineTo(0,0);
+    g.fill();
+    if (selectedColor === 'rgb(241,56,92)'){
+    g.beginPath();
+    g.moveTo(50,0);
+    g.lineTo(50,50);
+    g.stroke();
+    }   
+    // purple
+    g.fillStyle = '#a65ed1';
+    g.beginPath();
+    g.moveTo(0,50);
+    g.lineTo(50,50);
+    g.lineTo(50,100);
+    g.lineTo(0,100);
+    g.lineTo(0,50);
+    g.fill();
+    if (selectedColor === '#a65ed1'){
+    g.beginPath();
+    g.moveTo(50,50);
+    g.lineTo(50,100);
+    g.stroke();
+    }   
+    // blue
+    g.fillStyle = '#326fd3';
+    g.beginPath();
+    g.moveTo(0,100);
+    g.lineTo(50,100);
+    g.lineTo(50,150);
+    g.lineTo(0,150);
+    g.lineTo(0,100);
+    g.fill();
+    if (selectedColor === '#326fd3'){
+    g.beginPath();
+    g.moveTo(50,100);
+    g.lineTo(50,150);
+    g.stroke();
+    }   
+    // light blue
+    g.fillStyle = '#00d3ef';
+    g.beginPath();
+    g.moveTo(0,150);
+    g.lineTo(50,150);
+    g.lineTo(50,200);
+    g.lineTo(0,200);
+    g.lineTo(0,150);
+    g.fill();
+    if (selectedColor === '#00d3ef'){
+    g.beginPath();
+    g.moveTo(50,150);
+    g.lineTo(50,200);
+    g.stroke();
+    }   
+    // mint
+    g.fillStyle = 'rgb(34,255,204)';
+    g.beginPath();
+    g.moveTo(0,200);
+    g.lineTo(50,200);
+    g.lineTo(50,250);
+    g.lineTo(0,250);
+    g.lineTo(0,200);
+    g.fill();
+    if (selectedColor === 'rgb(34,255,204)'){
+    g.beginPath();
+    g.moveTo(50,200);
+    g.lineTo(50,250);
+    g.stroke();
+    }
+    // green
+    g.fillStyle = 'rgb(0,255,103)';
+    g.beginPath();
+    g.moveTo(0,250);
+    g.lineTo(50,250);
+    g.lineTo(50,300);
+    g.lineTo(0,300);
+    g.lineTo(0,250);
+    g.fill();
+    if (selectedColor === 'rgb(0,255,103)'){
+    g.beginPath();
+    g.moveTo(50,250);
+    g.lineTo(50,300);
+    g.stroke();
+    }
+    // yellow
+    g.fillStyle = '#fff000';
+    g.beginPath();
+    g.moveTo(0,300);
+    g.lineTo(50,300);
+    g.lineTo(50,350);
+    g.lineTo(0,350);
+    g.lineTo(0,300);
+    g.fill();
+    if (selectedColor === '#fff000'){
+    g.beginPath();
+    g.moveTo(50,300);
+    g.lineTo(50,350);
+    g.stroke();
+    }
+    // gray
+    g.fillStyle = '#666666';
+    g.beginPath();
+    g.moveTo(0,350);
+    g.lineTo(50,350);
+    g.lineTo(50,400);
+    g.lineTo(0,400);
+    g.lineTo(0,350);
+    g.fill();
+    if (selectedColor === '#666666'){
+    g.beginPath();
+    g.moveTo(50,350);
+    g.lineTo(50,400);
+    g.stroke();
+    }
+
+    // BUTTONS
+
+    // black , hide curves
+    g.fillStyle = 'black';
+    g.beginPath();
+    g.moveTo(0,400);
+    g.lineTo(50,400);
+    g.lineTo(50,425);
+    g.lineTo(0,425);
+    g.lineTo(0,400);
+    g.fill();
+
+    // black, show curves
+    g.fillStyle = 'gray';
+    g.beginPath();
+    g.moveTo(0,425);
+    g.lineTo(50,425);
+    g.lineTo(50,450);
+    g.lineTo(0,450);
+    g.lineTo(0,425);
+    g.fill();
+
+    // labels for buttons
+    g.font = '10px sans-serif';
+    g.fillStyle = 'white';
+    g.fillText('hide', 15, 418);
+    g.fillText('show', 13, 440);
+
+    // // Lines On Toggle Button in Upper/Right corner
+    // g.fillStyle = 'gray';
+    // g.beginPath();
+    // g.moveTo(this.width,0);
+    // g.lineTo(this.width,50);
+    // g.lineTo(this.width-50,0);
+    // g.fill();
+    // // Lines On Toggle Button in Lower/Right corner
+    // g.fillStyle = 'blue';
+    // g.beginPath();
+    // g.moveTo(this.width,this.height);
+    // g.lineTo(this.width,this.height-50);
+    // g.lineTo(this.width-50,this.height);
+    // g.fill();
+    g.lineWidth = 1;
+
+    // DRAW THE SCENE
+    M.identity(m);
+    M.save(m);
+
+    // INITIALIZE VARIABLES
+
+    var curves = [], curve, n, t;
+
+// Compute the cursor.
+// Note: This will not yet work in the general case, because
+//       after converting from pixels, we need to undo perspective
+//       and then transform by the inverse of matrix m.
+     var cx = (this.cursor.x - this.width /2) /  (this.width/2);
+     var cy = (this.cursor.y - this.height/2) / -(this.width/2);
+
+// When mouse is button is down, select a key point if cursor gets near it.
+    if (this.cursor.z) {
+        if (this.n === undefined){
+            for (n = 0 ; n < P.length ; n++) {
+              let dx = P[n][0] - cx,
+                  dy = P[n][1] - cy;
+              // if near a point itself, slect that point
+              if (dx * dx + dy * dy < 0.05 * 0.05) {
+                 this.n = n;
+                 break;
+              }
+            }
+        }
+    }
+// When mouse button is up, no key point is selected.
+     else
+        delete this.n;
+     // If a key point is selected, move it to the cursor location.
+
+     if (this.n !== undefined) {
+        P[this.n][0] = cx;
+        P[this.n][1] = cy;
+     }  else if (this.cursor.z && this.cursor.x < 50 && this.cursor.y > 425&& this.cursor.y < 450){ // clear points
+          showCurves = true;
+     } else if (this.cursor.z && cx > -.8) { // undefined, no point selected
+        console.log(this.cursor.z);
+        // ADD POINT IF BUTTON DOWN
+        if (cx < .85 && (cy <= .5 || cy >= .5)){
+           P.push([cx, cy, 0]);
+        } 
+        // // Corner toggle buttons
+        // else if (cx > .85 && cy > .5) {
+        //    linesOn = false;
+        // } else if (cx > .85 && cy < -.5) {
+        //    linesOn = true;
+        // }
+     }
+
+     // HOVER FOR COLOR PREVIEW
+
+     if (this.cursor.x < 50 && this.cursor.y < 50){
+        g.fillStyle = 'rgb(241,56,92)';
+        if (this.cursor.z)
+           selectedColor = 'rgb(241,56,92)';
+     } else if (this.cursor.x < 50 && this.cursor.y > 50 && this.cursor.y < 100) {
+        g.fillStyle = '#a65ed1';
+        if (this.cursor.z)
+           selectedColor = '#a65ed1';
+     } else if (this.cursor.x < 50 && this.cursor.y > 100 && this.cursor.y < 150) {
+        g.fillStyle = '#326fd3';
+        if (this.cursor.z)
+           selectedColor = '#326fd3';
+     } else if (this.cursor.x < 50 && this.cursor.y > 150 && this.cursor.y < 200) {
+         g.fillStyle = '#00d3ef';
+         if (this.cursor.z)
+           selectedColor = '#00d3ef';
+     } else if (this.cursor.x < 50 && this.cursor.y > 200 && this.cursor.y < 250) {
+         g.fillStyle = 'rgb(34,255,204)';
+         if (this.cursor.z)
+           selectedColor = 'rgb(34,255,204)';
+     } else if (this.cursor.x < 50 && this.cursor.y > 250 && this.cursor.y < 300) {
+         g.fillStyle = 'rgb(0,255,103)';
+         if (this.cursor.z)
+           selectedColor = 'rgb(0,255,103)';
+     } else if (this.cursor.x < 50 && this.cursor.y > 300 && this.cursor.y < 350){
+        g.fillStyle = '#fff000';
+        if (this.cursor.z)
+           selectedColor = '#fff000';
+     } else if (this.cursor.x < 50 && this.cursor.y > 350 && this.cursor.y < 400){
+        g.fillStyle = '#666666';
+        if (this.cursor.z)
+           selectedColor = '#666666';
+     } else if (this.cursor.z && this.cursor.x < 50 && this.cursor.y > 400 && this.cursor.y < 425){
+        showCurves = false;
+     } else if (this.cursor.z && this.cursor.x < 50 && this.cursor.y > 425 && this.cursor.y < 450){
+        showCurves = true;
+     }
+     else {
+        g.fillStyle = selectedColor;
+     }
+
+    // Draw the set of bsplines as a single filled curve.
+    if(showCurves){
+         curve = [];
+         for (n = 0 ; n < P.length ; n++) {
+           let nm = (n - 1 + P.length) % P.length,
+               n1 = (n + 1           ) % P.length,
+               n2 = (n + 2           ) % P.length,
+                X = M.transform(Bspline, [ P[nm][0], P[n][0], P[n1][0], P[n2][0] ]),
+                Y = M.transform(Bspline, [ P[nm][1], P[n][1], P[n1][1], P[n2][1] ]),
+                Z = M.transform(Bspline, [ P[nm][2], P[n][2], P[n1][2], P[n2][2] ]);
+            for (t = 0 ; t < 1.0001 ; t += 1/20)
+               curve.push( [ cubic(X, t), cubic(Y, t), cubic(Z, t) ] );
+         }
+         this.drawCurves(m, [ curve ], true); // Set isFill flag to true.
+    }
+     
+ // Draw lines between successive key points.
+  if (linesOn){
+     curves = [];
+     for (n = 0 ; n < P.length-1 ; n++)
+     curves.push([ P[n], P[(n+1) % P.length] ]);
+        g.strokeStyle = selectedColor;
+        this.drawCurves(m, curves);
+  }
+
+  // Draw the cursor as red crosshairs.
+     curves = [];
+     curves.push([ [cx-.1, cy], [cx+.1, cy] ]);
+     curves.push([ [cx, cy-.1], [cx, cy+.1] ]);
+     g.strokeStyle = 'red';
+     this.drawCurves(m, curves);
+
+  // Draw the cursor as red crosshairs.
+     curves = [];
+     curves.push([ [cx-.1, cy], [cx+.1, cy] ]);
+     curves.push([ [cx, cy-.1], [cx, cy+.1] ]);
+     g.strokeStyle = 'red';
+     this.drawCurves(m, curves);
+
+// Draw the key points as small disks (blue for original, green for new!)
+
+   curves = [];
+   for (n = startP ; n < P.length ; n++) {
+      curve = [];
+      for (t = 0 ; t < 2 * Math.PI ; t += 1/10)
+         curve.push([P[n][0] + .015 * Math.cos(t),
+                     P[n][1] + .015 * Math.sin(t), 0]);
+      curves.push(curve);
+   }
+   g.fillStyle = 'lightgreen';
+   this.drawCurves(m, curves, true);
+   curves = [];
+   for (n = 0 ; n < startP ; n++) {
+      curve = [];
+      for (t = 0 ; t < 2 * Math.PI ; t += 1/10)
+         curve.push([P[n][0] + .015 * Math.cos(t),
+                     P[n][1] + .015 * Math.sin(t), 0]);
+      curves.push(curve);
+   }
+   g.fillStyle = 'blue';
+   this.drawCurves(m, curves, true);
+
+
+  M.restore(m);
+
+    // MOUSE UP AND MOUSE DOWN EVENT LISTENERS
+    document.getElementById("canvas1").addEventListener("mousedown", mouseDown);
+    document.getElementById("canvas1").addEventListener("mouseup", mouseUp);
+
+    function mouseDown() {
+        console.log("The mouse button is held down.");
+    }
+
+    function mouseUp() {
+        console.log("You released the mouse button.");
+    }
+
+    //  KEY PRESS EVENT LISTENER TO TOGGLE THE LINES
+    document.addEventListener("keypress", myFunction);
+
+    function myFunction(event) {
+        if (event.keyCode == 46)
+            linesOn = true;
+        if (event.keyCode == 47)
+            linesOn = false;
+    }
+
+}
+drawCanvases([canvas1]);
+</script>
+</body>>
