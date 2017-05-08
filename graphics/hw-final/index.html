@@ -31,12 +31,15 @@ new features:
 </td>
 </tr> -->
 <h1> <em id="red">h</em><em id="orange">e</em><em id="mint">l</em><em id="lightblue">l</em><em id="blue">o</em><em id="purple">!</em> </h1>
-<h4> use the color palette to change the color of your work </h4>
-<h4> click and drag along the palette to use it as a slider </h4>
+<h2>welcome to the <em id="red">d</em><em id="orange">o</em><em id="green">o</em><em id="mint">d</em><em id="lightblue">l</em><em id="blue">e</em><em id="purple">r</em></h2>
 <h4> add a new point by selecting anywhere on the canvas </h4>
+<h4> use the color palette to change the color of your doodle </h4>
+<h4> hover the cursor over a color to preview it </h4>
+<h4> use the orange and green points to adjust your curves </h4>
 <h4> click and drag the blue point to move your work </h4>
 <h4> press C / X to toggle the curves on and off </h4>
 <h4> press L / K to toggle the lines on and off </h4>
+<h4> press N to start a new doodle </h4>
 
 <!-- </table> -->
 
@@ -58,12 +61,8 @@ function cubic(A, t) { return A[0] * t*t*t + A[1] * t*t + A[2] * t + A[3]; }
 var startP = 1;
 var P = [
          [ 0, 0, 0], 
-         // [ -.2,  .4,  0],
-         // [  .2, -.2,  0],
-         // [  .6, .4,  0],
-         // [  .8, -.5,  0],
        ];
-var selectedColor = 'rgb(241,56,92)';
+var selectedColor = '#326fd3';
 var linesOn = true;
 var pointsOn = true;
 var lineToggle = '#326fd3';
@@ -186,7 +185,10 @@ canvas1.update = function(g) {
         console.log(this.cursor.z);
         // ADD POINT IF BUTTON DOWN
         if (cx < .85 && (cy <= .5 || cy >= .5)){
-           P.push([cx, cy, 0]);
+           if (P.length > 1){
+                P.push([(cx + P[P.length-1][0]) / 2, (cy + P[P.length-1][1]) / 2, 0]);
+            }
+            P.push([cx, cy, 0]);
         } 
         // // Corner toggle buttons
         // else if (cx > .85 && cy > .5) {
@@ -217,7 +219,9 @@ canvas1.update = function(g) {
     // Draw the set of bsplines as a single filled curve.
     if(showCurves){
          curve = [];
-         for (n = 1 ; n < P.length ; n++) {
+         saved = P[0];
+         P.splice(0, 1);
+         for (n = 0 ; n < P.length ; n++) {
            let nm = (n - 1 + P.length) % P.length,
                n1 = (n + 1           ) % P.length,
                n2 = (n + 2           ) % P.length,
@@ -228,6 +232,7 @@ canvas1.update = function(g) {
                curve.push( [ cubic(X, t), cubic(Y, t), cubic(Z, t) ] );
          }
          this.drawCurves(m, [ curve ], true); // Set isFill flag to true.
+         P.splice(0, 0, saved);
     }
      
  // Draw lines between successive key points.
@@ -256,7 +261,7 @@ canvas1.update = function(g) {
 // Draw the key points as small disks (blue for original, green for new!)
 
    curves = [];
-   for (n = startP ; n < P.length ; n++) {
+   for (n = startP ; n < P.length ; n += 2) {
       curve = [];
       for (t = 0 ; t < 2 * Math.PI ; t += 1/10)
          curve.push([P[n][0] + .015 * Math.cos(t),
@@ -265,6 +270,18 @@ canvas1.update = function(g) {
    }
    g.fillStyle = 'lightgreen';
    this.drawCurves(m, curves, true);
+
+   curves = [];
+   for (n = startP+1 ; n < P.length ; n += 2) {
+      curve = [];
+      for (t = 0 ; t < 2 * Math.PI ; t += 1/10)
+         curve.push([P[n][0] + .015 * Math.cos(t),
+                     P[n][1] + .015 * Math.sin(t), 0]);
+      curves.push(curve);
+   }
+   g.fillStyle = 'orange';
+   this.drawCurves(m, curves, true);
+
    curves = [];
    for (n = 0 ; n < startP ; n++) {
       curve = [];
@@ -304,33 +321,13 @@ canvas1.update = function(g) {
             linesOn = true;
         else if (event.keyCode == 75 || event.keyCode == 107)
             linesOn = false;
+        else if (event.keyCode == 78 || event.keyCode == 110){
+            P = [];
+            P.push([ 0, 0, 0]);
+        }
     }
-
-    // //  KEY PRESS EVENT LISTENER TO TOGGLE THE LINES
-    // document.addEventListener("keydown", arrowKeysPre);
-    // // document.addEventListener("keyup", arrowKeysPost);
-
-    // var arrowCount = 0;
-    // function arrowKeysPre(event) {
-    //     console.log(arrowCount);
-    //     arrowCount++;
-    //     if (arrowCount == 5000){
-    //         // console.log("ONE ITERATION");
-    //         // if (event.which == 40){ //down
-    //         //     colorPosition += 1;
-    //         // } else if (event.which == 38){ //up
-    //         //     colorPosition -= 1;
-    //         // }
-    //         // selectedColor = colors[colorPosition];
-    //         // arrowCount = 0;
-    //     }
-    // }
-    // // function arrowKeysPost(event){
-    // //     console.log('arrow down');
-    // //     arrowFired = false;
-    // // }
-
 }
 drawCanvases([canvas1]);
+
 </script>
 </body>
