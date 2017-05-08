@@ -196,54 +196,12 @@ canvas1.update = function(g) {
      } else {
         g.fillStyle = selectedColor;
      }
-     
-
-     // if (this.cursor.x < 50 && this.cursor.y < 50){
-     //    g.fillStyle = 'rgb(241,56,92)';
-     //    if (this.cursor.z){
-     //       selectedColor = 'rgb(241,56,92)';
-     //    }
-     // } else if (this.cursor.x < 50 && this.cursor.y > 50 && this.cursor.y < 100) {
-     //    g.fillStyle = 'orange';
-     //    if (this.cursor.z)
-     //       selectedColor = 'orange';
-     // } else if (this.cursor.x < 50 && this.cursor.y > 100 && this.cursor.y < 150) {
-     //    g.fillStyle = '#fff000';
-     //    if (this.cursor.z)
-     //       selectedColor = '#fff000';
-     // } else if (this.cursor.x < 50 && this.cursor.y > 150 && this.cursor.y < 200) {
-     //     g.fillStyle = 'rgb(0,255,103)';
-     //     if (this.cursor.z)
-     //       selectedColor = 'rgb(0,255,103)';
-     // } else if (this.cursor.x < 50 && this.cursor.y > 200 && this.cursor.y < 250) {
-     //     g.fillStyle = 'rgb(34,255,204)';
-     //     if (this.cursor.z)
-     //       selectedColor = 'rgb(34,255,204)';
-     // } else if (this.cursor.x < 50 && this.cursor.y > 250 && this.cursor.y < 300) {
-     //     g.fillStyle = '#00d3ef';
-     //     if (this.cursor.z)
-     //       selectedColor = '#00d3ef';
-     // } else if (this.cursor.x < 50 && this.cursor.y > 300 && this.cursor.y < 350){
-     //    g.fillStyle = '#326fd3';
-     //    if (this.cursor.z)
-     //       selectedColor = '#326fd3';
-     // } else if (this.cursor.x < 50 && this.cursor.y > 350 && this.cursor.y < 400){
-     //    g.fillStyle = '#a65ed1';
-     //    if (this.cursor.z)
-     //       selectedColor = '#a65ed1';
-     // } else if (this.cursor.x < 50 && this.cursor.y > 400 && this.cursor.y < 450){
-     //    g.fillStyle = '#666666';
-     //    if (this.cursor.z)
-     //        selectedColor = '#666666';
-     // } else {
-     //    g.fillStyle = selectedColor;
-     // }
      colorPosition = colors.indexOf(selectedColor);
 
     // Draw the set of bsplines as a single filled curve.
     if(showCurves){
          curve = [];
-         for (n = 0 ; n < P.length ; n++) {
+         for (n = 1 ; n < P.length ; n++) {
            let nm = (n - 1 + P.length) % P.length,
                n1 = (n + 1           ) % P.length,
                n2 = (n + 2           ) % P.length,
