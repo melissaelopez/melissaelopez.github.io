@@ -32,8 +32,17 @@ canvas {
 #red{
 	color: rgb(241,56,92);
 }
+#pink{
+	color: #ff283a;
+}
 #orange{
 	color: orange;
+}
+#orangepink{
+	color: rgb(244, 122, 65);
+}
+#yellow{
+	color: #f4b642;
 }
 #green{
 	color: rgb(0,255,103);
