@@ -40,6 +40,7 @@ new features:
 <h4> select #1-9 to adjust the line thickness </h4>
 <h4> press C / X to toggle the curves on and off </h4>
 <h4> press L / K to toggle the lines on and off </h4>
+<h4> show / hide the hex color code with S / H </h4>
 <h4> press N to start a new doodle </h4>
 <h4> <br> <em id="pink">melissa lopez </em></h4>
 <h4><em id="orangepink">computer graphics</em> </h4>
@@ -73,6 +74,7 @@ var lineToggle = '#326fd3';
 var buttonToggle = '#326fd3';
 var showCurves = false;
 var lineWidth = 1;
+var showColor = false;
 
 canvas1.update = function(g) {
 
@@ -144,14 +146,17 @@ canvas1.update = function(g) {
     //  UPDATE GRADIENT TO FILL MORE SCREEN
     gradient = g.createLinearGradient(175, 100, this.width, this.height);
 
-    g.fillStyle = selectedColor;
-    g.font = '14px sans-serif';
-    
-    if (typeof selectedColor !== 'string'){
-        g.fillText('gradient', 540, 440);
-    } else{
-        g.fillText(selectedColor, 540, 440);
+    if (showColor){
+        g.fillStyle = selectedColor;
+        g.font = '14px sans-serif';
+        
+        if (typeof selectedColor !== 'string'){
+            g.fillText('gradient', 540, 440);
+        } else{
+            g.fillText(selectedColor, 540, 440);
+        }
     }
+    
 
     // DRAW THE SCENE
     g.lineWidth = lineWidth;
@@ -357,6 +362,10 @@ canvas1.update = function(g) {
             lineWidth = 8;
         else if (event.keyCode == 57)
             lineWidth = 9;
+        else if (event.keyCode == 115 || event.keyCode == 83)
+            showColor = true;
+        else if (event.keyCode == 104 || event.keyCode == 72)
+            showColor = false;
     }
 }
 drawCanvases([canvas1]);
