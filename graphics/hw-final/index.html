@@ -37,7 +37,7 @@ new features:
 <h4> hover the cursor over a color to preview it </h4>
 <h4> use the orange and green points to adjust your curves </h4>
 <h4> click and drag the blue point to move your work </h4>
-<h4> select 1-5 to adjust the line thickness </h4>
+<h4> select #1-9 to adjust the line thickness </h4>
 <h4> press C / X to toggle the curves on and off </h4>
 <h4> press L / K to toggle the lines on and off </h4>
 <h4> press N to start a new doodle </h4>
@@ -103,11 +103,11 @@ canvas1.update = function(g) {
     // g.fillRect(10, 10, 200, 100);
 
     colorPosition = 0;
-    colors = [  'rgb(241,56,92)', // red
-                'orange', // orange
+    colors = [  '#f1385c', // red
+                '#ff7f50', // orange
                 '#fff000', // yellow
-                'rgb(0,255,103)', // green
-                'rgb(34,255,204)', //mint
+                '#00ff67', // green
+                '#22ffcc', //mint
                 '#00d3ef', // light blue
                 '#326fd3', // dark blue
                 '#a65ed1', //purple
@@ -139,10 +139,19 @@ canvas1.update = function(g) {
             g.moveTo(55,start);
             g.lineTo(55,start+50);
             g.stroke();
-        }  
+    }  
     
     //  UPDATE GRADIENT TO FILL MORE SCREEN
     gradient = g.createLinearGradient(175, 100, this.width, this.height);
+
+    g.fillStyle = selectedColor;
+    g.font = '14px sans-serif';
+    
+    if (typeof selectedColor !== 'string'){
+        g.fillText('gradient', 540, 440);
+    } else{
+        g.fillText(selectedColor, 540, 440);
+    }
 
     // DRAW THE SCENE
     g.lineWidth = lineWidth;
@@ -303,23 +312,23 @@ canvas1.update = function(g) {
 
   M.restore(m);
 
-    // // MOUSE UP AND MOUSE DOWN EVENT LISTENERS
-    // document.getElementById("canvas1").addEventListener("mousedown", mouseDown);
-    // document.getElementById("canvas1").addEventListener("mouseup", mouseUp);
+    // MOUSE UP AND MOUSE DOWN EVENT LISTENERS
+    document.getElementById("canvas1").addEventListener("mousedown", mouseDown);
+    document.getElementById("canvas1").addEventListener("mouseup", mouseUp);
 
-    // function mouseDown() {
-    //     console.log("The mouse button is held down.");
-    // }
+    function mouseDown() {
+        console.log("The mouse button is held down.");
+    }
 
-    // function mouseUp() {
-    //     console.log("You released the mouse button.");
-    // }
+    function mouseUp() {
+        console.log("You released the mouse button.");
+    }
 
     //  KEY PRESS EVENT LISTENER TO TOGGLE THE LINES
     document.addEventListener("keypress", myFunction);
 
     function myFunction(event) {
-        // console.log(event.keyCode)
+        console.log(event.keyCode)
         if (event.keyCode == 67 || event.keyCode == 99)
             showCurves = true;
         else if (event.keyCode == 88 || event.keyCode == 120)
@@ -336,12 +345,18 @@ canvas1.update = function(g) {
             lineWidth = 2;
         else if (event.keyCode == 51)
             lineWidth = 3;
-        else if (event.keyCode == 53)
+        else if (event.keyCode == 52)
             lineWidth = 4;
-        else if (event.keyCode == 55)
+        else if (event.keyCode == 53)
             lineWidth = 5;
-            
-        
+        else if (event.keyCode == 54)
+            lineWidth = 6;
+        else if (event.keyCode == 55)
+            lineWidth = 7;
+        else if (event.keyCode == 56)
+            lineWidth = 8;
+        else if (event.keyCode == 57)
+            lineWidth = 9;
     }
 }
 drawCanvases([canvas1]);
