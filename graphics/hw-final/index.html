@@ -228,7 +228,7 @@ canvas1.update = function(g) {
      colorPosition = colors.indexOf(selectedColor);
 
     // Draw the set of bsplines as a single filled curve.
-    if(showCurves){
+    if(showCurves && P.length > 3){
          curve = [];
          saved = P[0];
          P.splice(0, 1);
