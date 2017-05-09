@@ -133,8 +133,12 @@ canvas1.update = function(g) {
         start += 50;
     }
     // console.log(gradient);
-    if (selectedColor == gradient){
-            // console.log('gradient AF');
+    if (typeof selectedColor !== 'string'){
+            start = 400;
+            g.beginPath();
+            g.moveTo(55,start);
+            g.lineTo(55,start+50);
+            g.stroke();
         }  
     
     //  UPDATE GRADIENT TO FILL MORE SCREEN
@@ -188,8 +192,6 @@ canvas1.update = function(g) {
             P[this.n][1] = cy;
         }
         
-     }  else if (this.cursor.z && this.cursor.x < 50 && this.cursor.y > 425&& this.cursor.y < 450){ // clear points
-          showCurves = true;
      } else if (this.cursor.z && cx > -.8) { // undefined, no point selected
         // console.log(this.cursor.z);
         // ADD POINT IF BUTTON DOWN
