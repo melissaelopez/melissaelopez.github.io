@@ -1,0 +1,35 @@
+body {
+  font-family: "Josefin Sans";
+  background-color: #ff7785;
+  color: #333;
+  letter-spacing: 10px;
+  font-size: 50px; }
+
+h1 {
+  font-size: 20px; }
+
+h2 {
+  font-size: 15px;
+  position: absolute;
+  bottom: 5%;
+  right: 40%; }
+
+form {
+  width: 300px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -70px 0 0 -155px; }
+
+input {
+  display: block;
+  width: 300px;
+  margin: 0 auto;
+  font-size: 40px;
+  border: none;
+  border-bottom: .5px dotted black;
+  background-color: transparent;
+  outline: none; }
+
+/*# sourceMappingURL=base.css.map */
