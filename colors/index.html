@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,97 +19,32 @@
   <div id="container" class="container-fluid">
     <h1>COLORRRS COPYYY</h1>
 
-    <form>
+    <!-- Converter -->
+    <form id="hex-rgb-converter">
         <input id="hex-box" type="text" name="hex" value="hex" spellcheck="false">
         <input id="rgb-box" type="text" name="rbg" value="rgb" spellcheck="false">
     </form>
 
-    <h2>MELISSA LOPEZ, 2017</h2>
+    <!-- Favorite Colors -->
+    <div id="palettes">
+        <canvas id="can" width="400" height="400" class="main">
+        </canvas>
+        <h1 id="color-code" class="padded"></h1>
+    </div>
+
+
+    <!-- Footer -->
+    <p>
+        <a id="hrBtn">&#160;HEX TO RGB</a> •
+        <a id="cpBtn">&#160;FAVORITES</a> •
+        <a href="http://melello.com">&#160;MELISSA LOPEZ, 2017</a>
+    </p>
+
   </div>
 
-
-
-<script>
-$("#hex-box").on("change keyup paste", function(){
-    console.log("hex box was changed");
-    var s = document.getElementById('hex-box').value;
-
-    // Format input string to include a hash sign if not already there
-    if (s.charAt(0) !== '#'){
-        s = '#' + s;
-    }
-
-    console.log(s);
-
-    if (s.length >= 4){
-        s = fillZeros(s,7);
-        console.log("zeros added!");
-        console.log(s);
-        $("body").css({"background-color": s});
-
-        // Make conversion to RGB
-
-        var rStr = "" + s[1] + s[2];
-        var gStr = "" + s[3] + s[4];
-        var bStr = "" + s[5] + s[6];
-
-        var r = parseInt(rStr, 16);
-        var g = parseInt(gStr, 16);
-        var b = parseInt(bStr, 16);
-
-        console.log(r);
-        console.log(g);
-        console.log(b);
-
-        if(isNaN(r) || isNaN(g) || isNaN(b)){
-            document.getElementById('rgb-box').value = "rgb";
-        } else {
-            document.getElementById('rgb-box').value = "rgb("+r+","+g+","+b+")";
-        }
-
-    }
-    else{
-        s = "#ff7785";
-        $("body").css({"background-color": s});
-        document.getElementById('rgb-box').value = "rgb";
-    }
-})
-
-$("#rgb-box").on("change keyup paste", function(){
-    console.log("rgb box was changed");
-    var s = document.getElementById('rgb-box').value;
-    console.log(s);
-    var firstComma = s.indexOf(",");
-    var secondComma = s.lastIndexOf(",");
-    var openP = s.indexOf("(");
-    var closedP = s.indexOf(")");
-    var r = parseInt(s.slice(openP+1, firstComma));
-    var g = parseInt(s.slice(firstComma+1, secondComma));
-    var b = parseInt(s.slice(secondComma+1, closedP));
-
-    if (r > 255 || g > 255 || b > 255 || isNaN(r) || isNaN(g) || isNaN(b)){
-        document.getElementById('hex-box').value = "hex";
-    } else {
-        r = fillZeros(r.toString(16), 2);
-        g = fillZeros(g.toString(16), 2);
-        b = fillZeros(b.toString(16), 2);
-        document.getElementById('hex-box').value = "#"+r+b+g;
-    }
-
-    console.log(r);
-    console.log(g);
-    console.log(b);
-})
-
-function fillZeros (s, n){
-    while (s.length < n){
-        s = s + '0'
-    }
-    return s;
-}
-</script>
+<script src="colors.js"></script>
+<script src="rgb-hex-converter.js"></script>
+<script src="color-palette.js"></script>
 
 </body>
-
-
 </html>

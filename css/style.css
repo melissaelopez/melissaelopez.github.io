@@ -33,9 +33,9 @@ h1.graphics{
 
 header.graphics{
   height: 20% !important;
-  background: red; 
-  background: -webkit-linear-gradient(left top, #fc9e5f, #ff8ea7); 
-  background: -o-linear-gradient(bottom right, #fc9e5f, #ff8ea7);  
+  background: red;
+  background: -webkit-linear-gradient(left top, #fc9e5f, #ff8ea7);
+  background: -o-linear-gradient(bottom right, #fc9e5f, #ff8ea7);
   background: -moz-linear-gradient(bottom right, #fc9e5f, #ff8ea7);
   background: linear-gradient(to bottom right, #fc9e5f, #ff8ea7);
   display: table-cell;
@@ -359,7 +359,7 @@ div.skill-pill-cs-base {
     padding-right: 10px;
     margin-right: 6px;
     margin-bottom: 15px;
-    border-radius: 10px; 
+    border-radius: 10px;
     transition: all 0.2s ease-in;
 }
 
@@ -372,7 +372,7 @@ div.skill-pill-design-base {
     padding-right: 10px;
     margin-right: 6px;
     margin-bottom: 15px;
-    border-radius: 10px; 
+    border-radius: 10px;
     transition: all 0.2s ease-in;
 }
 
@@ -398,7 +398,7 @@ div.skill-pill-cs {
     padding-right: 10px;
     margin-right: 2px;
     margin-bottom: 6px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 div.skill-pill-cs-soft {
@@ -410,7 +410,7 @@ div.skill-pill-cs-soft {
     padding-right: 10px;
     margin-right: 2px;
     margin-bottom: 6px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 div.skill-pill-design {
@@ -422,7 +422,7 @@ div.skill-pill-design {
     padding-right: 10px;
     margin-right: 2px;
     margin-bottom: 6px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 div.skill-pill-leadership {
     height: 40px;
@@ -433,7 +433,7 @@ div.skill-pill-leadership {
     padding-right: 10px;
     margin-right: 2px;
     margin-bottom: 6px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 div.outline {
@@ -577,27 +577,27 @@ div.skill-pill-cs-base:hover {
     color: white;
     background-color: #527094;
     cursor: pointer;
-}   
+}
 
 div.skill-pill-cs-base:hover ~ div.skill-pill-design,
 div.skill-pill-cs-base:hover ~ div.skill-pill-leadership {
     background-color: lightgray;
     transition: all 0.2s ease-in;
-}  
+}
 
 /*Highlight Design Skills*/
 div.skill-pill-design-base:hover {
     color: white;
     background-color: #b07c8f;
     cursor: pointer;
-}   
+}
 
 div.skill-pill-design-base:hover ~ div.skill-pill-cs,
 div.skill-pill-design-base:hover ~ div.skill-pill-cs-soft,
 div.skill-pill-design-base:hover ~ div.skill-pill-leadership {
     background-color: lightgray;
     transition: all 0.2s ease-in;
-}  
+}
 
 /* Highlight Leadership Skills */
 
@@ -605,7 +605,7 @@ div.skill-pill-leadership-base:hover {
     color: white;
     background-color: #f49681;
     cursor: pointer;
-}   
+}
 
 div.skill-pill-leadership-base:hover ~ div.skill-pill-cs,
 div.skill-pill-leadership-base:hover ~ div.skill-pill-design,
@@ -613,7 +613,7 @@ div.skill-pill-leadership-base:hover ~ div.skill-pill-cs-soft,
 div.skill-pill-leadership-base:hover ~ div.skill-pill-design {
     background-color: lightgray;
     transition: all 0.2s ease-in;
-}  
+}
 
 /*a > img:hover, a:hover > img {
     opacity: .85;
