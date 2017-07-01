@@ -1,7 +1,7 @@
 /* Global Styles */
 .parallax {
   /* The image used */
-  background-image: url(../img/bg.png);
+  background-image: url(img/bg.png);
   background-color: transparent;
   /* Full height */
   height: 100%;
@@ -22,7 +22,7 @@ body {
   overflow: hidden; }
 
 body {
-  font-family: "Maven Pro","Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'Reem Kufi', sans-serif;
   margin: 0; }
 
 a {
@@ -646,7 +646,7 @@ div.bottom > ol.carousel-indicators {
 
 .bg_photo {
   /* The image used */
-  background-image: url(../img/bg.png);
+  background-image: url(img/bg.png);
   /* Full height */
   height: 100%;
   /* Center and scale the image nicely */
@@ -720,14 +720,17 @@ div.bottom > ol.carousel-indicators {
 .text {
   position: absolute;
   top: 0;
+  padding-top: 25%;
+  padding-left: 15%;
   color: black;
-  font-size: 10vh;
-  text-align: left;
+  font-size: 3vh;
+  letter-spacing: 3vh;
+  font-weight: bold;
+  line-height: .5;
   background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
   height: 100%;
-  line-height: 100px;
-  text-align: center;
+  text-align: left;
   z-index: 10;
   opacity: 0;
   -webkit-transition: all 0.5s ease;
@@ -738,4 +741,4 @@ div.bottom > ol.carousel-indicators {
 .text:hover {
   opacity: 1; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=new-style.css.map */
