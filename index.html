@@ -18,8 +18,11 @@
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- Hero CSS -->
+    <link href="css/hero.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Maven+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Reem+Kufi" rel="stylesheet">
 
     <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -31,364 +34,336 @@
 
 <body>
 
-
-
-
-    <!-- <div id='hero'>
-    <div class='layer-bg layer' data-depth='0.10' data-type='parallax'></div>
-        <div class='layer-1 layer' data-depth='1.0' data-type='parallax'></div>
+    <div id='hero'>
+        <div class='layer-bg layer' data-depth='0.10' data-type='parallax'></div>
+        <div class='layer-1 layer' data-depth='0.20' data-type='parallax'></div>
         <div class='layer-2 layer' data-depth='0.50' data-type='parallax'></div>
+        <div class='layer-3 layer' data-depth='0.80' data-type='parallax'></div>
+        <!-- <div class='layer-overlay layer' data-depth='0.85' data-type='parallax'></div> -->
+        <div class='layer-4 layer' data-depth='1.00' data-type='parallax'></div>
+        <img class="title animated rollIn" src="img/melissa.png" id="melissa">
+        <img class="title animated rotateIn" src="img/lopez.png" id="lopez">
     </div>
-    <div id='hero-mobile'></div> -->
+    <div id='hero-mobile'>
+        <img class="title animated rollIn" src="img/melissa.png" id="melissa">
+        <img class="title animated rotateIn" src="img/lopez.png" id="lopez">
+    </div>
 
-    <!-- <div class="parallax"></div>
-    <img src="img/first-layer.png" class="header"> -->
-
-    <!-- Header -->
-    <!-- <header id="top" class="header-main"> -->
-        <!-- <img src="img/first-layer.png" class="header" style="background:transparent;"> -->
-        <!-- <h2><strong><div class="element5"></div></strong></h2> -->
-		<!-- <h2 id="bio" class="animated fadeIn"><strong>Hi, I'm Melissa. I'm an aspiring software engineer, passionate about student leadership and making people's lives a little easier. I live in New York City, but I still miss the Californian sunsets I grew up with. My full name is Melissa Eileen Lopez, that's where MELELLO comes from. Thanks for stopping by. Hope you'll enjoy learning more.</strong></h2> -->
-    <!-- </header> -->
-
-    <div class="parallax">
-         <div id="bg" class="parallax__group">
-             <div class="parallax__layer parallax__layer--deep">
-                 <div class="bg_photo">
-                     <img class="title animated rollIn" src="img/melissa.png" id="melissa">
-                     <img class="title animated rotateIn" src="img/lopez.png" id="lopez">
-                 </div>
-             </div>
-         </div>
-
-         <div id="second" class="parallax__group">
-             <div class="parallax__layer parallax__layer--base">
-                 <div class="first_photo"><img class="smaller" src="img/first-layer.png"></div>
-                 <div class="next"></div>
-                 <div>
-                     <!-- About -->
-                     <section id="about" class="about">
-                         <div class="container">
-                             <div class="row">
-                                 <div class="col-lg-10 col-lg-offset-1">
-                                     <div class="row">
-                                         <div class="col-md-6">
-                                             <div class="portfolio-item">
-                                                 <h3 class="spaced"><strong>EDUCATION<br><br></strong></h3>
-                                                 <h4 class="spaced"><strong>NEW YORK UNIVERSITY • MAY 2018</strong></h4>
-                                                 <h4>College of Arts and Science</h4>
-                                                 <h4><strong>Computer Science, B.A.</strong> • Mathematics Minor</h4>
-                                                 <h4 class="spaced"><strong><br>COURSEWORK</strong></h4>
-                                                 <h4 class="intro">Introduction to Computer Programming</h4>
-                                                 <h4>Introduction to Computer Science</h4>
-                                                 <h4>Data Structures</h4>
-                                                 <h4>Computer Systems Organization</h4>
-                                                 <h4>Operating Systems</h4>
-                                                 <h4>Basic Algorithms</h4>
-                                                 <h4>Applied Internet Technology</h4>
-                                                 <h4>Robotics</h4>
-                                                 <h4>Discrete Math</h4>
-                                                 <h4>Calculus I-III</h4>
-                                                 <h4>Linear Algebra</h4>
-                                                 <h4>Visual Foundation Studio</h4>
-                                                 <h4>Ideation and Prototyping</h4>
-                                                 <h4>Computer Graphics</h4>
-                                                 <h4><em>Fall 2017: Large Scale Web Applications, Interactive Computing, Design I + II</em></h4>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-6">
-                                             <div class="portfolio-item skills">
-                                                 <h3 class="spaced"><strong>SKILLS<br><br></strong></h3>
-                                                 <div class="animated infinite pulse skill-pill-cs-base"><h4>Software Development</h4></div>
-                                                 <div class="animated infinite pulse skill-pill-design-base"><h4>Design</h4></div>
-                                                 <div class="animated infinite pulse skill-pill-leadership-base"><h4>Leadership</h4></div>
-                                                 <div class="skill-pill-cs"><h4>Java</h4></div>
-                                                 <div class="skill-pill-cs"><h4>Python</h4></div>
-                                                 <div class="skill-pill-cs"><h4>HTML</h4></div>
-                                                 <div class="skill-pill-cs"><h4>CSS</h4></div>
-                                                 <div class="skill-pill-cs"><h4>JavaScript</h4></div>
-                                                 <div class="skill-pill-cs"><h4>X86-64 Assembly</h4></div>
-                                                 <div class="skill-pill-cs"><h4>Node.js</h4></div>
-                                                 <div class="skill-pill-cs"><h4>Express.js</h4></div>
-                                                 <div class="skill-pill-cs"><h4>Handlebars.js</h4></div>
-                                                 <div class="skill-pill-cs"><h4>MongoDB</h4></div>
-                                                 <div class="skill-pill-cs"><h4>Heroku</h4></div>
-                                                 <div class="skill-pill-cs"><h4>Bootstrap</h4></div>
-                                                 <div class="skill-pill-cs-soft"><h4>Git</h4></div>
-                                                 <div class="skill-pill-cs-soft"><h4>UNIX / Linux</h4></div>
-                                                 <div class="skill-pill-cs-soft"><h4>Mac OS</h4></div>
-                                                 <div class="skill-pill-cs-soft"><h4>Windows</h4></div>
-                                                 <div class="skill-pill-cs-soft"><h4>Sublime</h4></div>
-                                                 <div class="skill-pill-cs-soft"><h4>Eclipse</h4></div>
-                                                 <div class="skill-pill-cs-soft"><h4>IDLE</h4></div>
-                                                 <div class="skill-pill-design"><h4>Photoshop</h4></div>
-                                                 <div class="skill-pill-design"><h4>Illustrator</h4></div>
-                                                 <div class="skill-pill-design"><h4>InDesign</h4></div>
-                                                 <div class="skill-pill-design"><h4>Graphic Design</h4></div>
-                                                 <div class="skill-pill-design"><h4>Iterative Design</h4></div>
-                                                 <div class="skill-pill-design"><h4>UX Design</h4></div>
-                                                 <div class="skill-pill-design"><h4>User-Centered Design</h4></div>
-                                                 <div class="skill-pill-leadership"><h4>Group Leadership</h4></div>
-                                                 <div class="skill-pill-leadership"><h4>Public Speaking</h4></div>
-                                                 <div class="skill-pill-leadership"><h4>Team Building</h4></div>
-                                                 <div class="skill-pill-leadership"><h4>Project Collaboration</h4></div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- /.col-lg-10 -->
-                             </div>
-                             <!-- /.row -->
-                         </div>
-                         <!-- /.container -->
-                     </section>
-
-                     <!-- Experience -->
-                     <section id="experience" class="experience bg-primary">
-                         <div class="container">
-                             <div class="row text-center">
-                                 <div class="col-lg-10 col-lg-offset-1">
-                                     <div class="row">
-                                         <div class="col-md-3 col-sm-6" >
-                                             <div class="experience-item leadership">
-                                                 <h3>
-                                                     <strong>COLLEGE CAPTAIN</strong>
-                                                 </h3>
-                                                 <hr class="small">
-                                                 <h4>
-                                                     <strong>NYU College of Arts and Science</strong>
-                                                 </h4>
-                                                 <p>February 2016 - Present</p>
-                                                 <p>Captain to group of 44 NYU CAS College Leaders by serving on administrative Leadership Team to support and train CLs</p>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-3 col-sm-6">
-                                             <div class="experience-item leadership">
-                                                 <h3>
-                                                     <strong>ADMISSIONS AMBASSADOR</strong>
-                                                 </h3>
-                                                 <hr class="small">
-                                                 <h4>
-                                                     <strong>NYU Undergraduate Admissions</strong>
-                                                 </h4>
-                                                 <p>January 2015 - Present</p>
-                                                 <p>Student face and voice of Undergraduate Admissions campus tours, admissions events, Welcome Center coverage, and hotline</p>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-3 col-sm-6">
-                                             <div class="experience-item design">
-                                                 <h3>
-                                                     <strong>GRAPHIC DESIGNER + WEBMASTER</strong>
-                                                 </h3>
-                                                 <hr class="small">
-                                                 <h4>
-                                                     <strong>#BetterSexTalk</strong>
-                                                 </h4>
-                                                 <p>February 2015 - Present</p>
-                                                 <p>Backbone of visual messaging for national photo campaign around issues of campus sexual harassment and assult</p>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-3 col-sm-6">
-                                             <div class="experience-item programming">
-                                                 <h3>
-                                                     <strong>IN-CLASS + LAB PYTHON TUTOR</strong>
-                                                 </h3>
-                                                 <hr class="small">
-                                                 <h4>
-                                                     <strong>Courant Institute of Mathematical Sciences</strong>
-                                                 </h4>
-                                                 <p>September 2015 - May 2016</p>
-                                                 <p>Course aid for NYU's undergraduate <em>Introduction to Computer Programming</em></p>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <!-- /.row (nested) -->
-                                 </div>
-                                 <!-- /.col-lg-10 -->
-                             </div>
-                             <!-- /.row -->
-                         </div>
-                         <!-- /.container -->
-                     </section>
-
-                     <section id="resume" class="resume">
-                         <div class="container">
-                             <div class="row">
-                                 <div class="col-lg-10 col-lg-offset-1">
-                                     <div class="row text-center">
-                                     <a href="/pdf/lopez_melissa_resume.pdf" class="btn btn-dark btn-lg">CHECK OUT MY RÉSUMÉ</a>
-                                     </div>
-                                 </div>
-                                 <!-- /.col-lg-10 -->
-                             </div>
-                             <!-- /.row -->
-                         </div>
-                     </section>
-
-                     <!-- Portfolio -->
-                     <section id="portfolio" class="portfolio programming">
-                         <div class="container">
-                             <div class="row">
-                                 <div class="col-lg-10 col-lg-offset-1">
-                                     <div class="row">
-                                         <div class="col-md-6 programming-port">
-                                             <div class="portfolio-item">
-                                                 <a href="https://cas-cohort-cup-tracker.herokuapp.com" class="port programming-port">
-                                                 <img src="img/cohort-cup.png">
-                                                 <strong>CAS COHORT CUP TRACKER</strong>
-                                                 </a>
-                                                 <p>Cohort Cup is a competition in NYU's College of Science between its 44 first-year student cohorts. It engages 1500 students through Facebook Challenges and Marquee Events, both of which earn students points. I created this website for students to be able to see where their cohorts rank, and to ease the maintenance workload for the competition's administrators. <strong><a href="https://github.com/melissaelopez/cas-cohort-cup">See the source on GitHub.</a></strong></p>
-                                                 <div class="skill-pill-cs outline"><h4>JavaScript</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>HTML</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>CSS</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>Node.js</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>Express.js</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>Passport-Local Mongoose</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>Heroku</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>Bootstrap</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>mLab MongoDB</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>Chart.js</h4></div>
-                                                 <div class="skill-pill-design"><h4>Illustrator</h4></div>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-6 programming-port">
-                                             <div class="portfolio-item">
-                                                 <a href="https://github.com/melissaelopez/OS-linker/tree/master" class="port programming-port">
-                                                 <img src="img/linker.png">
-                                                 <strong>LINKER SIMULATOR</strong>
-                                                 </a>
-                                                 <p>This project was completed as part of my Operating Systems course at NYU. It's designed to simulate a two-pass linker, written in Java.</p>
-                                                 <div class="skill-pill-cs outline"><h4>Java</h4></div>
-                                                 <div class="skill-pill-cs outline"><h4>Operating Systems</h4></div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- /.col-lg-10 -->
-                             </div>
-                             <!-- /.row -->
-                         </div>
-                     </section>
-
-                     <section id="portfolio" class="portfolio ux">
-                         <div class="container">
-                             <div class="row">
-                                 <div class="col-lg-10 col-lg-offset-1">
-                                     <div class="row">
-                                         <div class="col-md-6 ux-port">
-                                             <div class="portfolio-item ux-port">
-                                                 <a href="/presentations/bite/index.html" class="ux-port">
-                                                 <img src="img/bite.png">
-                                                 <strong>BITE</strong></a>
-                                                 <p>Social media users need a better way to organize their timelines/feeds across multiple networks. This prototyping project aims to solve this problem with a design for creating custom user feeds based on groups of people user's would like to follow on Facebook, Twitter and Instagram combined.</p>
-                                                 <div class="skill-pill-design outline"><h4>User-Centered Design</h4></div>
-                                                 <div class="skill-pill-design outline"><h4>Photoshop</h4></div>
-                                                 <div class="skill-pill-design outline"><h4>Illustrator</h4></div>
-                                                 <div class="skill-pill-leadership"><h4>Public Speaking</h4></div>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-6">
-                                             <div class="portfolio-item ux-port">
-                                                 <a href="/presentations/EDYou/EDYou.html" class="ux-port">
-                                                 <img src="img/edyou.png">
-                                                 ED<strong>YOU</strong></a>
-                                                 <p>The college admissions process is already daunting enough for any college applicant, but it can be even more difficult if you’re a first-generation student. EDYou is designed to be an admissions guide – a companion for walking you through the admissions process, providing both personalized and general task lists, deadlines, financial aid guides, and scholarship finders for any college applicant.</p>
-                                                 <div class="skill-pill-design outline"><h4>User-Centered Design</h4></div>
-                                                 <div class="skill-pill-design outline"><h4>Illustrator</h4></div>
-                                                 <div class="skill-pill-leadership"><h4>Public Speaking</h4></div>
-                                                 <div class="skill-pill-leadership"><h4>Project Collaboration</h4></div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- /.col-lg-10 -->
-                             </div>
-                             <!-- /.row -->
-                         </div>
-                     </section>
-
-                     <section id="portfolio" class="portfolio design">
-                         <div class="container">
-                             <div class="row">
-                                 <div class="col-lg-10 col-lg-offset-1">
-                                     <div class="row">
-                                         <div class="col-md-6 design-port">
-                                             <div class="portfolio-item design-port">
-                                                 <a href="http://www.bstcampaign.org" class="design-port">
-                                                 <!-- <img src="img/bst.png"> -->
-                                                 <strong>#BETTERSEXTALK</strong>
-                                                 </a>
-                                                 <p>#BetterSexTalk is a photography campaign that works to raise awareness around issues of sex education and sexual assault. Our campaign took portraits of college students across the country asking one simple question: If you could give one piece of advice about sex to a younger sibling, what would it be?</p>
-                                                 <div class="skill-pill-leadership outline"><h4>Project Collaboration</h4></div>
-                                                 <div class="skill-pill-leadership outline"><h4>A whole lot of patience</h4></div>
-                                                 <div class="skill-pill-design"><h4>Photoshop</h4></div>
-                                                 <div class="skill-pill-design"><h4>Illustrator</h4></div>
-                                                 <div class="skill-pill-design"><h4>SquareSpace</h4></div>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-6">
-                                             <div class="portfolio-item design-port">
-                                                 <a href="/pdf/show-spark-portfolio.pdf" class="design-port">
-                                                 <!-- <img src="img/showspark.png"> -->
-                                                 <strong>SHOWSPARK</strong>
-                                                 </a>
-                                                 <p>ShowSpark is a mobile app that aims to make concerts more interactive by having audience members vote on components of the show, from the setlist to the stage lights.</p>
-                                                 <div class="skill-pill-leadership outline"><h4>Project Collaboration</h4></div>
-                                                 <div class="skill-pill-design"><h4>Illustrator</h4></div>
-                                                 <div class="skill-pill-design"><h4>Logo Design</h4></div>
-                                                 <div class="skill-pill-design"><h4>UX Design</h4></div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                     <div class="row">
-                                         <div class="col-md-6">
-                                             <div class="portfolio-item design-port">
-                                                 <a href="img/gov.png" class="design-port">
-                                                 <!-- <img src="img/gov.png"> -->
-                                                 <strong>GOVERNOR'S ISLAND SNAPCHAT GEOFILTER</strong>
-                                                 </a>
-                                                 <p>I made this Snapchat Geofilter for Governor's Island, NY: a summer hammock-haven in New York City. It was made live on Snapchat in 2015.</p>
-                                                 <div class="skill-pill-design"><h4>Photoshop</h4></div>
-                                                 <div class="skill-pill-design"><h4>Illustrator</h4></div>
-                                             </div>
-                                         </div>
-                                         <div class="col-md-6">
-                                             <div class="portfolio-item design-port">
-                                                 <a href="img/econ-review.jpg" class="design-port">
-                                                 <!-- <img src="img/ter.png"> -->
-                                                 <strong>THE ECONOMICS REVIEW</strong>
-                                                 </a>
-                                                 <p>The Economics Review at NYU is an online publication consisting of a rigorous selection of student essays, opinions and research papers on important topics in economics, politics and public policy among New York University’s students. I was asked to design the cover for their first ever printed volume.</p>
-                                                 <div class="skill-pill-leadership outline"><h4>Project Collaboration</h4></div>
-                                                 <div class="skill-pill-design"><h4>Photoshop</h4></div>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <!-- /.col-lg-10 -->
-                             </div>
-                             <!-- /.row -->
-                         </div>
-                     </section>
-
-                     <footer id="contact" class="footer">
-                       <div class="container">
-                         <p class="text-muted"><img src="img/melissa-lopez-square.jpg" class="footer"><h1 class="footer">LET'S GET IN TOUCH.</h1>
-                         <a class="footer" href="mailto:name@example.com" class="footer">melissa.lopez@nyu.edu</a>
-                         • <a class="footer" href="/pdf/lopez_melissa_resume.pdf" class="footer">Résumé</a>
-                         • <a class="footer" href="https://www.linkedin.com/in/melissa-lopez" class="footer">LinkedIn</a>
-                         • <a class="footer" href="https://github.com/melissaelopez" class="footer">GitHub</a>
-                         • <a class="footer" href="https://www.instagram.com/melello/" class="footer">Instagram</a>
-                           </a>
-                         </p>
-                       </div>
-                     </footer>
-                 </div>
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <h3 class="spaced"><strong>EDUCATION<br><br></strong></h3>
+                                <h4 class="spaced"><strong>NEW YORK UNIVERSITY • MAY 2018</strong></h4>
+                                <h4>College of Arts and Science</h4>
+                                <h4><strong>Computer Science, B.A.</strong> • Mathematics Minor</h4>
+                                <h4 class="spaced"><strong><br>RELEVANT COURSEWORK</strong></h4>
+                                <h4 class="intro">Introduction to Computer Programming</h4>
+                                <h4>Introduction to Computer Science</h4>
+                                <h4>Data Structures</h4>
+                                <h4>Computer Systems Organization</h4>
+                                <h4>Operating Systems</h4>
+                                <h4>Basic Algorithms</h4>
+                                <h4>Applied Internet Technology</h4>
+                                <h4>Visual Foundation Studio</h4>
+                                <h4>Ideation and Prototyping</h4>
+                                <h4>Discrete Math</h4>
+                                <h4>Calculus I-III</h4>
+                                <h4>Linear Algebra</h4>
+                                <h4><em>Spring 2017: Computer Graphics, Introduction to Robotics</em></h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item skills">
+                                <h3 class="spaced"><strong>SKILLS<br><br></strong></h3>
+                                <div class="animated infinite pulse skill-pill-cs-base"><h4>Software Development</h4></div>
+                                <div class="animated infinite pulse skill-pill-design-base"><h4>Design</h4></div>
+                                <div class="animated infinite pulse skill-pill-leadership-base"><h4>Leadership</h4></div>
+                                <div class="skill-pill-cs"><h4>Java</h4></div>
+                                <div class="skill-pill-cs"><h4>Python</h4></div>
+                                <div class="skill-pill-cs"><h4>HTML</h4></div>
+                                <div class="skill-pill-cs"><h4>CSS</h4></div>
+                                <div class="skill-pill-cs"><h4>JavaScript</h4></div>
+                                <div class="skill-pill-cs"><h4>X86-64 Assembly</h4></div>
+                                <div class="skill-pill-cs"><h4>Node.js</h4></div>
+                                <div class="skill-pill-cs"><h4>Express.js</h4></div>
+                                <div class="skill-pill-cs"><h4>Handlebars.js</h4></div>
+                                <div class="skill-pill-cs"><h4>MongoDB</h4></div>
+                                <div class="skill-pill-cs"><h4>Heroku</h4></div>
+                                <div class="skill-pill-cs"><h4>Bootstrap</h4></div>
+                                <div class="skill-pill-cs-soft"><h4>Git</h4></div>
+                                <div class="skill-pill-cs-soft"><h4>UNIX / Linux</h4></div>
+                                <div class="skill-pill-cs-soft"><h4>Mac OS</h4></div>
+                                <div class="skill-pill-cs-soft"><h4>Windows</h4></div>
+                                <div class="skill-pill-cs-soft"><h4>Sublime</h4></div>
+                                <div class="skill-pill-cs-soft"><h4>Eclipse</h4></div>
+                                <div class="skill-pill-cs-soft"><h4>IDLE</h4></div>
+                                <div class="skill-pill-design"><h4>Photoshop</h4></div>
+                                <div class="skill-pill-design"><h4>Illustrator</h4></div>
+                                <div class="skill-pill-design"><h4>InDesign</h4></div>
+                                <div class="skill-pill-design"><h4>Graphic Design</h4></div>
+                                <div class="skill-pill-design"><h4>Iterative Design</h4></div>
+                                <div class="skill-pill-design"><h4>UX Design</h4></div>
+                                <div class="skill-pill-design"><h4>User-Centered Design</h4></div>
+                                <div class="skill-pill-leadership"><h4>Group Leadership</h4></div>
+                                <div class="skill-pill-leadership"><h4>Public Speaking</h4></div>
+                                <div class="skill-pill-leadership"><h4>Team Building</h4></div>
+                                <div class="skill-pill-leadership"><h4>Project Collaboration</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-10 -->
             </div>
+            <!-- /.row -->
         </div>
-     </div> <!-- Parallax -->
+        <!-- /.container -->
+    </section>
 
+    <!-- Experience -->
+    <section id="experience" class="experience bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6" >
+                            <div class="experience-item leadership">
+                                <h3>
+                                    <strong>COLLEGE CAPTAIN</strong>
+                                </h3>
+                                <hr class="small">
+                                <h4>
+                                    <strong>NYU College of Arts and Science</strong>
+                                </h4>
+                                <p>February 2016 - Present</p>
+                                <p>Captain to group of 44 NYU CAS College Leaders by serving on administrative Leadership Team to support and train CLs</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="experience-item leadership">
+                                <h3>
+                                    <strong>ADMISSIONS AMBASSADOR</strong>
+                                </h3>
+                                <hr class="small">
+                                <h4>
+                                    <strong>NYU Undergraduate Admissions</strong>
+                                </h4>
+                                <p>January 2015 - Present</p>
+                                <p>Student face and voice of Undergraduate Admissions campus tours, admissions events, Welcome Center coverage, and hotline</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="experience-item design">
+                                <h3>
+                                    <strong>GRAPHIC DESIGNER + WEBMASTER</strong>
+                                </h3>
+                                <hr class="small">
+                                <h4>
+                                    <strong>#BetterSexTalk</strong>
+                                </h4>
+                                <p>February 2015 - Present</p>
+                                <p>Backbone of visual messaging for national photo campaign around issues of campus sexual harassment and assult</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="experience-item programming">
+                                <h3>
+                                    <strong>IN-CLASS + LAB PYTHON TUTOR</strong>
+                                </h3>
+                                <hr class="small">
+                                <h4>
+                                    <strong>Courant Institute of Mathematical Sciences</strong>
+                                </h4>
+                                <p>September 2015 - May 2016</p>
+                                <p>Course aid for NYU's undergraduate <em>Introduction to Computer Programming</em></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
 
+    <section id="resume" class="resume">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row text-center">
+                    <a href="/pdf/lopez_melissa_resume.pdf" class="btn btn-dark btn-lg">CHECK OUT MY RÉSUMÉ</a>
+                    </div>
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="portfolio programming">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row">
+                        <div class="col-md-6 programming-port">
+                            <div class="portfolio-item">
+                                <a href="https://cas-cohort-cup-tracker.herokuapp.com" class="port programming-port">
+                                <img src="img/cohort-cup.png">
+                                <strong>CAS COHORT CUP TRACKER</strong>
+                                </a>
+                                <p>Cohort Cup is a competition in NYU's College of Science between its 44 first-year student cohorts. It engages 1500 students through Facebook Challenges and Marquee Events, both of which earn students points. I created this website for students to be able to see where their cohorts rank, and to ease the maintenance workload for the competition's administrators. <strong><a href="https://github.com/melissaelopez/cas-cohort-cup">See the source on GitHub.</a></strong></p>
+                                <div class="skill-pill-cs outline"><h4>JavaScript</h4></div>
+                                <div class="skill-pill-cs outline"><h4>HTML</h4></div>
+                                <div class="skill-pill-cs outline"><h4>CSS</h4></div>
+                                <div class="skill-pill-cs outline"><h4>Node.js</h4></div>
+                                <div class="skill-pill-cs outline"><h4>Express.js</h4></div>
+                                <div class="skill-pill-cs outline"><h4>Passport-Local Mongoose</h4></div>
+                                <div class="skill-pill-cs outline"><h4>Heroku</h4></div>
+                                <div class="skill-pill-cs outline"><h4>Bootstrap</h4></div>
+                                <div class="skill-pill-cs outline"><h4>mLab MongoDB</h4></div>
+                                <div class="skill-pill-cs outline"><h4>Chart.js</h4></div>
+                                <div class="skill-pill-design"><h4>Illustrator</h4></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 programming-port">
+                            <div class="portfolio-item">
+                                <a href="https://github.com/melissaelopez/OS-linker/tree/master" class="port programming-port">
+                                <img src="img/linker.png">
+                                <strong>LINKER SIMULATOR</strong>
+                                </a>
+                                <p>This project was completed as part of my Operating Systems course at NYU. It's designed to simulate a two-pass linker, written in Java.</p>
+                                <div class="skill-pill-cs outline"><h4>Java</h4></div>
+                                <div class="skill-pill-cs outline"><h4>Operating Systems</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio ux">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row">
+                        <div class="col-md-6 ux-port">
+                            <div class="portfolio-item ux-port">
+                                <a href="/presentations/bite/index.html" class="ux-port">
+                                <img src="img/bite.png">
+                                <strong>BITE</strong></a>
+                                <p>Social media users need a better way to organize their timelines/feeds across multiple networks. This prototyping project aims to solve this problem with a design for creating custom user feeds based on groups of people user's would like to follow on Facebook, Twitter and Instagram combined.</p>
+                                <div class="skill-pill-design outline"><h4>User-Centered Design</h4></div>
+                                <div class="skill-pill-design outline"><h4>Photoshop</h4></div>
+                                <div class="skill-pill-design outline"><h4>Illustrator</h4></div>
+                                <div class="skill-pill-leadership"><h4>Public Speaking</h4></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item ux-port">
+                                <a href="/presentations/EDYou/EDYou.html" class="ux-port">
+                                <img src="img/edyou.png">
+                                ED<strong>YOU</strong></a>
+                                <p>The college admissions process is already daunting enough for any college applicant, but it can be even more difficult if you’re a first-generation student. EDYou is designed to be an admissions guide – a companion for walking you through the admissions process, providing both personalized and general task lists, deadlines, financial aid guides, and scholarship finders for any college applicant.</p>
+                                <div class="skill-pill-design outline"><h4>User-Centered Design</h4></div>
+                                <div class="skill-pill-design outline"><h4>Illustrator</h4></div>
+                                <div class="skill-pill-leadership"><h4>Public Speaking</h4></div>
+                                <div class="skill-pill-leadership"><h4>Project Collaboration</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio design">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="row">
+                        <div class="col-md-6 design-port">
+                            <div class="portfolio-item design-port">
+                                <a href="http://www.bstcampaign.org" class="design-port">
+                                <!-- <img src="img/bst.png"> -->
+                                <strong>#BETTERSEXTALK</strong>
+                                </a>
+                                <p>#BetterSexTalk is a photography campaign that works to raise awareness around issues of sex education and sexual assault. Our campaign took portraits of college students across the country asking one simple question: If you could give one piece of advice about sex to a younger sibling, what would it be?</p>
+                                <div class="skill-pill-leadership outline"><h4>Project Collaboration</h4></div>
+                                <div class="skill-pill-leadership outline"><h4>A whole lot of patience</h4></div>
+                                <div class="skill-pill-design"><h4>Photoshop</h4></div>
+                                <div class="skill-pill-design"><h4>Illustrator</h4></div>
+                                <div class="skill-pill-design"><h4>SquareSpace</h4></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item design-port">
+                                <a href="/pdf/show-spark-portfolio.pdf" class="design-port">
+                                <!-- <img src="img/showspark.png"> -->
+                                <strong>SHOWSPARK</strong>
+                                </a>
+                                <p>ShowSpark is a mobile app that aims to make concerts more interactive by having audience members vote on components of the show, from the setlist to the stage lights.</p>
+                                <div class="skill-pill-leadership outline"><h4>Project Collaboration</h4></div>
+                                <div class="skill-pill-design"><h4>Illustrator</h4></div>
+                                <div class="skill-pill-design"><h4>Logo Design</h4></div>
+                                <div class="skill-pill-design"><h4>UX Design</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="portfolio-item design-port">
+                                <a href="img/gov.png" class="design-port">
+                                <!-- <img src="img/gov.png"> -->
+                                <strong>GOVERNOR'S ISLAND SNAPCHAT GEOFILTER</strong>
+                                </a>
+                                <p>I made this Snapchat Geofilter for Governor's Island, NY: a summer hammock-haven in New York City. It was made live on Snapchat in 2015.</p>
+                                <div class="skill-pill-design"><h4>Photoshop</h4></div>
+                                <div class="skill-pill-design"><h4>Illustrator</h4></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item design-port">
+                                <a href="img/econ-review.jpg" class="design-port">
+                                <!-- <img src="img/ter.png"> -->
+                                <strong>THE ECONOMICS REVIEW</strong>
+                                </a>
+                                <p>The Economics Review at NYU is an online publication consisting of a rigorous selection of student essays, opinions and research papers on important topics in economics, politics and public policy among New York University’s students. I was asked to design the cover for their first ever printed volume.</p>
+                                <div class="skill-pill-leadership outline"><h4>Project Collaboration</h4></div>
+                                <div class="skill-pill-design"><h4>Photoshop</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+      <div class="container">
+        <p class="text-muted"><img src="img/melissa-lopez-square.jpg" class="footer"><h1 class="footer">LET'S GET IN TOUCH.</h1>
+        <a class="footer" href="mailto:name@example.com" class="footer">melissa.lopez@nyu.edu</a>
+        • <a class="footer" href="/pdf/lopez_melissa_resume.pdf" class="footer">Résumé</a>
+        • <a class="footer" href="https://www.linkedin.com/in/melissa-lopez" class="footer">LinkedIn</a>
+        • <a class="footer" href="https://github.com/melissaelopez" class="footer">GitHub</a>
+        • <a class="footer" href="https://www.instagram.com/melello/" class="footer">Instagram</a>
+          </a>
+        </p>
+      </div>
+    </footer>
 
     <!-- jQuery library, Bootstrap, Typed.js, Melissa-Site.js-->
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
