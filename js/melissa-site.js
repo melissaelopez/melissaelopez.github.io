@@ -73,6 +73,7 @@ $(function() {
     });
 });
 
+// Parallax
 window.addEventListener('scroll', function(event) {
         var depth, i, layer, layers, len, movement, topDistance, translate3d;
         topDistance = this.pageYOffset;
@@ -89,4 +90,3 @@ window.addEventListener('scroll', function(event) {
             layer.style.transform = translate3d;
         }
     });
-

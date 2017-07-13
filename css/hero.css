@@ -58,25 +58,33 @@ p {
 }
 
 .layer-bg {
-  background-image: url("hero-02.png");
+  background-image: url("hero-08.png");
 }
 
 .layer-1 {
-  background-image: url("hero-03.png");
+  background-image: url("hero-09.png");
   /*background-position: left bottom;*/
 }
 
 .layer-2 {
-  background-image: url("hero-04.png");
+  background-image: url("hero-10.png");
 }
 
 .layer-3 {
-  background-image: url("hero-05.png");
-  background-position: right bottom;
+  background-image: url("hero-11.png");
+  /*background-position: right bottom;*/
 }
 
 .layer-4 {
-  background-image: url("hero-06.png");
+  background-image: url("hero-12.png");
+}
+
+.layer-5 {
+  background-image: url("hero-13.png");
+}
+
+.layer-6 {
+  background-image: url("hero-14.png");
 }
 
 /*.layer-overlay {
