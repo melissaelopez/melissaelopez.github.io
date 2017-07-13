@@ -18,6 +18,9 @@ a {
     transition: all 0.2s ease-in;
 }
 
+/*p{
+    color: white;
+}*/
 img {
     width: 100%;
     height: auto;
@@ -268,11 +271,11 @@ footer {
 }
 
 a.footer {
-    color: gray;
+    color: white;
 }
 
 h1.footer {
-    color: gray;
+    color: white;
 }
 
 #to-top {
@@ -321,7 +324,7 @@ div.footer {
 }
 
 a.footer {
-    color: gray;
+    color: white;
     position: relative;
     text-decoration: none;
     display: inline-block;
