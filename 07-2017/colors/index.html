@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Typeface from Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <!-- Style sheet, compliled to CSS from SASS -->
+    <link rel="stylesheet" type="text/css" href="base.css">
+
+</head>
+
+<body>
+
+  <div id="container" class="container-fluid">
+    <h1>COLORRRS COPYYY</h1>
+
+    <!-- Converter -->
+    <form id="hex-rgb-converter">
+        <input id="hex-box" type="text" name="hex" value="hex" spellcheck="false">
+        <input id="rgb-box" type="text" name="rbg" value="rgb" spellcheck="false">
+    </form>
+
+    <!-- Favorite Colors -->
+    <div id="palettes">
+        <canvas id="can" width="400" height="400" class="main">
+        </canvas>
+        <h1 id="color-code" class="padded"></h1>
+    </div>
+
+
+    <!-- Footer -->
+    <p>
+        <a id="hrBtn">&#160;HEX TO RGB</a> -
+        <a id="cpBtn">&#160;FAVORITES</a> -
+        <a href="http://melello.com">&#160;MELISSA LOPEZ, 2017</a>
+    </p>
+
+  </div>
+
+<script src="colors.js"></script>
+<script src="rgb-hex-converter.js"></script>
+<script src="color-palette.js"></script>
+
+</body>
+</html>

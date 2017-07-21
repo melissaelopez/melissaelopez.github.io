@@ -1,0 +1,133 @@
+***** ••••••••••••••••••••••••••••• *****
+***** •• Computer Graphics Notes •• *****
+***** ••••••••••••••••••••••••••••• *****
+
+Tuesday, February 7
+
+*************************************************
+ Ray Tracing, Shadows, Reflection and Refraction
+*************************************************
+
+* How do we account for the shinny-ness
+
+A + Sum ( D * (N • L) + S * pow(E • R, p) ) 
+(ambient light color) + (color diffused) * (normal • light source) + (specular component color)
+* A = ambient light
+* D = unit length vector from the object to the eye
+* N = normal
+* S = specular component
+* The shinnier it is, the larger the power p (which is also a color!)
+* R = 2 * N + dot(N,L) - L
+* This model isn't actually realistic, so we need to sum all the light sources
+* The is the description of a material surface
+
+* Reflections and Shadows are really really easy when you think about how the light source is hitting an object
+
+
+
+
+Tuesday, February 14
+
+*************************************************************
+ Ray Tracing, Shadows, Reflection and Refraction (continued)
+*************************************************************
+
+* interested in the lab? email him: herscher@nyu.edu
+
+* check out the new ray tracing story (should be posted!)
+* perlin has added thing to the library
+	* you can now store information for all the spheres in uSpheres
+	* that's where the spheres are, and they're also being animated by the javascript
+* step J adds in the phong shader --> basically makes them look like plastic objects (this is all the math that we went through from Feb. 7) --> go in and break it down
+	* make the highlight basically white for plastic, make the highlight closer to the color of the sphere to make it look more like metal
+* all the lights are also in the javascript, so in the WebGL code we just loop through however many lights we have
+* "u" at the beginning = is uniform, "s" at the end = is an array
+* there are couple lights at play (the key light and fill light)
+* woah how did he make the glowing pink and orange ones??
+* for the third part of the gradient, you want to use (1 - t * t) (if you just use t, then you will get a 50-50 gradient)
+* you now need a way for the spheres to reflect the background
+* (recall A is ambient light)
+* the gradient here is being used in three ways (the background, its reflection on the spheres, and the reflection off one sphere and onto another)
+
+
+
+
+Tuesday, February 23
+
+****************************
+ Data Structures in Shaders
+****************************
+
+* Remember that when we were raytracing, we were just looking for the roots of the funtion
+	* The place where the function = 0 is where the shape we're looking for lies
+		* A sphere had negative stuff on the inside, positive on the outside, and equals 0 on the surface
+* ax + by + cz + d = 0
+	* the normal of the plane is proportional to the vector [a b c] (points in the positive direction where the function would be positive/increasing)
+ 
+Some convention stuff:
+* We don't want to confuse our constants and variables
+* A column (vertical) vector is a point in space, the variables x, y, x
+* A row (horizontal) vector are the coefficients of an equation 
+* ax + by + cz + d = 0 --> homogeneous eq'n (because it's set up to equal zero) --> this is just a dot product between:
+
+	[ a  b  c  d ] • [ x ]  
+	                 [ y ]    =    ax + by + cz + d 
+	                 [ z ]
+	                 [ W ]	and make W = 1 (this is the homogeneous coordinate)                 
+* let's do raytracing for a plane
+* P • V + t(P • W) = 0
+
+
+
+
+
+Thursday, March 2
+
+************
+ 2D Drawing
+************
+
+var blue  = 128 + Math.floor(128 * Math.sin(time));
+g.fillstyle = ‘rgb(255,128,)’ + blue + ‘)’;
+g.beingPath();
+g.moveTo(0,0);
+g.lineTo(this.width, 0);
+...
+...
+...
+g.fill();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

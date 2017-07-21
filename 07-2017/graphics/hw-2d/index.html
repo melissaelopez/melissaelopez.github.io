@@ -1,0 +1,215 @@
+<table>
+
+<tr>
+<td><canvas id=canvas2 width=400 height=500></td>
+<td width=50></td>
+<td>
+A funky lil NYC subway map.
+</td>
+</tr>
+
+
+</table>
+
+<script src=drawlib1.js></script>
+<script>
+
+
+   canvas2.update = function(g) {
+      g.lineWidth = 10;
+      g.strokeStyle = 'rgb(0, 0, 0)';
+      g.fillStyle = 'rgb(242,234,214)';
+      g.fill();
+
+      var yellow = 'rgb(252,204,10)';
+      var blue = 'rgb(0,57,166)';
+      var green = 'rgb(0,147,60)';
+      var orange = 'rgb(255,99,25)';
+      var red = 'rgb(238,53,46)';
+      var gray = 'rgb(167,169,172)';
+      var purple = 'rgb(185,51,173)';
+      var brown = 'rgb(153,102,51)';
+
+      // background
+      g.beginPath();
+      g.moveTo(0, 0);
+      g.lineTo(this.width, 0);
+      g.lineTo(this.width, this.height);
+      g.lineTo(0, this.height);
+      g.lineTo(0, 0);
+      g.stroke();
+      g.fill();
+
+      g.lineWidth = 30;
+      g.lineCap = 'round';
+      g.lineJoin = 'round';
+
+      // Streets
+      g.strokeStyle = 'white';
+      g.lineWidth = 3;
+
+      // 4th
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 15);
+      g.lineTo(this.width, (this.height / 2) + 15);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 15);
+      g.lineTo(0, (this.height / 2) - 10);
+      g.stroke();
+
+      // Bleeker
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 55);
+      g.lineTo(this.width, (this.height / 2) + 55);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 55);
+      g.lineTo(0, (this.height / 2) + 35);
+      g.stroke();
+
+      // Houston
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 75);
+      g.lineTo(this.width, (this.height / 2) + 75);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(100, (this.height / 2) + 75);
+      g.lineTo(0, (this.height / 2) + 110);
+      g.stroke();
+      
+      // 5th Ave
+      g.beginPath();
+      g.moveTo(this.width/2, 0);
+      g.lineTo(this.width/2, this.height/2);
+      g.stroke();
+
+      // 4th-1st Ave's
+      g.beginPath();
+      g.moveTo(this.width/2 + 50, 0);
+      g.lineTo(this.width/2 + 50, this.height);
+      g.stroke();
+
+      // WSP
+      g.fillStyle = 'rgb(108,190,69)';
+      g.beginPath();
+      g.moveTo((this.width / 2) - 20, (this.height / 2) - 10);
+      g.lineTo((this.width / 2) + 20, (this.height / 2) - 10);
+      g.lineTo((this.width / 2) + 20, (this.height / 2) + 10);
+      g.lineTo((this.width / 2) - 20, (this.height / 2) + 10);
+      g.fill();
+
+      // USQ
+      g.beginPath();
+      g.moveTo((this.width / 2) + 40, (this.height / 2) - 80);
+      g.lineTo((this.width / 2) + 85, (this.height / 2) - 80);
+      g.lineTo((this.width / 2) + 85, (this.height / 2) - 50);
+      g.lineTo((this.width / 2) + 60, (this.height / 2) - 50);
+      g.fill();
+
+      // Bryant Park
+      g.beginPath();
+      g.moveTo(155, 55);
+      g.lineTo(180, 55);
+      g.lineTo(180, 70);
+      g.lineTo(155, 70);
+      g.fill();
+
+      // City Hall
+      g.beginPath();
+      g.moveTo((this.width / 2) + 50, (this.height / 2) + 150);
+      g.lineTo((this.width / 2) + 105, (this.height / 2) + 150);
+      g.lineTo((this.width / 2) + 90, (this.height / 2) + 210);
+      g.lineTo((this.width / 2) + 50, (this.height / 2) + 210);
+      g.fill();
+
+      // Subway Lines
+      g.lineWidth = 15;
+
+      g.strokeStyle = yellow;
+      g.beginPath();
+      g.moveTo(this.width - 150, this.height);
+      g.lineTo(this.width - 150,this.height - Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
+
+      g.strokeStyle = red;
+      g.beginPath();
+      g.moveTo(25, 0);
+      g.lineTo(Math.abs((50)*Math.sin(time)),this.height);
+      g.stroke();
+
+      g.strokeStyle = blue;
+      g.beginPath();
+      g.moveTo(0, this.width / 4);
+      g.lineTo(Math.abs((this.width/4 + 50)*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo((this.width/4 + 50), this.height);
+      g.lineTo(Math.abs(((this.width/4 + 50))*Math.sin(time)),Math.abs((this.width/2 + 75)*Math.sin(time)));
+      g.stroke();
+
+      g.strokeStyle = green;
+      g.beginPath();
+      g.moveTo(this.width - 95, this.height - 100);
+      g.lineTo(this.width - 110,this.height - 100 - Math.abs((this.height - 100)*Math.sin(time)));
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(this.width - 95, 0);
+      g.lineTo(this.width - 110,this.height - 100 - Math.abs((this.height - 100)*Math.sin(time)));
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(this.width - 95, this.height - 100);
+      g.lineTo(Math.abs((this.width - 120)*Math.sin(time)),this.height);
+      g.stroke();
+
+      g.strokeStyle = orange;
+      g.beginPath();
+      g.moveTo((this.width/4 + 50), 0);
+      g.lineTo(this.width/4 + 50,Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(this.width, this.height - 200);
+      g.lineTo(this.width/4 + 50,Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
+
+      g.strokeStyle = yellow;
+      g.beginPath();
+      g.moveTo(50, 0);
+      g.lineTo(this.width - 150,this.height - Math.abs((this.height - 200)*Math.sin(time)));
+      g.stroke();
+
+      g.strokeStyle = gray;
+      g.beginPath();
+      g.moveTo(0, this.height/3 + 30);
+      g.lineTo(Math.abs((this.width)*Math.sin(time)), this.height/3 + 30);
+      g.stroke();
+
+      g.strokeStyle = purple;
+      g.beginPath();
+      g.moveTo(this.width, 50);
+      g.lineTo(this.width - Math.abs((this.width)*Math.sin(time)), 50);
+      g.stroke();
+
+      g.strokeStyle = brown;
+      g.beginPath();
+      g.moveTo(this.width, this.height - 150);
+      g.lineTo(this.width - Math.abs((50)*Math.sin(time)), this.height - 150);
+      g.stroke();
+
+      g.beginPath();
+      g.moveTo(this.width - 40, this.height);
+      g.lineTo(this.width - Math.abs((50)*Math.sin(time)), this.height - 150);
+      g.stroke();
+   }
+
+   draw2DCanvases([canvas2 ]);
+</script>
+
+
