@@ -30,7 +30,7 @@ permalink: /404.html
 </head>
 
 <body>
-    <canvas height=100 width=100>sorry, there's nothing to see here</canvas>
+    <canvas height=100 width=100></canvas>
     <script>
     'use strict';
     console.clear();
@@ -39,7 +39,7 @@ permalink: /404.html
     var ctx = cvs.getContext('2d');
 
     var h = cvs.height;
-    var w = cvs.height;
+    var w = cvs.width;
 
     draw(true);
 
@@ -56,6 +56,9 @@ permalink: /404.html
     draw(false);
     });
     }
+    ctx.fillStyle = "white";
+    ctx.font = "bold 50px Arial";
+    ctx.fillText("sorry, nothing to see here", (w / 2) - 17, (h / 2) + 8);
     </script>
 </body>
 </html>
