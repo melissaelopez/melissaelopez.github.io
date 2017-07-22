@@ -50,16 +50,11 @@ img.overlay-image:hover{
     transition: all 0.5s ease-in-out;
 }
 
-/*#colors-info{
-    visibility: hidden;
-    display: none;
-}*/
-
 /*About*/
 
 #about{
     background-color: #2D122A;
-    padding: 100px;
+    padding: 10%;
     color: white;
 }
 
@@ -86,8 +81,12 @@ strong.purple{
 }
 
 
-/*buttons*/
-/*button{
+/*buttons / footer*/
+
+#footer{
+    padding: 100px;
+}
+button{
   transition: 200ms ease-in;
 }
 button:hover {
@@ -103,12 +102,12 @@ button:before {
   left: 0;
   width: 0;
   height: 100%;
-  background: skyblue;
+  background: #8CEDEB;
   z-index: -1;
   transition: 200ms ease-in;
 }
 
-#about {
+#footer {
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -119,7 +118,7 @@ button:before {
 
 h1 {
   /*max-width: 250px;*/
-  /*text-transform: uppercase;
+  text-transform: uppercase;
   color: ghostwhite;
   transition: 500ms ease-in;
 }
@@ -129,14 +128,14 @@ button {
   position: relative;
   overflow: hidden;
   background: none;
-  border: 2px solid white;
+  border: 2px solid #8CEDEB;
   border-radius: 3px;
   padding: 15px 30px;
   font-size: 16px;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 600;
-  color: skyblue;
+  color: #8CEDEB;
 }
 button a {
   text-decoration: none;
@@ -151,50 +150,4 @@ button:focus {
 }
 button:hover {
   cursor: pointer;
-}*/
-
-/******************************/
-
-/*#about {
-  background-color: #1abc9c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
 }
-
-.btn {
-  border: 5px solid #2c3e50;
-  color: #2c3e50;
-  display: block;
-  font-family: 'trebuchet ms';
-  font-size: 2rem;
-  letter-spacing: 0.1rem;
-  padding: 1rem;
-  position: relative;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.btn::before {
-  content: "";
-  background-color: #E26A6A;
-  box-shadow: 10px 10px 0 #F1C40F,
-              20px 20px 0 #3498DB;
-  position: absolute;
-  left: 0.25rem;
-  top: 0.5rem;
-  height: 102%;
-  width: 102%;
-  z-index: -1;
-  transition: all 0.4s ease;
-}
-
-.btn:hover::before {
-  box-shadow: none;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}*/

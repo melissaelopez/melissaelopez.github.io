@@ -1,0 +1,61 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Melello | 404 Page Not Found</title>
+    <style>
+    canvas {
+    min-height: 100%;
+    min-width: 100%;
+    background: black;
+    image-rendering: pixelated;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+    body {
+    background: black;
+    }
+
+    html, body {
+    height: 100%;
+    overflow: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas height=100 width=100></canvas>
+    <script>
+    'use strict';
+    console.clear();
+
+    var cvs = document.querySelector('canvas');
+    var ctx = cvs.getContext('2d');
+
+    var h = cvs.height;
+    var w = cvs.height;
+
+    draw(true);
+
+    function draw(initial) {
+    for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
+      if (initial || Math.random() > 0.95) {
+        ctx.fillStyle = 'hsl(' + Math.random() * 360 + ', 100%, 60%)';
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+    }
+    window.requestAnimationFrame(function () {
+    draw(false);
+    });
+    }
+    </script>
+</body>
+</html>

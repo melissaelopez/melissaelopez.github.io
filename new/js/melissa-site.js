@@ -41,39 +41,36 @@ window.addEventListener('scroll', function(event) {
 
 $page_bg = '#2D122A';
 $title_color = 'ghostwhite';
-$('h1').css('color', $title_color);
-$('#about').css('background', $page_bg);
+// $('h1').css('color', $title_color);
+$('#footer').css('background', $page_bg);
 
 $('button.alt1').on('mouseenter',function(){
-	$('#about').css('background', '#F9485A');
+	$('#footer').css('background', '#F9485A');
 });
 
 $('button.alt2').on('mouseenter',function(){
-	$('#about').css('background', '#B5F5F6');
-	$('h1').css('color', '#2D122A');
+	$('#footer').css('background', '#B5F5F6');
+	// $('h1').css('color', '#2D122A');
 });
 $('button.alt3').on('mouseenter',function(){
-	$('#about').css('background', '#C82C41');
+	$('#footer').css('background', 'orange');
 });
 
 $('button.alt4').on('mouseenter',function(){
-	$('#about').css('background', '#50E1DD');
-	$('h1').css('color', '#3d3f3f');
-});
+	$('#footer').css('background', 'limegreen');
 
+});
 
 
 $('button.alt1').on('mouseleave',function(){
-	$('#about').css('background', $page_bg);
+	$('#footer').css('background', $page_bg);
 });
 $('button.alt2').on('mouseleave',function(){
-	$('#about').css('background', $page_bg);
-	$('h1').css('color', $title_color);
+	$('#footer').css('background', $page_bg);
 });
 $('button.alt3').on('mouseleave',function(){
-	$('#about').css('background', $page_bg);
+	$('#footer').css('background', $page_bg);
 });
 $('button.alt4').on('mouseleave',function(){
-	$('#about').css('background', $page_bg);
-	$('h1').css('color', $title_color);
+	$('#footer').css('background', $page_bg);
 });
