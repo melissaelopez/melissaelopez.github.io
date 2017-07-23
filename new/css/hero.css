@@ -25,26 +25,13 @@ body {
   height: 1348px; /*height of bg-photo*/
   position: fixed;
   z-index: -1;
+  /*object-fit: contain;*/
 }
 
 #hero-mobile {
   display: none;
   background: url("../img/bg-08.png") no-repeat center bottom/cover;
-  height: 320px;
-}
-
-.first-section {
-  padding: 50px 0 20px 0;
-}
-
-.text-header {
-  font-size: 50px;
-  text-align: center;
-}
-
-h1 {
-  line-height: 120%;
-  margin-bottom: 30px;
+  height: 700px;
 }
 
 #hero, .layer {

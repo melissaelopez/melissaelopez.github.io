@@ -55,6 +55,7 @@ img.overlay-image:hover{
 #about{
     background-color: #2D122A;
     padding: 10%;
+    /*padding-top: 50%;*/
     color: white;
 }
 
@@ -116,7 +117,7 @@ button:before {
   background: #db5f43;
 }
 
-h1 {
+h1.button {
   /*max-width: 250px;*/
   text-transform: uppercase;
   color: ghostwhite;
