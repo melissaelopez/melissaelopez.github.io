@@ -1,7 +1,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Reem Kufi', serif;
+  /*font-family: 'Reem Kufi', serif;*/
 }
 
 #hero {
@@ -25,32 +25,13 @@ body {
   height: 1348px; /*height of bg-photo*/
   position: fixed;
   z-index: -1;
+  /*object-fit: contain;*/
 }
 
 #hero-mobile {
   display: none;
-  background: url("bg-08.png") no-repeat center bottom/cover;
-  height: 320px;
-}
-
-.first-section {
-  padding: 50px 0 20px 0;
-}
-
-.text-header {
-  font-size: 50px;
-  text-align: center;
-}
-
-h1 {
-  line-height: 120%;
-  margin-bottom: 30px;
-}
-
-p {
-  color: #ede0d5;
-  font-size: 18px;
-  line-height: 150%;
+  background: url("../img/bg-08.png") no-repeat center bottom/cover;
+  height: 700px;
 }
 
 #hero, .layer {
@@ -58,33 +39,33 @@ p {
 }
 
 .layer-bg {
-  background-image: url("hero-08.png");
+  background-image: url("../img/hero-02.png");
 }
 
 .layer-1 {
-  background-image: url("hero-09.png");
+  background-image: url("../img/hero-03.png");
   /*background-position: left bottom;*/
 }
 
 .layer-2 {
-  background-image: url("hero-10.png");
+  background-image: url("../img/hero-10.png");
 }
 
 .layer-3 {
-  background-image: url("hero-11.png");
+  background-image: url("../img/hero-11.png");
   /*background-position: right bottom;*/
 }
 
 .layer-4 {
-  background-image: url("hero-12.png");
+  background-image: url("../img/hero-12.png");
 }
 
 .layer-5 {
-  background-image: url("hero-13.png");
+  background-image: url("../img/hero-13.png");
 }
 
 .layer-6 {
-  background-image: url("hero-14.png");
+  background-image: url("../img/hero-14.png");
 }
 
 /*.layer-overlay {
@@ -99,15 +80,6 @@ p {
   #hero-mobile {
     display: block;
   }
-}
-
-.tutorial-link {
-  color: #fff;
-  font-size: 18px;
-  text-decoration: underline;
-}
-.tutorial-link:hover {
-  color: #ede0d5;
 }
 
 .title {
