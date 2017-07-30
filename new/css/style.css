@@ -8,12 +8,19 @@ body {
 }
 
 body {
-    font-family: "Open Sans","Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "Raleway","Quicksand","Helvetica Neue",Helvetica,Arial,sans-serif;
     margin: 0;
 }
 
 h1{
-    font-family: 'Reem Kufi';
+    /*font-family: 'Reem Kufi';*/
+}
+
+h3{
+    font-size: 12pt;
+    color: black;
+    /*margin-right: 10px;*/
+    /*text-align: right;*/
 }
 
 a {
@@ -31,7 +38,11 @@ img {
 }
 
 p{
-    font-size: 16pt;
+    font-size: 12pt;
+}
+
+.highlight{
+    background-color: white;
 }
 
 /*Portfolio*/
@@ -61,7 +72,7 @@ img.overlay-image:hover{
 /*About*/
 
 #about{
-    background-color: #2D122A;
+    background-color: #2D122A; /*plum*/
     padding: 10%;
     /*padding-top: 50%;*/
     color: white;
@@ -88,6 +99,116 @@ strong.purple{
     color: violet;
     /*background-color: darkblue;*/
 }
+
+/* Resume */
+
+#resume{
+    padding: 25px;
+    background-color: #F9485A; /*pink*/
+    color: white;
+    transition: all 0.3s ease-in;
+}
+
+#resume:hover{
+    background-color: #45deda; /*blue*/
+    color: #2D122A;
+}
+
+a.resume{
+    text-decoration: none;
+    font-size: 14pt;
+}
+
+/*Tools*/
+#tools{
+    background-color: white;
+    padding: 5%;
+}
+
+h3.tools{
+    line-height: 200%;
+}
+
+.white{
+    color: white;
+}
+
+div.skill-pill {
+    height: 40px;
+    color: black;
+    background: transparent;
+    border: 1px solid black;
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    margin-bottom: 3px;
+    border-radius: 10px;
+}
+
+h4.pill{
+    letter-spacing: 2px;
+    font-size: 10pt;
+    line-height: 145%;
+}
+
+h4.type{
+    display: inline;
+    color: white;
+    margin-right: 20px;
+}
+
+/* button */
+div.h-btn {
+    /*height: 0px;*/
+    color: black;
+    background: transparent;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+}
+div.h-btn:hover {
+    color: white;
+    /*background: black;*/
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.github:hover{
+    background-color: #F9485A;
+}
+
+.demo:hover{
+    background-color: #45deda;
+}
+
+#care{
+    background-color: white;
+    color: black;
+    /*background-image: url(../img/heart-color-bg.jpg);*/
+    background-size: cover;
+    padding: 5%;
+
+}
+
+#experience{
+    background-color: white;
+}
+
+.experience-item{
+    color: black;
+    font-size: 12pt;
+}
+
+
+
+
+
+
 
 
 /*buttons / footer*/
@@ -159,45 +280,4 @@ button:focus {
 }
 button:hover {
   cursor: pointer;
-}
-
-/*Tools*/
-#tools{
-    background-color: #44deda;
-    padding: 5%;
-}
-
-.white{
-    color: white;
-}
-
-div.skill-pill {
-    height: 40px;
-    color: white;
-    background: transparent;
-    border: 1px solid white;
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-right: 10px;
-    margin-bottom: 6px;
-    border-radius: 10px;
-}
-
-h4.pill{
-    letter-spacing: 2px;
-}
-
-h4.type{
-    display: inline;
-    color: white;
-    margin-right: 20px;
-}
-
-#care{
-    background-color: gray;
-    background-image: url(../img/heart-color-bg.jpg);
-    background-size: cover;
-    padding: 5%;
-
 }

@@ -44,20 +44,21 @@ permalink: /404.html
     draw(true);
 
     function draw(initial) {
-    for (var y = 0; y < h; y++) {
-    for (var x = 0; x < w; x++) {
-      if (initial || Math.random() > 0.95) {
-        ctx.fillStyle = 'hsl(' + Math.random() * 360 + ', 100%, 60%)';
-        ctx.fillRect(x, y, 1, 1);
-        ctx.fillStyle = "white";
-        ctx.font = "bold 20px Arial";
-        ctx.fillText("404", (w / 2) - 17, (h / 2) + 8);
-      }
-    }
-    }
-    window.requestAnimationFrame(function () {
-    draw(false);
-    });
+        for (var y = 0; y < h; y++) {
+            for (var x = 0; x < w; x++) {
+                if (initial || Math.random() > 0.95) {
+                    ctx.fillStyle = 'hsl(' + Math.random() * 360 + ', 100%, 60%)';
+                    ctx.fillRect(x, y, 1, 1);
+                    ctx.fillStyle = "white";
+                    ctx.font = "bold 20px Arial";
+                    ctx.fillText("404", (w / 2) - 17, (h / 2) + 8);
+                }
+            }
+        }
+
+        window.requestAnimationFrame(function () {
+            draw(false);
+        });
     }
     </script>
 </body>

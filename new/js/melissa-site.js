@@ -74,3 +74,11 @@ $('button.alt3').on('mouseleave',function(){
 $('button.alt4').on('mouseleave',function(){
 	$('#footer').css('background', $page_bg);
 });
+
+
+$("#resume").hover(function(){
+    $('#r-text').addClass('animated tada');
+});
+$("#resume").bind("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",function(){
+    $('#r-text').removeClass('animated tada');
+});
