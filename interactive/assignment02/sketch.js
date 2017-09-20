@@ -8,6 +8,7 @@ var ballX = 250;
 var ballY = 250;
 var ballSpeedX = Math.random() * 7 + 1;
 var ballSpeedY = Math.random() * 7 + 1;
+var faster = 1.1;
 
 var objX = Math.random() * 400 + 50;
 var objY = Math.random() * 300 + 50;
@@ -24,7 +25,6 @@ var ponitSound;
 var points = 0;
 var misses = 0;
 
-// this all happens before setup, this is where you load external graphics
 function preload(){
     bgArtwork = loadImage("images/bg-full.jpg");
     flowerArtwork = loadImage("images/cloud.png");
@@ -45,9 +45,8 @@ function setup(){
 }
 
 function draw(){
-    console.log("x:"+ballX);
-    console.log("y:"+ballY);
-    image(bgArtwork, 250,250,height, width);
+    // Redraw backgrouns
+    image(bgArtwork, 250, 250, height, width);
 
     // Show score
     fill(255);
@@ -61,7 +60,6 @@ function draw(){
 
     fill(112,224,224, 200);                    // deep purple
     rect(250, 5, width, 10);
-
 
     // Draw objective, and see if the ball is close to it
     image(flowerArtwork, objX, objY);
@@ -92,42 +90,38 @@ function draw(){
 
     // Draw the ball
     fill(255);
-    // image(ballArtwork, ballX, ballY);
     ellipse(ballX, ballY, 20,20);
 
     // if the ball touches the left or right edge
     if (ballX <= 20 || ballX >= 480){
-        ballSpeedX = -ballSpeedX;
-        // ballSpeedY = -ballSpeedY; // ASK KAPP ABOUT THIS PART????
+        ballSpeedX = -newFactor() * ballSpeedX;
+        ballSpeedY = newFactor() * ballSpeedY;
         bounceSound.play();
-        ballSpeedX += random(0, 1);
-        ballSpeedY += random(0, 1);
     }
     // if the ball touches the paddle
     if (((ballX >= paddleX - (paddleWidth / 2) && ballX <= paddleX + (paddleWidth / 2)) && (ballY >= 480 && ballY <= 500) ) ){
         if (ballX > paddleX){ //hit left side, we want a negative x speed
             if (ballSpeedX < 0){
-                ballSpeedX = -ballSpeedX;
-                ballSpeedX -= random(0, 1);
-                ballSpeedY -= random(0, 1);
+                ballSpeedX = -newFactor() * ballSpeedX;
+            } else {
+                ballSpeedX = newFactor() * ballSpeedX;
             }
         }
         else if (ballX < paddleX){ //hit right side, we want a positive x speed
             if (ballSpeedX > 0){
-                ballSpeedX = -ballSpeedX;
-                ballSpeedX += random(0, 1);
-                ballSpeedY += random(0, 1);
+                ballSpeedX = -newFactor() * ballSpeedX;
+            } else {
+                ballSpeedX = newFactor() * ballSpeedX;
             }
         }
-        ballSpeedY = -ballSpeedY;
+        ballSpeedY = -faster * ballSpeedY;
         bounceSound.play();
     }
     // if the ball touches the top edge
     if (ballY <= 20){
-        ballSpeedY = -ballSpeedY;
+        ballSpeedY = -newFactor() * ballSpeedY;
+        ballSpeedX = newFactor() * ballSpeedX;
         bounceSound.play();
-        ballSpeedX += random(0, 1);
-        ballSpeedY += random(0, 1);
     }
     // if the ball gets past the paddle (or out of bounds event), reset the ball
     if (ballY > 600 || ballX < 10 || ballX > 490){
@@ -139,7 +133,11 @@ function draw(){
         missSound.play();
     }
 
-    // move the ball by the appropriate amount
+    // move the ball by the speed
     ballX += ballSpeedX;
     ballY += ballSpeedY;
+}
+
+function newFactor(){
+    return Math.random() * (faster - 1) + 1;
 }
