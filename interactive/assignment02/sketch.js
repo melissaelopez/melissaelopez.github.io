@@ -46,7 +46,7 @@ function setup(){
 
     textSize(10);
     text("U S E   A   A N D   D   T O   M O V E   L E F T   A N D   R I G H T", 100, 430);
-    text("U S E   P   A N D   R   T O   M O V E   P A U S E   A N D   R E S U M E", 85, 445);
+    text("U S E   P   A N D   R   T O   P A U S E   A N D   R E S U M E", 85, 445);
     text("P R E S S   S P A C E B A R   T O   B E G I N !", 130, 470);
     rectMode(CENTER);
     imageMode(CENTER);
