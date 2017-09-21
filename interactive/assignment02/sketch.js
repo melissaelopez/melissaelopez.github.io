@@ -149,7 +149,7 @@ function draw(){
                 bounceSound.play();
             }
             // if the ball gets past the paddle (or out of bounds event), reset the ball
-            if (ballY > 600 || ballX < 10 || ballX > 490){
+            if (ballY > 500 || ballX < 10 || ballX > 490){
                 ballX = 250;
                 ballY = 250;
                 ballSpeedX = random(-10, 8)+2;
