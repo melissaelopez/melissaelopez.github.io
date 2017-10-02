@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../p5/p5.min.js"></script>
+    <script src="../p5/addons/p5.dom.min.js"></script>
+    <script src="../p5/addons/p5.sound.min.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+
+    body{
+        padding: 0;
+        margin: 0;
+        font-family: sans-serif;
+        text-align: center;
+    }
+    tr {
+        display: block;
+    }
+    img{
+        width: 300px;
+    }
+    div{
+        padding: 100px;
+    }
+    </style>
+    <title>Assignment 03: Open-Ended Gane</title>
+    <tr>
+      <td>wind speed</td>
+      <td><input type="range" id="range1" min="0" max="10" step="1" value="5" oninput="updateRange(this);" onchange="updateRange(this);"></td>
+    </tr>
+    <div id="canvas-container"></div>
+    <div id = "docs">
+        <h1>documentation</h1>
+        <p>
+            I sought out to make a game that was a bit more peaceful than Breakout 1.0, so I thought about what I personally find peaceful.
+            I was inspired by a photo that I found on Unsplash
+             (these photos are free to use!), and knew I had to use it to make a game. And so I did, and now that image is the background
+              photo of the game above.
+        </p>
+        <img src="images/water.jpg"/>
+        <p>
+            One of the biggest challenges I faced in making this game was finding peaceful sounds! It's easy to find loud "ta-da" type sounds
+            to play when the player scores a point, but I didn't want the sound to take away from the theme. Ultimately, the "point" sound
+            I chose is a pin-drop sound because it's quite subtle.
+        </p>
+        <p>
+
+        </p>
+    </div>
+    <div id = "physical-interface">
+        <h1>physical interface</h1>
+        <p>
+            For our physical interface, we made a piano! We built it with black Playdough and the Makey Makey. To complete the circuit,
+            the player needs to wear and aluminum bracelet while playing.
+        </p>
+        <img src="images/piano.jpg"/>
+    </div>
+  </head>
+  <body>
+  </body>
+</html>
