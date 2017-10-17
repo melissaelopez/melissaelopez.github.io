@@ -9,6 +9,7 @@ var numSquaresPerRow = 10;
 var squares = [];
 var remainingMoves = 30;
 
+var state = 1;
 
 function setup() {
     canvasHeight = windowHeight < windowWidth ? windowHeight : windowWidth;
@@ -21,12 +22,21 @@ function setup() {
 
     createBoard();
     setAllNeighbors();
+    flood(squares[0][0].color);
     displaySquares();
 }
 
 function draw() {
 
-    displaySquares();
+    if (state == 1){
+        displaySquares();
+        if(gameFinished()){
+            state = 2;
+        }
+    }
+    if (state == 2){
+
+    }
 }
 
 function repositionCanvas() {
@@ -60,6 +70,10 @@ function generateColors(){
     // for (var i = 0; i < numColors; i++){
     //     colors.push(color('hsl('+Math.floor((Math.random() * 360))+', 100%, 60%)'));
     // }
+    // colors.push(color('hsla('+(  Math.floor((Math.random() * 50)) + 0  )  +', 100%, 60%, 0.09)'));
+    // colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 100 )+', 100%, 60%, 0.09)'));
+    // colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 200 )+', 100%, 60%, 0.09)'));
+    // colors.push(color('hsla('+( Math.floor((Math.random() * 60)) + 300 )+', 100%, 60%, 0.09)'));
     colors.push(color('hsl('+(  Math.floor((Math.random() * 50)) + 0  )  +', 100%, 60%)'));
     colors.push(color('hsl('+( Math.floor((Math.random() * 50)) + 100 )+', 100%, 60%)'));
     colors.push(color('hsl('+( Math.floor((Math.random() * 50)) + 200 )+', 100%, 60%)'));
@@ -69,7 +83,7 @@ function generateColors(){
 function createBoard() {
     var squareSize = width / numSquaresPerRow;
     var rowPos = 0;
-    while (rowPos <= height){
+    while (rowPos < height){
         colPos = 0;
         row = []
         for (var i = 0; i < numSquaresPerRow; i++){
@@ -157,6 +171,18 @@ function addNeighbors(s, color){
     if (s.right != undefined && s.right.color == color){
         s.right.inFlood = true;
     }
+}
+
+function gameFinished(){
+    color = squares[0][0].color;
+    for (var i = 0; i < squares.length; i++){
+        for (var j = 0; j < squares[i].length; j++){
+            if (squares[i][j].color != color){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 // function floodAnimation(s){
