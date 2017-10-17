@@ -1,15 +1,25 @@
 var theCanvas;
-var canvasWidth;;
+var canvasWidth;
 var canvasHeight;
 
 var id = 1;
-var numColors = 7;
+var numColors = 6;
 var colors = [];
 var numSquaresPerRow = 10;
 var squares = [];
 var remainingMoves = 30;
 
-var state = 1;
+var state = 0;
+var startArt = [];
+var startArtIndex = 0;
+
+function preload(){
+    var startArtwork1 = loadImage("img/startArtwork-01.png");
+    var startArtwork2 = loadImage("img/startArtwork-02.png");
+    var startArtwork3 = loadImage("img/startArtwork-03.png");
+    var startArtwork4 = loadImage("img/startArtwork-04.png");
+    startArt = [startArtwork1, startArtwork2, startArtwork3, startArtwork4];
+}
 
 function setup() {
     canvasHeight = windowHeight < windowWidth ? windowHeight : windowWidth;
@@ -23,31 +33,23 @@ function setup() {
     createBoard();
     setAllNeighbors();
     flood(squares[0][0].color);
-    displaySquares();
+    // displaySquares();
 }
 
 function draw() {
 
-    if (state == 1){
-        displaySquares();
-        if(gameFinished()){
-            state = 2;
-        }
+    if (state == 0){
+        startScreen();
     }
-    if (state == 2){
+    else if (state == 1){
+        playGame();
+    }
+    else if (state == 2){
 
     }
 }
 
-function repositionCanvas() {
-  var xPos = int(windowWidth/2 - 0.5*width);
-  var yPos = int(windowHeight/2 - 0.5*height);
-  theCanvas.position(xPos, yPos);
-}
-
-function windowResized() {
-  repositionCanvas();
-}
+// ------------------ SETUP ----------------------------
 
 function Square(x, y, size, id) {
     this.x = x;
@@ -66,21 +68,59 @@ function Square(x, y, size, id) {
     }
 }
 
+// ------------------ PRE-GAME ----------------------------
+function startScreen(){
+    dancingScreenAnimation();
+    textSize(25);
+    fill(255);
+    // text("PRESS [SPACEBAR]", 50, 425);
+    // text("TO START PLAYING!", 50, 455);
+    image(startArt[startArtIndex++ % 4], 0, 0, canvasWidth, canvasHeight);
+    if (keyIsDown(32)){
+        state = 1;
+        startTime = millis();
+    }
+}
+
+function dancingScreenAnimation(){
+    frameRate(7);
+    createBoard();
+    setAllNeighbors();
+    flood(squares[0][0].color);
+    displaySquares();
+}
+
+// ------------------ GAMEPLAY ----------------------------
+
+function playGame(){
+    frameRate(60);
+    displaySquares();
+    if (gameFinished()){
+        state = 2;
+    }
+}
+
 function generateColors(){
-    // for (var i = 0; i < numColors; i++){
-    //     colors.push(color('hsl('+Math.floor((Math.random() * 360))+', 100%, 60%)'));
-    // }
+    for (var i = 0; i < numColors; i++){
+        colors.push(color('hsl('+Math.floor((Math.random() * 360))+', 100%, 60%)'));
+    }
+
+    // standardized
     // colors.push(color('hsla('+(  Math.floor((Math.random() * 50)) + 0  )  +', 100%, 60%, 0.09)'));
     // colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 100 )+', 100%, 60%, 0.09)'));
     // colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 200 )+', 100%, 60%, 0.09)'));
     // colors.push(color('hsla('+( Math.floor((Math.random() * 60)) + 300 )+', 100%, 60%, 0.09)'));
-    colors.push(color('hsl('+(  Math.floor((Math.random() * 50)) + 0  )  +', 100%, 60%)'));
-    colors.push(color('hsl('+( Math.floor((Math.random() * 50)) + 100 )+', 100%, 60%)'));
-    colors.push(color('hsl('+( Math.floor((Math.random() * 50)) + 200 )+', 100%, 60%)'));
-    colors.push(color('hsl('+( Math.floor((Math.random() * 60)) + 300 )+', 100%, 60%)'));
+
+    // standardized
+    // colors.push(color('hsl('+(  Math.floor((Math.random() * 22)) + 0  )  +', 100%, 60%)'));
+    // colors.push(color('hsl('+( Math.floor((Math.random() * 40)) + 37 )+', 100%, 60%)'));
+    // colors.push(color('hsl('+( Math.floor((Math.random() * 60)) + 161 )+', 100%, 60%)'));
+    // colors.push(color('hsl('+( Math.floor((Math.random() * 30)) + 277 )+', 100%, 60%)'));
+    // colors.push(color('hsl('+( Math.floor((Math.random() * 20)) + 340 )+', 100%, 60%)'));
 }
 
 function createBoard() {
+    squares = []
     var squareSize = width / numSquaresPerRow;
     var rowPos = 0;
     while (rowPos < height){
@@ -183,6 +223,18 @@ function gameFinished(){
         }
     }
     return true;
+}
+
+// ------------------ MISC ----------------------------
+
+function repositionCanvas() {
+  var xPos = int(windowWidth/2 - 0.5*width);
+  var yPos = int(windowHeight/2 - 0.5*height);
+  theCanvas.position(xPos, yPos);
+}
+
+function windowResized() {
+  repositionCanvas();
 }
 
 // function floodAnimation(s){
