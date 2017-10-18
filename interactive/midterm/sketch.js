@@ -5,13 +5,18 @@ var canvasHeight;
 var id = 1;
 var numColors = 6;
 var colors = [];
-var numSquaresPerRow = 10;
+var numSquaresPerRow = 13;
 var squares = [];
-var remainingMoves = 30;
+var remainingMoves;
 
 var state = 0;
 var startArt = [];
+var floodItArtwork;
 var startArtIndex = 0;
+var scoreOpacity = 255;
+var scoreSpeed = 7;
+
+var playerWins;
 
 function preload(){
     var startArtwork1 = loadImage("img/startArtwork-01.png");
@@ -19,25 +24,27 @@ function preload(){
     var startArtwork3 = loadImage("img/startArtwork-03.png");
     var startArtwork4 = loadImage("img/startArtwork-04.png");
     startArt = [startArtwork1, startArtwork2, startArtwork3, startArtwork4];
+    floodItArtwork = loadImage("img/flood-it-overlay.png");
 }
 
 function setup() {
-    canvasHeight = windowHeight < windowWidth ? windowHeight : windowWidth;
-    canvasWidth = windowHeight < windowWidth ? windowHeight : windowWidth;
+    // determine how to maximize a square canvas in the browser window
+    canvasHeight = windowHeight < windowWidth ? windowHeight-100 : windowWidth-100;
+    canvasWidth = windowHeight < windowWidth ? windowHeight-100 : windowWidth-100;
     theCanvas = createCanvas(canvasWidth, canvasHeight);
+
+    // center canvas
     repositionCanvas();
+
+    // style + game setup
     noStroke();
     background(0);
     generateColors();
-
     createBoard();
-    setAllNeighbors();
-    flood(squares[0][0].color);
-    // displaySquares();
 }
 
+// three states: PRE-GAME, PLAY, POST-GAME
 function draw() {
-
     if (state == 0){
         startScreen();
     }
@@ -45,23 +52,30 @@ function draw() {
         playGame();
     }
     else if (state == 2){
-
+        endGame();
     }
 }
 
-// ------------------ SETUP ----------------------------
+// ------------------ SQUARE CLASS ----------------------------
 
 function Square(x, y, size, id) {
     this.x = x;
     this.y = y;
     this.size = size;
     this.color = random(colors);
+
+    // neighbors populated with helper funtion after entire board is created
     this.up = null;
     this.down = null;
     this.left = null;
     this.right = null;
+
+    // id for easier debugging
     this.id = id;
+
+    // key for determining how to flood each time the user clicks on a square
     this.inFlood = false;
+
     this.display = function() {
         fill(this.color);
         rect(this.x, this.y, this.size, this.size);
@@ -69,56 +83,74 @@ function Square(x, y, size, id) {
 }
 
 // ------------------ PRE-GAME ----------------------------
+
+// randomly generate colors to use in the game
+function generateColors(){
+    // put 22FFE4 in each pallete!!
+    var colors1 = [color('#FF8183'), color('#75879C'), color('#76AAB4'), color('#ACC7C8'), color('#F9FFFB'), color('#F8BF83'), color('#22FFE4')]
+    var colors2 = [color('#FF00C5'), color('#FF5EC9'), color('#682D89'), color('#00DBFF'), color('#FFA9E2'), color('#F9FFFB'), color('#22FFE4')];
+
+    colors = [colors1, colors2];
+    colors = random(colors);
+}
+
+// when the game starts, play dancing squares animation and wait for the user to press spacebar
 function startScreen(){
     dancingScreenAnimation();
     textSize(25);
     fill(255);
-    // text("PRESS [SPACEBAR]", 50, 425);
-    // text("TO START PLAYING!", 50, 455);
-    image(startArt[startArtIndex++ % 4], 0, 0, canvasWidth, canvasHeight);
-    if (keyIsDown(32)){
+    startArtIndex += .5;
+    // image(startArt[(Math.floor(startArtIndex)) % 4], 0, 0, canvasWidth, canvasHeight);
+    image(floodItArtwork, 0, 0, canvasWidth, canvasHeight);
+    if (keyIsDown(49)){
+        numSquaresPerRow = 5;
+        remainingMoves = 15;
+        createBoard();
         state = 1;
-        startTime = millis();
+    }
+    else if (keyIsDown(50)){
+        numSquaresPerRow = 10;
+        remainingMoves = 25;
+        createBoard();
+        state = 1;
+    }
+    else if (keyIsDown(51)){
+        numSquaresPerRow = 15;
+        remainingMoves = 30;
+        createBoard();
+        state = 1;
     }
 }
 
+// recreate the board and redraw it to create dancing animation
 function dancingScreenAnimation(){
     frameRate(7);
     createBoard();
-    setAllNeighbors();
-    flood(squares[0][0].color);
     displaySquares();
 }
 
 // ------------------ GAMEPLAY ----------------------------
 
+// display the squares and check if the game should have ended
 function playGame(){
     frameRate(60);
     displaySquares();
+    textSize(canvasWidth);
+    textAlign(CENTER, CENTER);
+    fill(255, scoreOpacity % 255);
+    text(remainingMoves, canvasWidth/2, canvasHeight/2);
+    scoreOpacity -= scoreSpeed;
     if (gameFinished()){
         state = 2;
+        playerWins = true;
+    }
+    else if (movesExhausted()){
+        state = 2;
+        playerWins = false;
     }
 }
 
-function generateColors(){
-    for (var i = 0; i < numColors; i++){
-        colors.push(color('hsl('+Math.floor((Math.random() * 360))+', 100%, 60%)'));
-    }
-
-    // standardized
-    // colors.push(color('hsla('+(  Math.floor((Math.random() * 50)) + 0  )  +', 100%, 60%, 0.09)'));
-    // colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 100 )+', 100%, 60%, 0.09)'));
-    // colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 200 )+', 100%, 60%, 0.09)'));
-    // colors.push(color('hsla('+( Math.floor((Math.random() * 60)) + 300 )+', 100%, 60%, 0.09)'));
-
-    // standardized
-    // colors.push(color('hsl('+(  Math.floor((Math.random() * 22)) + 0  )  +', 100%, 60%)'));
-    // colors.push(color('hsl('+( Math.floor((Math.random() * 40)) + 37 )+', 100%, 60%)'));
-    // colors.push(color('hsl('+( Math.floor((Math.random() * 60)) + 161 )+', 100%, 60%)'));
-    // colors.push(color('hsl('+( Math.floor((Math.random() * 30)) + 277 )+', 100%, 60%)'));
-    // colors.push(color('hsl('+( Math.floor((Math.random() * 20)) + 340 )+', 100%, 60%)'));
-}
-
+// create squares to fill up the canvas
 function createBoard() {
     squares = []
     var squareSize = width / numSquaresPerRow;
@@ -134,8 +166,11 @@ function createBoard() {
         rowPos += squareSize;
     }
     squares[0][0].inFlood = true;
+    setAllNeighbors();
+    flood(squares[0][0].color);
 }
 
+// go through knewly created squares and populate the up, down, left, right properties of each square
 function setAllNeighbors() {
     for (var i = 0; i < squares.length; i++) {
         for (var j = 0; j < squares[i].length; j++) {
@@ -174,12 +209,9 @@ function mousePressed(){
     var row = Math.floor(mouseY / (canvasHeight / numSquaresPerRow) );
     var color = squares[row][col].color;
 
-    //add all the right boxes to fill with inFlood property
-    // checkAddToFill(squares[0][0], squares[0][0].color, color);
-
     if (flood(color)){
         remainingMoves--;
-        console.log(remainingMoves);
+        scoreOpacity = 255;
     }
 }
 
@@ -225,6 +257,20 @@ function gameFinished(){
     return true;
 }
 
+function movesExhausted(){
+    return remainingMoves == 0 ? true : false;
+}
+
+// ------------------ POST-GAME ----------------------------
+function endGame(){
+    if (playerWins){
+        dancingScreenAnimation();
+    } else{
+        background(0);
+    }
+}
+
+
 // ------------------ MISC ----------------------------
 
 function repositionCanvas() {
@@ -236,6 +282,34 @@ function repositionCanvas() {
 function windowResized() {
   repositionCanvas();
 }
+
+
+
+
+
+
+
+
+
+// for (var i = 0; i < numColors; i++){
+//     colors.push(color('hsl('+Math.floor((Math.random() * 360))+', 100%, 60%)'));
+// }
+
+// standardized
+// colors.push(color('hsla('+(  Math.floor((Math.random() * 50)) + 0  )  +', 100%, 60%, 0.09)'));
+// colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 100 )+', 100%, 60%, 0.09)'));
+// colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 200 )+', 100%, 60%, 0.09)'));
+// colors.push(color('hsla('+( Math.floor((Math.random() * 60)) + 300 )+', 100%, 60%, 0.09)'));
+
+// standardized
+// colors.push(color('hsl('+(  Math.floor((Math.random() * 22)) + 0  )  +', 100%, 60%)'));
+// colors.push(color('hsl('+( Math.floor((Math.random() * 40)) + 37 )+', 100%, 60%)'));
+// colors.push(color('hsl('+( Math.floor((Math.random() * 60)) + 161 )+', 100%, 60%)'));
+// colors.push(color('hsl('+( Math.floor((Math.random() * 30)) + 277 )+', 100%, 60%)'));
+// colors.push(color('hsl('+( Math.floor((Math.random() * 20)) + 340 )+', 100%, 60%)'));
+
+
+
 
 // function floodAnimation(s){
 //     console.log("animate!");
