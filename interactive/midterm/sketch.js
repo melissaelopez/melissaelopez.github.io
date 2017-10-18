@@ -3,28 +3,32 @@ var canvasWidth;
 var canvasHeight;
 
 var id = 1;
-var numColors = 6;
-var colors = [];
 var numSquaresPerRow = 13;
 var squares = [];
+var levelMoves;
 var remainingMoves;
 
+var numColors = 6;
+var colors = [];
+var colorsToAdd;
+var addIndex = 0;
+
 var state = 0;
-var startArt = [];
-var floodItArtwork;
-var startArtIndex = 0;
 var scoreOpacity = 255;
 var scoreSpeed = 7;
 
+var floodItArtwork;
+var youWinArtwork;
+var gameOverArtwork;
+
 var playerWins;
+var freeze;
 
 function preload(){
-    var startArtwork1 = loadImage("img/startArtwork-01.png");
-    var startArtwork2 = loadImage("img/startArtwork-02.png");
-    var startArtwork3 = loadImage("img/startArtwork-03.png");
-    var startArtwork4 = loadImage("img/startArtwork-04.png");
-    startArt = [startArtwork1, startArtwork2, startArtwork3, startArtwork4];
     floodItArtwork = loadImage("img/flood-it-overlay.png");
+    youWinArtwork = loadImage("img/you-win.png");
+    youWinArtwork = loadImage("img/you-win.png");
+    gameOverArtwork = loadImage("img/game-over.png");
 }
 
 function setup() {
@@ -32,6 +36,9 @@ function setup() {
     canvasHeight = windowHeight < windowWidth ? windowHeight-100 : windowWidth-100;
     canvasWidth = windowHeight < windowWidth ? windowHeight-100 : windowWidth-100;
     theCanvas = createCanvas(canvasWidth, canvasHeight);
+
+    //
+    colorsToAdd = [color('#D14674'), color('#15FF4C'), color('#C0C0FF'), color('#EDC500'), color('#680050'), color('#3A3A3A'), color('#440808')];
 
     // center canvas
     repositionCanvas();
@@ -96,26 +103,28 @@ function generateColors(){
 
 // when the game starts, play dancing squares animation and wait for the user to press spacebar
 function startScreen(){
-    dancingScreenAnimation();
+    numSquaresPerRow = 30;
+    dancingScreenAnimation(floodItArtwork);
     textSize(25);
     fill(255);
-    startArtIndex += .5;
-    // image(startArt[(Math.floor(startArtIndex)) % 4], 0, 0, canvasWidth, canvasHeight);
-    image(floodItArtwork, 0, 0, canvasWidth, canvasHeight);
+    freeze = false;
     if (keyIsDown(49)){
         numSquaresPerRow = 5;
+        levelMoves = 15;
         remainingMoves = 15;
         createBoard();
         state = 1;
     }
     else if (keyIsDown(50)){
         numSquaresPerRow = 10;
+        levelMoves = 25;
         remainingMoves = 25;
         createBoard();
         state = 1;
     }
     else if (keyIsDown(51)){
         numSquaresPerRow = 15;
+        levelMoves = 30;
         remainingMoves = 30;
         createBoard();
         state = 1;
@@ -123,10 +132,11 @@ function startScreen(){
 }
 
 // recreate the board and redraw it to create dancing animation
-function dancingScreenAnimation(){
+function dancingScreenAnimation(imageName){
     frameRate(7);
     createBoard();
     displaySquares();
+    image(imageName, 0, 0, canvasWidth, canvasHeight);
 }
 
 // ------------------ GAMEPLAY ----------------------------
@@ -205,13 +215,16 @@ function displaySquares() {
 }
 
 function mousePressed(){
-    var col = Math.floor(mouseX / (canvasWidth / numSquaresPerRow) );
-    var row = Math.floor(mouseY / (canvasHeight / numSquaresPerRow) );
-    var color = squares[row][col].color;
-
-    if (flood(color)){
-        remainingMoves--;
-        scoreOpacity = 255;
+    if (!freeze){
+        var col = Math.floor(mouseX / (canvasWidth / numSquaresPerRow) );
+        var row = Math.floor(mouseY / (canvasHeight / numSquaresPerRow) );
+        if (squares[row][col] != undefined){
+            var color = squares[row][col].color;
+            if (flood(color)){
+                remainingMoves--;
+                scoreOpacity = 255;
+            }
+        }
     }
 }
 
@@ -264,12 +277,32 @@ function movesExhausted(){
 // ------------------ POST-GAME ----------------------------
 function endGame(){
     if (playerWins){
-        dancingScreenAnimation();
+        dancingScreenAnimation(youWinArtwork);
+        if (keyIsDown(32)){
+            nextLevel();
+        }
     } else{
-        background(0);
+        playerLost();
     }
 }
 
+function nextLevel(){
+    numSquaresPerRow += 2;
+    levelMoves += 5;
+    remainingMoves = levelMoves;
+    colors.push(colorsToAdd[addIndex]);
+    addIndex++;
+    createBoard();
+    state = 1;
+}
+
+function playerLost(){
+    freeze = true;
+    image(gameOverArtwork, 0, 0, canvasWidth, canvasHeight);
+    if (keyIsDown(32)){
+        state = 0;
+    }
+}
 
 // ------------------ MISC ----------------------------
 
@@ -282,59 +315,3 @@ function repositionCanvas() {
 function windowResized() {
   repositionCanvas();
 }
-
-
-
-
-
-
-
-
-
-// for (var i = 0; i < numColors; i++){
-//     colors.push(color('hsl('+Math.floor((Math.random() * 360))+', 100%, 60%)'));
-// }
-
-// standardized
-// colors.push(color('hsla('+(  Math.floor((Math.random() * 50)) + 0  )  +', 100%, 60%, 0.09)'));
-// colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 100 )+', 100%, 60%, 0.09)'));
-// colors.push(color('hsla('+( Math.floor((Math.random() * 50)) + 200 )+', 100%, 60%, 0.09)'));
-// colors.push(color('hsla('+( Math.floor((Math.random() * 60)) + 300 )+', 100%, 60%, 0.09)'));
-
-// standardized
-// colors.push(color('hsl('+(  Math.floor((Math.random() * 22)) + 0  )  +', 100%, 60%)'));
-// colors.push(color('hsl('+( Math.floor((Math.random() * 40)) + 37 )+', 100%, 60%)'));
-// colors.push(color('hsl('+( Math.floor((Math.random() * 60)) + 161 )+', 100%, 60%)'));
-// colors.push(color('hsl('+( Math.floor((Math.random() * 30)) + 277 )+', 100%, 60%)'));
-// colors.push(color('hsl('+( Math.floor((Math.random() * 20)) + 340 )+', 100%, 60%)'));
-
-
-
-
-// function floodAnimation(s){
-//     console.log("animate!");
-//     displaySquares();
-// }
-
-
-// THIS FUNCTION DOES NOT WORK -- EXCEEDS CALL STACK
-// function checkAddToFill(s, oldColor, newColor){
-//     if (oldColor == newColor || s.color != oldColor) {
-//         return;
-//     }
-//
-//     s.inFlood = true;
-//
-//     if (s.left != null){
-//         checkAddToFill(s.left, oldColor, newColor);
-//     }
-//     if (s.right != null) {
-//         checkAddToFill(s.right, oldColor, newColor);
-//     }
-//     if (s.up != null) {
-//         checkAddToFill(s.up, oldColor, newColor);
-//     }
-//     if (s.down != null) {
-//         checkAddToFill(s.down, oldColor, newColor);
-//     }
-// }
