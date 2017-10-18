@@ -20,6 +20,8 @@ var scoreSpeed = 7;
 var floodItArtwork;
 var youWinArtwork;
 var gameOverArtwork;
+var startMusic;
+var winMusic;
 
 var playerWins;
 var freeze;
@@ -29,6 +31,8 @@ function preload(){
     youWinArtwork = loadImage("img/you-win.png");
     youWinArtwork = loadImage("img/you-win.png");
     gameOverArtwork = loadImage("img/game-over.png");
+    startMusic = loadSound("sounds/start-screen.mp3");
+    winMusic = loadSound("sounds/win.mp3");
 }
 
 function setup() {
@@ -39,6 +43,7 @@ function setup() {
 
     //
     colorsToAdd = [color('#D14674'), color('#15FF4C'), color('#C0C0FF'), color('#EDC500'), color('#680050'), color('#3A3A3A'), color('#440808')];
+    startMusic.loop();
 
     // center canvas
     repositionCanvas();
@@ -114,6 +119,7 @@ function startScreen(){
         remainingMoves = 15;
         createBoard();
         state = 1;
+        startMusic.stop();
     }
     else if (keyIsDown(50)){
         numSquaresPerRow = 10;
@@ -121,6 +127,7 @@ function startScreen(){
         remainingMoves = 25;
         createBoard();
         state = 1;
+        startMusic.stop();
     }
     else if (keyIsDown(51)){
         numSquaresPerRow = 15;
@@ -128,6 +135,7 @@ function startScreen(){
         remainingMoves = 30;
         createBoard();
         state = 1;
+        startMusic.stop();
     }
 }
 
@@ -143,6 +151,8 @@ function dancingScreenAnimation(imageName){
 
 // display the squares and check if the game should have ended
 function playGame(){
+    startMusic.stop();
+    winMusic.stop();
     frameRate(60);
     displaySquares();
     textSize(canvasWidth);
@@ -153,6 +163,7 @@ function playGame(){
     if (gameFinished()){
         state = 2;
         playerWins = true;
+        winMusic.loop();
     }
     else if (movesExhausted()){
         state = 2;
@@ -301,6 +312,7 @@ function playerLost(){
     image(gameOverArtwork, 0, 0, canvasWidth, canvasHeight);
     if (keyIsDown(32)){
         state = 0;
+        startMusic.loop();
     }
 }
 
