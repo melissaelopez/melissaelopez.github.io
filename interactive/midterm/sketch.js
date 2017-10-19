@@ -92,6 +92,11 @@ function Square(x, y, size, id) {
         fill(this.color);
         rect(this.x, this.y, this.size, this.size);
     }
+
+    this.incDisplay = function(framesLeft, color) {
+        fill(color);
+        rect(this.x, this.y, this.size-(framesLeft * (1/this.size)), this.size-(framesLeft * (1/this.size)));
+    }
 }
 
 // ------------------ PRE-GAME ----------------------------
@@ -99,8 +104,11 @@ function Square(x, y, size, id) {
 // randomly generate colors to use in the game
 function generateColors(){
     // put 22FFE4 in each pallete!!
-    var colors1 = [color('#FF8183'), color('#75879C'), color('#76AAB4'), color('#ACC7C8'), color('#F9FFFB'), color('#F8BF83'), color('#22FFE4')]
+    var colors1 = [color('#FF8183'), color('#75879C'), color('#76AAB4'), color('#ACC7C8'), color('#F9FFFB'), color('#F8BF83'), color('#22FFE4')];
     var colors2 = [color('#FF00C5'), color('#FF5EC9'), color('#682D89'), color('#00DBFF'), color('#FFA9E2'), color('#F9FFFB'), color('#22FFE4')];
+    var colors3 = [color('#FF7F50'), color('#FFF000'), color('#00FF67'), color('#00D3EF'), color('#A65ED1'), color('#F1385C'), color('#22FFE4')];
+    var colors4 = [color('#ED6E8C'), color('#EF8D6A'), color('#BAF42C'), color('#6EF9A6'), color('#73E7EF'), color('#629CEF'), color('#22FFE4')];
+    var tempColors = [colors1, colors2, colors3, colors4];
 
     colors = [colors1, colors2];
     colors = random(colors);
@@ -173,10 +181,11 @@ function playGame(){
 
 // create squares to fill up the canvas
 function createBoard() {
+    id = 1;
     squares = []
     var squareSize = width / numSquaresPerRow;
     var rowPos = 0;
-    while (rowPos < height){
+    while (rowPos <= height - squareSize){
         colPos = 0;
         row = []
         for (var i = 0; i < numSquaresPerRow; i++){
@@ -245,6 +254,10 @@ function flood(color){
         for (var j = 0; j < squares[i].length; j++){
             if (squares[i][j].inFlood == true){
                 // floodAnimation(squares[i][j]);
+                // var framesLeft = 120;
+                // while(!animateSquareFlood(squares[i][j], color, framesLeft)){
+                //     framesLeft--;
+                // }
                 squares[i][j].color = color;
                 addNeighbors(squares[i][j], color);
                 validMove = true;
@@ -252,6 +265,16 @@ function flood(color){
         }
     }
     return validMove;
+}
+
+function animateSquareFlood(s, color, framesLeft){
+    s.incDisplay(framesLeft, color);
+    if (framesLeft <= 0) {
+        s.color = color;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function addNeighbors(s, color){
@@ -274,6 +297,7 @@ function gameFinished(){
     for (var i = 0; i < squares.length; i++){
         for (var j = 0; j < squares[i].length; j++){
             if (squares[i][j].color != color){
+                console.log(squares[i][j].id);
                 return false;
             }
         }
