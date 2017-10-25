@@ -97,6 +97,10 @@ function Square(x, y, size, id) {
         fill(color);
         rect(this.x, this.y, this.size-(framesLeft * (1/this.size)), this.size-(framesLeft * (1/this.size)));
     }
+
+    this.changeColor = function(color){
+        this.color = color;
+    }
 }
 
 // ------------------ PRE-GAME ----------------------------
@@ -110,7 +114,7 @@ function generateColors(){
     var colors4 = [color('#ED6E8C'), color('#EF8D6A'), color('#BAF42C'), color('#6EF9A6'), color('#73E7EF'), color('#629CEF'), color('#22FFE4')];
     var tempColors = [colors1, colors2, colors3, colors4];
 
-    colors = [colors1, colors2];
+    colors = [colors1, colors2, colors3, colors4];
     colors = random(colors);
 }
 
@@ -258,7 +262,7 @@ function flood(color){
                 // while(!animateSquareFlood(squares[i][j], color, framesLeft)){
                 //     framesLeft--;
                 // }
-                squares[i][j].color = color;
+                squares[i][j].changeColor(color);
                 addNeighbors(squares[i][j], color);
                 validMove = true;
             }
@@ -267,15 +271,15 @@ function flood(color){
     return validMove;
 }
 
-function animateSquareFlood(s, color, framesLeft){
-    s.incDisplay(framesLeft, color);
-    if (framesLeft <= 0) {
-        s.color = color;
-        return true;
-    } else {
-        return false;
-    }
-}
+// function animateSquareFlood(s, color, framesLeft){
+//     s.incDisplay(framesLeft, color);
+//     if (framesLeft <= 0) {
+//         s.color = color;
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
 
 function addNeighbors(s, color){
     if (s.up != undefined && s.up.color == color){
@@ -297,7 +301,7 @@ function gameFinished(){
     for (var i = 0; i < squares.length; i++){
         for (var j = 0; j < squares[i].length; j++){
             if (squares[i][j].color != color){
-                console.log(squares[i][j].id);
+                // console.log(squares[i][j].id);
                 return false;
             }
         }
