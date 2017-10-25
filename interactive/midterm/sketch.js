@@ -74,6 +74,7 @@ function Square(x, y, size, id) {
     this.x = x;
     this.y = y;
     this.size = size;
+    this.permSize = size;
     this.color = random(colors);
 
     // neighbors populated with helper funtion after entire board is created
@@ -81,6 +82,9 @@ function Square(x, y, size, id) {
     this.down = null;
     this.left = null;
     this.right = null;
+
+    this.colorChanging = false;
+    this.newColor;
 
     // id for easier debugging
     this.id = id;
@@ -90,16 +94,25 @@ function Square(x, y, size, id) {
 
     this.display = function() {
         fill(this.color);
+        this.changeColor();
         rect(this.x, this.y, this.size, this.size);
     }
 
-    this.incDisplay = function(framesLeft, color) {
-        fill(color);
-        rect(this.x, this.y, this.size-(framesLeft * (1/this.size)), this.size-(framesLeft * (1/this.size)));
-    }
+    this.changeColor = function(){
+        if (this.colorChanging == true){
+            console.log(this.id);
+            this.color = this.newColor;
+            if (this.size < this.permSize){
+                this.size += 5;
+            } else {
+                this.size = this.permSize;
+                this.colorChanging = false;
+                this.newColor = undefined;
+            }
+        } else {
+            this.size = this.permSize
+        }
 
-    this.changeColor = function(color){
-        this.color = color;
     }
 }
 
@@ -112,9 +125,13 @@ function generateColors(){
     var colors2 = [color('#FF00C5'), color('#FF5EC9'), color('#682D89'), color('#00DBFF'), color('#FFA9E2'), color('#F9FFFB'), color('#22FFE4')];
     var colors3 = [color('#FF7F50'), color('#FFF000'), color('#00FF67'), color('#00D3EF'), color('#A65ED1'), color('#F1385C'), color('#22FFE4')];
     var colors4 = [color('#ED6E8C'), color('#EF8D6A'), color('#BAF42C'), color('#6EF9A6'), color('#73E7EF'), color('#629CEF'), color('#22FFE4')];
+    var colors5 = [color('#6BC4A7'), color('#4FA48C'), color('#DE3242'), color('#B0394E'), color('#98191B'), color('#629CEF'), color('#22FFE4')];
+    var colors6 = [color('#FFC707'), color('#FC4B3F'), color('#FC6637'), color('#FC4B3F'), color('#FC1951'), color('#00FF67'), color('#22FFE4')];
+    var colors7 = [color('#F0B4BC'), color('#DE929E'), color('#B8CFD8'), color('#6F8F9C'), color('#365865'), color('#992265'), color('#22FFE4')];
+
     var tempColors = [colors1, colors2, colors3, colors4];
 
-    colors = [colors1, colors2, colors3, colors4];
+    colors = [colors7];
     colors = random(colors);
 }
 
@@ -155,6 +172,7 @@ function startScreen(){
 function dancingScreenAnimation(imageName){
     frameRate(7);
     createBoard();
+    squares[0][0].inFlood = true;
     displaySquares();
     image(imageName, 0, 0, canvasWidth, canvasHeight);
 }
@@ -262,7 +280,9 @@ function flood(color){
                 // while(!animateSquareFlood(squares[i][j], color, framesLeft)){
                 //     framesLeft--;
                 // }
-                squares[i][j].changeColor(color);
+                squares[i][j].newColor = color;
+                squares[i][j].size = 1;
+                squares[i][j].colorChanging = true;
                 addNeighbors(squares[i][j], color);
                 validMove = true;
             }
@@ -270,16 +290,6 @@ function flood(color){
     }
     return validMove;
 }
-
-// function animateSquareFlood(s, color, framesLeft){
-//     s.incDisplay(framesLeft, color);
-//     if (framesLeft <= 0) {
-//         s.color = color;
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
 
 function addNeighbors(s, color){
     if (s.up != undefined && s.up.color == color){
