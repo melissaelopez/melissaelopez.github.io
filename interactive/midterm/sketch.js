@@ -129,10 +129,8 @@ function generateColors(){
     var colors6 = [color('#FFC707'), color('#FC4B3F'), color('#FC6637'), color('#FC4B3F'), color('#FC1951'), color('#00FF67'), color('#22FFE4')];
     var colors7 = [color('#F0B4BC'), color('#DE929E'), color('#B8CFD8'), color('#6F8F9C'), color('#365865'), color('#992265'), color('#22FFE4')];
 
-    var tempColors = [colors1, colors2, colors3, colors4];
-
-    colors = [colors7];
-    colors = random(colors);
+    var tempColors = [colors1, colors2, colors3, colors4, colors5, colors6, colors7];
+    colors = random(tempColors);
 }
 
 // when the game starts, play dancing squares animation and wait for the user to press spacebar

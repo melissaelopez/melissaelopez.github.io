@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Midterm Project - Final Documentation</title>
+        <link rel="icon" type="image/ico" href="../../favicon.ico"/>
+		<style>
+			body {
+				font-family: 'Helvetica', sans-serif;
+				/*color: white;*/
+				padding: 50px;
+				/*background-color: #ff7a87;*/
+			}
+			a {
+				color: lightblue;
+			}
+            #flood{
+                width: 500px;
+            }
+            #mv{
+                width: 500px;
+            }
+            img {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                display: block;
+            }
+		</style>
+	</head>
+	<body>
+		<h1 class="white">Flood it!</h1>
+		<h2 class="white">Midterm Project - Final Documentation</h1>
+
+		<h3><a href="melello.com/interactive/midterm/">CLICK HERE TO GO TO THE GAME!</a></h3>
+
+        <p>
+			To start implementing the game, I created a basic board of square objects to represent the game. The game begins in the upper left corner, and which is the “flood area.” Each time you change the color of the flood area (by selecting any square on the board), each of the squares in the flood area will check its neighbors to see if they match the new color, and thus should be added to the fill area. The player should keep adding more and more squares to the fill until the entire board is filled with a single color. The catch is that the player only has a limited number of moves to work with!
+<br /><br />
+The algorithm is simple, and works nicely with recursion at a theoretical level. However, in progress it did not work as nicely because the call stack would get exceed even when the board was not all that large. This was by far the biggest hurdle I faced, and was easily the most important to fix. To account for this, I implemented an interative version of this same idea, that way less calls were being wasted on squares that did not need to be checked multiple times.
+<br /><br />
+My next step in implementing the full game was to create three states: pre-game, game play, and post-game. The post-game ultimately loops back to either pre-game (restart) ot to game-play (next level) -- more on that later.
+<br /><br />
+Pre-game represents the start page, and it allows you to select a level to begin playing at. One of the challenges I faced with this start page was that I knew I wanted to animate the squares in some way, but I wasn’t sure how to do so. I ended up making a “dancingSquares” animation which essentially lowers the frame rate while it’s playing. The animation displays a different board each frame, using the same set of colors the whole time to create the effect that the squares themselves are moving around. Overlayed on top of the animation is a title graphic that I created in Illustrator. (note: the graphic is a little easier to read when the squares are actually moving!)
+<br /><br />
+Additionally, I put a fair amount of time into the “random” colors that are generated for the boards. I initially wanted to generate truly random colors for the board, but the problem was that sometimes colors looked too similar (for example, 5 similar shades of blue made up a whole board), and thus the game became a little too tedious to play. Additionally, I was aiming for some more control over the aesthetic. So, instead of randomly generating each color, the game randomly selects from a few options of handmade color palettes to define the board colors.
+<br /><br />
+Game play has a few factors taken into account for each level: how many squares are on the board, how many colors are in play, and how many moves the player has to complete the level. Once an initial level has been selected, the board is generated via those 3 factors, and the game begins. When the user makes a move, a subtle animation plays to show how many allowed moves are remaining by flashing the number largely on the board then fading into invisibility.
+<br /><br />
+Additionally, the squares are animated as they flood. When the mouse is pressed to expand the flood, a small version of the square appears in the upper-left corner and enlarges over time. The size of the square grows until the square has reached full size. I implemented this by adding a “changingColor” state to each square in the Square class which draws the growing square when the state is activated, and gets deactivated when the new color square has reached full size.
+<br /><br />
+If the player wins, then they are greeted by a fun dancing squares animation again, with a large “YOU WIN” and victorious music. If the player loses, then “GAME OVER” is displayed. In both scenarios, there are options to continue playing. If the player won, then they may move on to a harder level with a more squares, an additional color, and only a few more moves. If the player lost, then they may return back to the start page. It is important to note that the game has to real end! The way the algorithm works for generating new levels is such that it probably creates levels that are impossible to win for the sake of ending the game as a whole in a reasonable amount of time. Hope you enjoy playing!
+
+
+        </p>
+
+	</body>
+</html>
