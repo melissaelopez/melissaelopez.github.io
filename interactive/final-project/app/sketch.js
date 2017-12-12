@@ -26,7 +26,7 @@ var yPos1;
 
 var runRadius = 30;
 
-var frameCheck = 15;
+var frameCheck = 40;
 var currentColor = 1;
 
 // low numbers means more color sensitivity, high numbers mean less sensitivity (aka false positives)
@@ -42,8 +42,22 @@ var particle1;
 var particle2;
 var particle3;
 var particle4;
+var transitionSound;
+var aura1Sound;
+var aura2Sound;
+var aura3Sound;
+var aura4Sound;
+
+var oldAura = 0;
+var currentAura = 0;
+var auraChanged = false;
 
 function preload() {
+    transitionSound = loadSound("../sounds/transition.mp3");
+    aura1Sound = loadSound("../sounds/aura1.mp3");
+    aura2Sound = loadSound("../sounds/aura2.m4a");
+    aura3Sound = loadSound("../sounds/aura3.m4a");
+    aura4Sound = loadSound("../sounds/aura4.m4a");
     marker = loadImage("../img/marker.png");
     bg1 = loadImage("../backgrounds/1-01.png");
     bg2 = loadImage("../backgrounds/2-02.png");
@@ -223,17 +237,62 @@ function mirrorVideo() {
 
 function animateBackground(){
     if (averagePPF1 < 2){
+        oldAura = currentAura;
+        currentAura = 1;
+        if (oldAura != currentAura){
+            auraChanged = true;
+        }
         runRadius = 30;
         animation1();
     } else if (averagePPF1 < 6){
+        oldAura = currentAura;
+        currentAura = 2;
+        if (oldAura != currentAura){
+            auraChanged = true;
+        }
         runRadius = 80;
         animation2();
     } else if (averagePPF1 < 10){
+        oldAura = currentAura;
+        currentAura = 3;
+        if (oldAura != currentAura){
+            auraChanged = true;
+        }
         runRadius = 55;
         animation3();
     } else {
+        oldAura = currentAura;
+        currentAura = 4;
+        if (oldAura != currentAura){
+            auraChanged = true;
+        }
         runRadius = 65;
         animation4();
+    }
+    if (auraChanged){
+        transitionSound.play();
+        if (currentAura == 1){
+            aura1Sound.play();
+            aura2Sound.stop();
+            aura3Sound.stop();
+            aura4Sound.stop();
+        } else if (currentAura == 2){
+            aura1Sound.stop();
+            aura2Sound.play();
+            aura3Sound.stop();
+            aura4Sound.stop();
+        } else if (currentAura == 3){
+            aura1Sound.stop();
+            aura2Sound.stop();
+            aura3Sound.play();
+            aura4Sound.stop();
+        } else if (currentAura == 4){
+            aura1Sound.stop();
+            aura2Sound.stop();
+            aura3Sound.stop();
+            aura4Sound.play();
+        }
+        auraChanged = false;
     }
 }
 
@@ -291,7 +350,7 @@ function NoiseWalker(x, y) {
 
   // display mechanics
   this.display1 = function() {
-      image(particle1, this.x, this.y, 80, 80);
+      image(particle1, this.x, this.y, 80*map(this.scale, .3, 1.5, .2, 2), 80*map(this.scale, .5, 1.5, .2, 1.5));
   }
 
   this.display2 = function() {
@@ -445,12 +504,12 @@ function NoiseWalker(x, y) {
     var yMovement = map( noise(this.yNoiseOffset), 0, 1, -1, 1 );
 
     // update our position
-    this.x += xMovement*4;
-    this.y += yMovement*4;
+    this.x += xMovement*8;
+    this.y += yMovement*8;
 
     // are we close to the mouse?  if so, run away!
-    if (dist(this.x, this.y, xPos1, yPos1) < 25) {
-      var speed = 4;
+    if (dist(this.x, this.y, xPos1, yPos1) < runRadius) {
+      var speed = 8;
       if (xPos1 < this.x) {
         this.x += speed;
       }
