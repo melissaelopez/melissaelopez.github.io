@@ -1,8 +1,10 @@
 var theCanvas;
 var frames = 0;
 var showCapture = true;
-var screenWidth = 400;
-var screenHeight = 300;
+var screenWidth = 360;
+var screenHeight = 270;
+
+var totalParticles = 100;
 
 var pixelsPerFrame1;
 var oldX1 = 0;
@@ -10,13 +12,6 @@ var oldY1 = 0;
 
 var sumPPF1 = 0;
 var averagePPF1;
-
-var pixelsPerFrame2;
-var oldX2 = 0;
-var oldY2 = 0;
-
-var sumPPF2 = 0;
-var averagePPF2;
 
 // video capture object
 var capture;
@@ -26,78 +21,120 @@ var r1 = 0;
 var g1 = 0;
 var b1 = 0;
 
-var r2 = 0;
-var g2 = 0;
-var b2 = 0;
+var xPos1;
+var yPos1;
 
-// keep track of which color we are currently going to set (the user will click to
-// set color #1 and then click again to set color #2)
+var runRadius = 30;
+
+var frameCheck = 15;
 var currentColor = 1;
 
-// what is our current threshold?  This is how sensitve our color detection algorithm should be
-// low numbers means more sensitivity, high numbers mean less sensitivity (aka false positives)
+// low numbers means more color sensitivity, high numbers mean less sensitivity (aka false positives)
 var threshold = 20;
 
+var marker;
+var hand;
+var bg1;
+var bg2;
+var bg3;
+var bg4;
+var particle1;
+var particle2;
+var particle3;
+var particle4;
+
+function preload() {
+    marker = loadImage("../img/marker.png");
+    bg1 = loadImage("../backgrounds/1-01.png");
+    bg2 = loadImage("../backgrounds/2-02.png");
+    bg3 = loadImage("../backgrounds/3-03.png");
+    bg4 = loadImage("../backgrounds/4-04.png");
+    particle1 = loadImage("../particles/1.png");
+    particle2 = loadImage("../particles/2.png");
+    particle3 = loadImage("../particles/3.png");
+    particle4 = loadImage("../particles/4-02.png");
+    hand = loadImage("../particles/hand.png");
+}
+
 function setup() {
-  theCanvas = createCanvas(screenWidth, screenHeight);
-  // theCanvas.style('width', 'auto');
-  // theCanvas.style('height', '100%');
+      // container.style('width', '100%');
+      // container.style('height', '100%');
 
-  // start up our web cam
-  capture = createCapture({
-    video: {
-      mandatory: {
-        minWidth: screenWidth,
-        minHeight: screenHeight,
-        maxWidth: screenWidth,
-        maxHeight: screenHeight
-      }
+      // start up our web cam
+    capture = createCapture({
+        video: {
+            mandatory: {
+                minWidth: screenWidth,
+                minHeight: screenHeight,
+                maxWidth: screenWidth,
+                maxHeight: screenHeight
+          }
+        }
+    });
+    capture.hide();
+
+    noStroke();
+    noFill();
+    rectMode(CENTER);
+    imageMode(CENTER);
+
+    // request a detailed noise landscape
+    noiseDetail(24);
+
+    // create our walker array
+    walkerArray = [];
+
+    // create particle system
+    for (var i = 0; i < totalParticles; i++) {
+        var tempWalker = new NoiseWalker( random(screenWidth), random(screenHeight) );
+        walkerArray.push( tempWalker );
     }
-  });
-  capture.hide();
+    theCanvas = createCanvas(screenWidth, screenHeight);
+    var canvasNode = document.getElementById("defaultCanvas0");
+    var parent = canvasNode.parentNode;
+    var wrapper = document.createElement('div');
 
-  stroke(0, 255, 0);
-  noFill();
-  rectMode(CENTER);
+    parent.replaceChild(wrapper, canvasNode);
+    var theVideo = document.getElementsByTagName("video")[0];
+    console.log(theVideo);
+    wrapper.appendChild(canvasNode);
+    wrapper.appendChild(theVideo);
+
+    wrapper.id = "container"
+
+    // canvasNode.style.width = "100%";
+    // canvasNode.style.height = "100%";
+    //
+    // videoNode.style.width = "100%";
+    // videoNode.style.height = "100%";
+    //
+    // wrapper.style.width = "100%";
+    // wrapper.style.height = "100%";
 }
 
 function draw() {
-
-  // expose the pixels in the incoming video stream
   capture.loadPixels();
   mirrorVideo();
 
-  // if we have some pixels to work wtih them we should proceed
   if (capture.pixels.length > 0) {
-
-    // set up variables to test for the best pixel
     var bestLocations1 = [];
-    var bestLocations2 = [];
 
-    for (var i = 0; i < capture.pixels.length; i += 4) {
-      // determine how close of a match this color is to our desired colors
+    for (var i = 0; i < capture.pixels.length; i += 8) {
       var match1 = dist(r1, g1, b1, capture.pixels[i], capture.pixels[i + 1], capture.pixels[i + 2]);
       if (match1 < threshold) {
-        // this pixel qualifies!  store its location into our array
         bestLocations1.push(i);
-      }
-      var match2 = dist(r2, g2, b2, capture.pixels[i], capture.pixels[i + 1], capture.pixels[i + 2]);
-      if (match2 < threshold) {
-        // this pixel qualifies!  store its location into our array
-        bestLocations2.push(i);
       }
     }
 
-    // draw the video
+    // draw the video only if we still need it!
     if (showCapture){
-        image(capture, 0, 0);
-    } else{
-        background(0);
+        image(capture, screenWidth/2, screenHeight/2);
+    } else {
+        animateBackground();
     }
 
     // do we have a best match?  it's possible that no pixels met our threshold
     if (bestLocations1.length > 0) {
-      // average up all of our locations
       var xSum = 0;
       var ySum = 0;
       for (var i = 0; i < bestLocations1.length; i++) {
@@ -106,65 +143,25 @@ function draw() {
       }
 
       // average our sums to get our 'centroid' point
-      var xPos1 = xSum / bestLocations1.length;
-      var yPos1 = ySum / bestLocations1.length;
+      xPos1 = xSum / bestLocations1.length;
+      yPos1 = ySum / bestLocations1.length;
 
       // now we know the best match!  draw a box around it
-      stroke(0,255,0);
-      rect(xPos1, yPos1, 25, 25);
+      // stroke(0,255,0);
+      // rect(xPos1, yPos1, 25, 25);
+      image(hand, xPos1, yPos1, 40, 40);
     }
 
-    if (bestLocations2.length > 0) {
-      // average up all of our locations
-      var xSum = 0;
-      var ySum = 0;
-      for (var i = 0; i < bestLocations2.length; i++) {
-        xSum += (bestLocations2[i] / 4) % screenWidth;
-        ySum += (bestLocations2[i] / 4) / screenWidth;
-      }
-
-      // average our sums to get our 'centroid' point
-      var xPos2 = xSum / bestLocations2.length;
-      var yPos2 = ySum / bestLocations2.length;
-
-      // now we know the best match!  draw a box around it
-      stroke(255,0,0);
-      rect(xPos2, yPos2, 25, 25);
-    }
     pixelsPerFrame1 = dist(oldX1, oldY1, xPos1, yPos1);
     oldX1 = xPos1;
     oldY1 = yPos1;
     sumPPF1 += pixelsPerFrame1;
 
-    pixelsPerFrame2 = dist(oldX2, oldY2, xPos2, yPos2);
-    oldX2 = xPos2;
-    oldY2 = yPos2;
-    sumPPF2 += pixelsPerFrame2;
-
-    if (frames % 30 == 0){
+    if (frames % frameCheck == 0){
         averagePPF1 = sumPPF1 / 30;
-        averagePPF2 = sumPPF2 / 30;
         sumPPF1 = 0;
-        sumPPF2 = 0;
-        console.log(averagePPF1, averagePPF2);
+        console.log(averagePPF1);
     }
-
-
-    // *********************************************
-    // working with averagePPF1 ans averagePPF2
-
-    /* average PPF: under 3 --> slow
-                    3-9 --> med1
-                    9-15 --> med2
-                    over 15 --> fast
-    */
-
-    // conditional to swtch on and off the image capture pixels
-
-
-
-
-    // *********************************************
     frames++;
   }
 }
@@ -181,16 +178,8 @@ function mousePressed() {
     console.log("Color 1 - Looking for: R=" + r1 + "; G=" + g1 + "; B=" + b1);
     currentColor = 2;
   }
-  else if (currentColor == 2) {
-    r2 = capture.pixels[loc];
-    g2 = capture.pixels[loc + 1];
-    b2 = capture.pixels[loc + 2];
 
-    console.log("Color 2 - Looking for: R=" + r2 + "; G=" + g2 + "; B=" + b2);
-    currentColor = 1;
-  }
-
-  if (r1 != 0 && g1 != 0 && b1 != 0 && r2 != 0 && g2 != 0 && b2 != 0){
+  if (r1 != 0 && g1 != 0 && b1 != 0){
       showCapture = false;
   }
 }
@@ -230,4 +219,267 @@ function mirrorVideo() {
     }
   }
   capture.updatePixels();
+}
+
+function animateBackground(){
+    if (averagePPF1 < 2){
+        runRadius = 30;
+        animation1();
+    } else if (averagePPF1 < 6){
+        runRadius = 80;
+        animation2();
+    } else if (averagePPF1 < 10){
+        runRadius = 55;
+        animation3();
+    } else {
+        runRadius = 65;
+        animation4();
+    }
+}
+
+function animation1(){
+    image(bg1, screenWidth/2 , screenHeight/2, width, height);
+    for (var i = 0; i < walkerArray.length; i++) {
+      walkerArray[i].move1();
+      walkerArray[i].display1();
+    }
+}
+
+function animation2(){
+    image(bg2, screenWidth/2 , screenHeight/2, width, height);
+    for (var i = 0; i < walkerArray.length; i++) {
+      walkerArray[i].move2();
+      walkerArray[i].display2();
+    }
+}
+
+function animation3(){
+    image(bg3, screenWidth/2 , screenHeight/2, width, height);
+    for (var i = 0; i < walkerArray.length; i++) {
+      walkerArray[i].move3();
+      walkerArray[i].display3();
+    }
+}
+
+function animation4(){
+    image(bg4, screenWidth/2 , screenHeight/2, width, height);
+    for (var i = 0; i < walkerArray.length; i++) {
+      walkerArray[i].move4();
+      walkerArray[i].display4();
+    }
+}
+
+// our NoiseWalker class
+function NoiseWalker(x, y) {
+  // store our position
+  this.x = x;
+  this.y = y;
+
+  this.scale = random(.5, 1.5);
+
+  // store our color
+  this.r = random(100,255);
+  this.g = this.r;
+  this.b = this.r;
+
+  // store our size
+  this.s = 5;
+
+  // create a "noise offset" to keep track of our position in Perlin Noise space
+  this.xNoiseOffset = random(0,1000);
+  this.yNoiseOffset = random(1000,2000);
+
+  // display mechanics
+  this.display1 = function() {
+      image(particle1, this.x, this.y, 80, 80);
+  }
+
+  this.display2 = function() {
+      image(particle2, this.x, this.y, 70*this.scale, 70*this.scale);
+  }
+
+  this.display3 = function() {
+      image(particle3, this.x, this.y, 50*this.scale, 50*this.scale);
+  }
+
+  this.display4 = function() {
+      image(particle4, this.x, this.y, 30, 30);
+  }
+
+  // movement mechanics
+  this.move1 = function() {
+    // compute how much we should move
+    var xMovement = map( noise(this.xNoiseOffset), 0, 1, -1, 1 );
+    var yMovement = map( noise(this.yNoiseOffset), 0, 1, -1, 1 );
+
+    // update our position
+    this.x += xMovement*1;
+    this.y += yMovement*1;
+
+    // are we close to the mouse?  if so, run away!
+    if (dist(this.x, this.y, xPos1, yPos1) < 25) {
+      var speed = 1;
+      if (xPos1 < this.x) {
+        this.x += speed;
+      }
+      else {
+        this.x -= speed;
+      }
+      if (yPos1 < this.y) {
+        this.y += speed;
+      }
+      else {
+        this.y -= speed;
+      }
+    }
+
+    // handle wrap-around
+    if (this.x > width) {
+      this.x = 0;
+    }
+    else if (this.x < 0) {
+      this.x = width;
+    }
+    if (this.y > height) {
+      this.y = 0;
+    }
+    else if (this.y < 0) {
+      this.y = height;
+    }
+
+    this.xNoiseOffset += 0.01;
+    this.yNoiseOffset += 0.01;
+  }
+
+   this.move2 = function() {
+    // compute how much we should move
+    var xMovement = map( noise(this.xNoiseOffset), 0, 1, -1, 1 );
+    var yMovement = map( noise(this.yNoiseOffset), 0, 1, -1, 1 );
+
+    // update our position
+    this.x += xMovement*2;
+    this.y += yMovement*2;
+
+    // are we close to the mouse?  if so, run away!
+    if (dist(this.x, this.y, xPos1, yPos1) < 25) {
+      var speed = 2;
+      if (xPos1 < this.x) {
+        this.x += speed;
+      }
+      else {
+        this.x -= speed;
+      }
+      if (yPos1 < this.y) {
+        this.y += speed;
+      }
+      else {
+        this.y -= speed;
+      }
+    }
+
+    // handle wrap-around
+    if (this.x > width) {
+      this.x = 0;
+    }
+    else if (this.x < 0) {
+      this.x = width;
+    }
+    if (this.y > height) {
+      this.y = 0;
+    }
+    else if (this.y < 0) {
+      this.y = height;
+    }
+
+    this.xNoiseOffset += 0.01;
+    this.yNoiseOffset += 0.01;
+  }
+
+    this.move3 = function() {
+    // compute how much we should move
+    var xMovement = map( noise(this.xNoiseOffset), 0, 1, -1, 1 );
+    var yMovement = map( noise(this.yNoiseOffset), 0, 1, -1, 1 );
+
+    // update our position
+    this.x += xMovement*3;
+    this.y += yMovement*3;
+
+    // are we close to the mouse?  if so, run away!
+    if (dist(this.x, this.y, xPos1, yPos1) < runRadius) {
+      var speed = 3;
+      if (xPos1 < this.x) {
+        this.x += speed;
+      }
+      else {
+        this.x -= speed;
+      }
+      if (yPos1 < this.y) {
+        this.y += speed;
+      }
+      else {
+        this.y -= speed;
+      }
+    }
+
+    // handle wrap-around
+    if (this.x > width) {
+      this.x = 0;
+    }
+    else if (this.x < 0) {
+      this.x = width;
+    }
+    if (this.y > height) {
+      this.y = 0;
+    }
+    else if (this.y < 0) {
+      this.y = height;
+    }
+
+    this.xNoiseOffset += 0.01;
+    this.yNoiseOffset += 0.01;
+  }
+
+     this.move4 = function() {
+    // compute how much we should move
+    var xMovement = map( noise(this.xNoiseOffset), 0, 1, -1, 1 );
+    var yMovement = map( noise(this.yNoiseOffset), 0, 1, -1, 1 );
+
+    // update our position
+    this.x += xMovement*4;
+    this.y += yMovement*4;
+
+    // are we close to the mouse?  if so, run away!
+    if (dist(this.x, this.y, xPos1, yPos1) < 25) {
+      var speed = 4;
+      if (xPos1 < this.x) {
+        this.x += speed;
+      }
+      else {
+        this.x -= speed;
+      }
+      if (yPos1 < this.y) {
+        this.y += speed;
+      }
+      else {
+        this.y -= speed;
+      }
+    }
+
+    // handle wrap-around
+    if (this.x > width) {
+      this.x = 0;
+    }
+    else if (this.x < 0) {
+      this.x = width;
+    }
+    if (this.y > height) {
+      this.y = 0;
+    }
+    else if (this.y < 0) {
+      this.y = height;
+    }
+
+    this.xNoiseOffset += 0.01;
+    this.yNoiseOffset += 0.01;
+  }
 }
